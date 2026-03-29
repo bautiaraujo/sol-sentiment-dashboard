@@ -1,7 +1,8 @@
 {
-  "last_updated": "2026-03-29T06:03:45.218744+00:00",
+  "last_updated": "2026-03-29T06:22:47.150442+00:00",
   "today_price": 83.02,
   "today_date": "2026-03-27",
+  "sentiment_coverage_pct": 3.6,
   "classifier": {
     "baseline": {
       "accuracy": 0.5427,
@@ -20,7 +21,8 @@
       "c": 5,
       "chi2": 0.125,
       "p": 0.7237
-    }
+    },
+    "sentiment_coverage_pct": 3.6
   },
   "regression": {
     "baseline": {
@@ -4466,404 +4468,404 @@
   ],
   "reddit_posts": [
     {
-      "date": "2026-03-09",
-      "title": "2021 vs 2026 is kinda interesting",
-      "score": 350,
-      "num_comments": 102,
-      "sent_score": 0.519,
-      "url": "https://reddit.com/r/solana/comments/1rp3n94/2021_vs_2026_is_kinda_interesting/"
+      "date": "2025-01-18",
+      "title": "trader bought 1million usd of trumps coin flipped it too 120mil",
+      "score": 4629,
+      "num_comments": 758,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i47ntj/trader_bought_1million_usd_of_trumps_coin_flipped/"
     },
     {
-      "date": "2026-03-23",
-      "title": "Crypto Credit Cards Backed by Solana and Others",
-      "score": 126,
-      "num_comments": 75,
-      "sent_score": 0.7386,
-      "url": "https://reddit.com/r/solana/comments/1s1ab19/crypto_credit_cards_backed_by_solana_and_others/"
+      "date": "2024-11-23",
+      "title": "Teach me like I’m 8 years old",
+      "score": 3466,
+      "num_comments": 699,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1gxnk4u/teach_me_like_im_8_years_old/"
     },
     {
-      "date": "2026-03-10",
-      "title": "Solana logo artwork built brick by brick. What do you think?",
-      "score": 94,
-      "num_comments": 20,
-      "sent_score": 0.1163,
-      "url": "https://reddit.com/r/solana/comments/1rpxj88/solana_logo_artwork_built_brick_by_brick_what_do/"
+      "date": "2025-01-18",
+      "title": "I’m going to be sick, I thought it was a rug. ",
+      "score": 3054,
+      "num_comments": 808,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i4domr/im_going_to_be_sick_i_thought_it_was_a_rug/"
     },
     {
-      "date": "2026-03-04",
-      "title": "What this actually means for Solana.",
-      "score": 73,
-      "num_comments": 58,
-      "sent_score": 0.2196,
-      "url": "https://reddit.com/r/solana/comments/1rkfrlh/what_this_actually_means_for_solana/"
+      "date": "2025-01-22",
+      "title": "JUST NOW: 🇺🇸 Donald Trump on his meme coin $TRUMP: “I don’t know much about it…”",
+      "score": 2425,
+      "num_comments": 798,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i757yj/just_now_donald_trump_on_his_meme_coin_trump_i/"
     },
     {
-      "date": "2026-03-18",
-      "title": "SEC Classifies SOL as Digital Commodity in Landmark Crypto Taxonomy",
-      "score": 73,
-      "num_comments": 10,
-      "sent_score": 0.1184,
-      "url": "https://reddit.com/r/solana/comments/1rwwnno/sec_classifies_sol_as_digital_commodity_in/"
+      "date": "2024-12-04",
+      "title": "400K USD while trading meme coins",
+      "score": 1850,
+      "num_comments": 488,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1h68yw7/400k_usd_while_trading_meme_coins/"
     },
     {
-      "date": "2026-03-03",
-      "title": "Solana Had One of Its Most Active Months Ever!",
-      "score": 64,
-      "num_comments": 25,
-      "sent_score": 0.9352,
-      "url": "https://reddit.com/r/solana/comments/1rjy14v/solana_had_one_of_its_most_active_months_ever/"
+      "date": "2025-07-25",
+      "title": "I'm not broke, I'm just low on fiat",
+      "score": 1823,
+      "num_comments": 335,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1m8ozmu/im_not_broke_im_just_low_on_fiat/"
     },
     {
-      "date": "2026-03-05",
-      "title": "We are building IBC for Solana",
-      "score": 63,
-      "num_comments": 24,
-      "sent_score": 0.2069,
-      "url": "https://reddit.com/r/solana/comments/1rlpdbb/we_are_building_ibc_for_solana/"
+      "date": "2024-11-29",
+      "title": "How does one cash out if they have hit a fortune like this on a Memecoin ? Explain liquidity please",
+      "score": 1689,
+      "num_comments": 530,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1h2rwt7/how_does_one_cash_out_if_they_have_hit_a_fortune/"
     },
     {
-      "date": "2026-03-20",
-      "title": "Solana is teasing Backpack Exchange TGE. go big or go home. 🎒",
-      "score": 59,
-      "num_comments": 13,
-      "sent_score": 0.3276,
-      "url": "https://reddit.com/r/solana/comments/1rynznn/solana_is_teasing_backpack_exchange_tge_go_big_or/"
+      "date": "2025-08-10",
+      "title": "How is this Cupsey guy earning 1.5m a month consistently?",
+      "score": 1682,
+      "num_comments": 575,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1mmumey/how_is_this_cupsey_guy_earning_15m_a_month/"
     },
     {
-      "date": "2026-03-18",
-      "title": "SEC Approves Nasdaq Rule Change for Tokenized Securities Trading",
-      "score": 58,
-      "num_comments": 9,
-      "sent_score": 0.448,
-      "url": "https://reddit.com/r/solana/comments/1rxi4tk/sec_approves_nasdaq_rule_change_for_tokenized/"
+      "date": "2025-02-16",
+      "title": "Turned $160 into $32,000",
+      "score": 1570,
+      "num_comments": 898,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1iqpnc3/turned_160_into_32000/"
     },
     {
-      "date": "2026-03-25",
-      "title": "If there’s one network you need to be on, it’s Solana — Armani Ferrante, CEO of Backpack Exchange",
-      "score": 57,
-      "num_comments": 8,
-      "sent_score": 0.2821,
-      "url": "https://reddit.com/r/solana/comments/1s32zil/if_theres_one_network_you_need_to_be_on_its/"
+      "date": "2025-02-26",
+      "title": "This is how this sub feels rn 😂",
+      "score": 1540,
+      "num_comments": 191,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1iyzxvl/this_is_how_this_sub_feels_rn/"
     },
     {
-      "date": "2026-03-25",
-      "title": "Solana has a problem. Interoperability. We're fixing this.",
-      "score": 52,
-      "num_comments": 8,
-      "sent_score": -0.045,
-      "url": "https://reddit.com/r/solana/comments/1s38lz4/solana_has_a_problem_interoperability_were_fixing/"
+      "date": "2024-11-20",
+      "title": "Don't be this kid ...He rugged his own coin and the community did a take-over ..",
+      "score": 1254,
+      "num_comments": 759,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1gvl6da/dont_be_this_kid_he_rugged_his_own_coin_and_the/"
     },
     {
-      "date": "2026-03-22",
-      "title": "Solana is the second largest chain for Blackrock's BUIDL tokenised money market fund",
-      "score": 42,
-      "num_comments": 6,
-      "sent_score": 0.8374,
-      "url": "https://reddit.com/r/solana/comments/1s0j4sp/solana_is_the_second_largest_chain_for_blackrocks/"
+      "date": "2024-03-24",
+      "title": "Gambled $5000 of student loans on Solana last year",
+      "score": 1251,
+      "num_comments": 665,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1bmmk7v/gambled_5000_of_student_loans_on_solana_last_year/"
     },
     {
-      "date": "2026-03-16",
-      "title": "Happy 6th Birthday, Solana!",
-      "score": 42,
-      "num_comments": 74,
-      "sent_score": 0.9839,
-      "url": "https://reddit.com/r/solana/comments/1rvj7kn/happy_6th_birthday_solana/"
+      "date": "2025-04-08",
+      "title": "Meeting up with my home boys who bought $SOL above 250",
+      "score": 1199,
+      "num_comments": 165,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1juaend/meeting_up_with_my_home_boys_who_bought_sol_above/"
     },
     {
-      "date": "2026-03-15",
-      "title": "BlackRock just proved the staked ETF model works. Solana is next in line.",
-      "score": 41,
-      "num_comments": 6,
-      "sent_score": 0.7208,
-      "url": "https://reddit.com/r/solana/comments/1rud4nt/blackrock_just_proved_the_staked_etf_model_works/"
+      "date": "2025-03-10",
+      "title": "Alt Season is coming bro 😂",
+      "score": 1098,
+      "num_comments": 127,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1j7rsi6/alt_season_is_coming_bro/"
     },
     {
-      "date": "2026-03-16",
-      "title": "Happy 6th Birthday Solana Fam",
-      "score": 39,
-      "num_comments": 15,
-      "sent_score": 0.5105,
-      "url": "https://reddit.com/r/solana/comments/1rv96y6/happy_6th_birthday_solana_fam/"
+      "date": "2024-11-09",
+      "title": "why we thought buying $SOL at 9$ was a not a good idea 😁",
+      "score": 1077,
+      "num_comments": 272,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1gncayb/why_we_thought_buying_sol_at_9_was_a_not_a_good/"
     },
     {
-      "date": "2026-03-12",
-      "title": "100 Billion Transactions on Solana!",
-      "score": 38,
-      "num_comments": 8,
-      "sent_score": 0.9099,
-      "url": "https://reddit.com/r/solana/comments/1rrxl0d/100_billion_transactions_on_solana/"
+      "date": "2024-12-29",
+      "title": "Everything is a fuckin scam",
+      "score": 1047,
+      "num_comments": 1166,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1hoozen/everything_is_a_fuckin_scam/"
     },
     {
-      "date": "2026-03-17",
-      "title": "Finally someone said it xD",
-      "score": 37,
-      "num_comments": 12,
-      "sent_score": 0.6963,
-      "url": "https://reddit.com/r/solana/comments/1rw0sst/finally_someone_said_it_xd/"
+      "date": "2025-01-19",
+      "title": "Solana is completely unusable.",
+      "score": 928,
+      "num_comments": 684,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i5az5q/solana_is_completely_unusable/"
     },
     {
-      "date": "2026-03-10",
-      "title": "At what SOL balance did you move to cold storage?",
-      "score": 35,
-      "num_comments": 45,
-      "sent_score": 0.0434,
-      "url": "https://reddit.com/r/solana/comments/1rq1hmo/at_what_sol_balance_did_you_move_to_cold_storage/"
+      "date": "2025-02-24",
+      "title": "Just about done guys...",
+      "score": 925,
+      "num_comments": 99,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1iwyokm/just_about_done_guys/"
     },
     {
-      "date": "2026-03-04",
-      "title": "Solana has more volume than BNB and XRP combined",
-      "score": 33,
-      "num_comments": 6,
-      "sent_score": 0.4618,
-      "url": "https://reddit.com/r/solana/comments/1rkkw8u/solana_has_more_volume_than_bnb_and_xrp_combined/"
+      "date": "2025-01-23",
+      "title": "My first year into crypto",
+      "score": 898,
+      "num_comments": 143,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i7walz/my_first_year_into_crypto/"
     },
     {
-      "date": "2026-03-22",
-      "title": "Why Solana might be one of the most bullish crypto setups",
-      "score": 33,
-      "num_comments": 11,
-      "sent_score": 0.851,
-      "url": "https://reddit.com/r/solana/comments/1s0q0qq/why_solana_might_be_one_of_the_most_bullish/"
+      "date": "2024-04-27",
+      "title": "How I went from 1000 > 200k so far this run",
+      "score": 892,
+      "num_comments": 551,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1cempoc/how_i_went_from_1000_200k_so_far_this_run/"
     },
     {
-      "date": "2026-03-24",
-      "title": "went back to native staking after 6 months on liquid. here's my thinking",
-      "score": 30,
-      "num_comments": 39,
-      "sent_score": -0.2662,
-      "url": "https://reddit.com/r/solana/comments/1s26vl1/went_back_to_native_staking_after_6_months_on/"
+      "date": "2025-11-29",
+      "title": "The most real meme I have ever seen on the internet.",
+      "score": 870,
+      "num_comments": 119,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1p9c9it/the_most_real_meme_i_have_ever_seen_on_the/"
     },
     {
-      "date": "2026-03-10",
-      "title": "Wall Street and Silicon Valley Pour $540M Into Solana ETFs in Q4",
-      "score": 29,
-      "num_comments": 4,
-      "sent_score": 0.073,
-      "url": "https://reddit.com/r/solana/comments/1rpxvsx/wall_street_and_silicon_valley_pour_540m_into/"
+      "date": "2024-12-07",
+      "title": "L1s 7 days profit gain",
+      "score": 856,
+      "num_comments": 196,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1h8khc9/l1s_7_days_profit_gain/"
     },
     {
-      "date": "2026-03-23",
-      "title": "Bonk saved Solana last bear. This time it’s Backpack.",
-      "score": 27,
-      "num_comments": 15,
-      "sent_score": 0.2899,
-      "url": "https://reddit.com/r/solana/comments/1s1dl3l/bonk_saved_solana_last_bear_this_time_its_backpack/"
+      "date": "2024-11-22",
+      "title": "Why you should never trade on a curved screen phone",
+      "score": 849,
+      "num_comments": 36,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1gxeso1/why_you_should_never_trade_on_a_curved_screen/"
     },
     {
-      "date": "2026-03-12",
-      "title": "Is crytpo still too complicated?",
-      "score": 26,
-      "num_comments": 40,
-      "sent_score": 0.1681,
-      "url": "https://reddit.com/r/solana/comments/1rrswka/is_crytpo_still_too_complicated/"
+      "date": "2025-07-21",
+      "title": "How we all feel about sol honestly",
+      "score": 826,
+      "num_comments": 167,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1m5deyw/how_we_all_feel_about_sol_honestly/"
     },
     {
-      "date": "2026-03-20",
-      "title": "Solana led all chains in organic stablecoin volumes in February",
-      "score": 26,
-      "num_comments": 3,
-      "sent_score": 0.7124,
-      "url": "https://reddit.com/r/solana/comments/1ryrbsq/solana_led_all_chains_in_organic_stablecoin/"
+      "date": "2025-02-23",
+      "title": "Everyone when they heard about the Kanye West meme coin",
+      "score": 819,
+      "num_comments": 108,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1ivzsll/everyone_when_they_heard_about_the_kanye_west/"
     },
     {
-      "date": "2026-03-14",
-      "title": "Solana Approves SIMD-266: P-Token Upgrade Unlocks Major Network Efficiency",
-      "score": 26,
-      "num_comments": 3,
-      "sent_score": 0.9121,
-      "url": "https://reddit.com/r/solana/comments/1rtgwon/solana_approves_simd266_ptoken_upgrade_unlocks/"
+      "date": "2024-03-21",
+      "title": "After more than 1 year I didn't open my wallet. I'm in shock.",
+      "score": 800,
+      "num_comments": 484,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1bkcyvf/after_more_than_1_year_i_didnt_open_my_wallet_im/"
     },
     {
-      "date": "2026-03-18",
-      "title": "Avoid Phantom wallet for Solana swaps",
-      "score": 25,
-      "num_comments": 22,
-      "sent_score": -0.6711,
-      "url": "https://reddit.com/r/solana/comments/1rxh8e8/avoid_phantom_wallet_for_solana_swaps/"
+      "date": "2025-02-25",
+      "title": "The age old question 😂",
+      "score": 791,
+      "num_comments": 168,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1ixxvnq/the_age_old_question/"
     },
     {
-      "date": "2026-03-07",
-      "title": "How much Sol for $`100,000",
-      "score": 25,
-      "num_comments": 50,
-      "sent_score": -0.0131,
-      "url": "https://reddit.com/r/solana/comments/1rnkwzu/how_much_sol_for_100000/"
+      "date": "2025-09-01",
+      "title": "USD1 Is Now Live On Solana",
+      "score": 787,
+      "num_comments": 71,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1n5o2ho/usd1_is_now_live_on_solana/"
     },
     {
-      "date": "2026-03-27",
-      "title": "Any advice for staking my sol?",
-      "score": 25,
-      "num_comments": 39,
-      "sent_score": -0.0296,
-      "url": "https://reddit.com/r/solana/comments/1s4tuv8/any_advice_for_staking_my_sol/"
+      "date": "2025-05-13",
+      "title": "Some never understand 😶",
+      "score": 781,
+      "num_comments": 96,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1klglwh/some_never_understand/"
     },
     {
-      "date": "2026-03-15",
-      "title": "What are the best options for solana lending in 2026?",
-      "score": 25,
-      "num_comments": 12,
-      "sent_score": 0.6085,
-      "url": "https://reddit.com/r/solana/comments/1ruscrc/what_are_the_best_options_for_solana_lending_in/"
+      "date": "2024-12-29",
+      "title": "Wrote my own Shitcoin Trading Bot in NodeJS",
+      "score": 774,
+      "num_comments": 583,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1hp0ll6/wrote_my_own_shitcoin_trading_bot_in_nodejs/"
     },
     {
-      "date": "2026-03-16",
-      "title": "I tested 4 different tools to recover locked SOL from my wallet — the fee differences are wild",
-      "score": 25,
-      "num_comments": 14,
-      "sent_score": -0.2237,
-      "url": "https://reddit.com/r/solana/comments/1rvfm2o/i_tested_4_different_tools_to_recover_locked_sol/"
+      "date": "2025-01-19",
+      "title": "Melania Trump Made Crypto Bad Again",
+      "score": 749,
+      "num_comments": 334,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i5crkq/melania_trump_made_crypto_bad_again/"
     },
     {
-      "date": "2026-02-28",
-      "title": "someone made a memecoin of our sheep, Nori, what do we do?",
-      "score": 23,
-      "num_comments": 41,
-      "sent_score": -0.7115,
-      "url": "https://reddit.com/r/solana/comments/1rgoazi/someone_made_a_memecoin_of_our_sheep_nori_what_do/"
+      "date": "2024-12-28",
+      "title": "Rock bottom. Need advice.",
+      "score": 693,
+      "num_comments": 1152,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1ho3hzi/rock_bottom_need_advice/"
     },
     {
-      "date": "2026-03-02",
-      "title": "Solflare Introduces Privacy Aggregator Layer (PAL), The First Wallet Native Built-in Privacy Layer For Solana",
-      "score": 23,
-      "num_comments": 7,
-      "sent_score": 0.2235,
-      "url": "https://reddit.com/r/solana/comments/1rj2wf4/solflare_introduces_privacy_aggregator_layer_pal/"
+      "date": "2025-01-24",
+      "title": "IT HAPPENED🔥🚀! TRUMP SIGNED AN EXECUTIVE ORDER ON CRYPTOCURRENCY, AIMED AT CREATING A NATIONAL DIGITAL ASSETS RESERVE/ST",
+      "score": 674,
+      "num_comments": 219,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i8pnp3/it_happened_trump_signed_an_executive_order_on/"
     },
     {
-      "date": "2026-03-23",
-      "title": "Backpack $BP TGE is today",
-      "score": 22,
-      "num_comments": 3,
-      "sent_score": 0.0999,
-      "url": "https://reddit.com/r/solana/comments/1s188ab/backpack_bp_tge_is_today/"
+      "date": "2024-12-19",
+      "title": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "score": 668,
+      "num_comments": 235,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1hhzpye/aaaaaaaaaaaaaaaaaaaaaaaaaaaaa/"
     },
     {
-      "date": "2026-03-11",
-      "title": "Solana Is Now Part Of Mastercard's New Crypto Partner Program",
-      "score": 22,
-      "num_comments": 10,
-      "sent_score": 0.2473,
-      "url": "https://reddit.com/r/solana/comments/1rqwa5p/solana_is_now_part_of_mastercards_new_crypto/"
+      "date": "2024-12-10",
+      "title": "Why’s sol nuking? Good time to buy?",
+      "score": 666,
+      "num_comments": 286,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1hb1u8m/whys_sol_nuking_good_time_to_buy/"
     },
     {
-      "date": "2026-03-27",
-      "title": "Stacking for 10 years betting on the net",
-      "score": 22,
-      "num_comments": 64,
-      "sent_score": 0.7048,
-      "url": "https://reddit.com/r/solana/comments/1s56rde/stacking_for_10_years_betting_on_the_net/"
+      "date": "2025-01-25",
+      "title": "Feel bad for the newcomers",
+      "score": 634,
+      "num_comments": 57,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i9dqmp/feel_bad_for_the_newcomers/"
     },
     {
-      "date": "2026-03-17",
-      "title": "Solana 2026: Strategic Leadership in Real World Assets, AI Agents, and the Scalability Revolution with Alpenglow",
-      "score": 21,
-      "num_comments": 7,
-      "sent_score": 0.4028,
-      "url": "https://reddit.com/r/solana/comments/1rwgzg8/solana_2026_strategic_leadership_in_real_world/"
+      "date": "2024-12-21",
+      "title": "We have created a virtual Museum of Scammers. Who should we add next?",
+      "score": 617,
+      "num_comments": 154,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1hj14b6/we_have_created_a_virtual_museum_of_scammers_who/"
     },
     {
-      "date": "2026-03-18",
-      "title": "I sold my Solana but phantom converted it to \"CASH\" instead of USDC. I don't have the option to change it back or buy mo",
-      "score": 20,
-      "num_comments": 26,
-      "sent_score": -0.5232,
-      "url": "https://reddit.com/r/solana/comments/1rwsw5u/i_sold_my_solana_but_phantom_converted_it_to_cash/"
+      "date": "2024-11-24",
+      "title": "How is this wallet doing this? 99% win rate $306 mil in profit",
+      "score": 612,
+      "num_comments": 263,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1gyehdz/how_is_this_wallet_doing_this_99_win_rate_306_mil/"
     },
     {
-      "date": "2026-03-10",
-      "title": "Build-A-Bear: Solana vault hackathon, up to 1M+ in vault seed funding",
-      "score": 20,
-      "num_comments": 5,
-      "sent_score": 0.2584,
-      "url": "https://reddit.com/r/solana/comments/1rpna45/buildabear_solana_vault_hackathon_up_to_1m_in/"
+      "date": "2024-11-23",
+      "title": "Stop investing in meme coins",
+      "score": 607,
+      "num_comments": 360,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1gy3v6k/stop_investing_in_meme_coins/"
     },
     {
-      "date": "2026-02-27",
-      "title": "Swapping solana to btc in phantom?",
-      "score": 20,
-      "num_comments": 19,
-      "sent_score": -0.0788,
-      "url": "https://reddit.com/r/solana/comments/1rgjh4m/swapping_solana_to_btc_in_phantom/"
-    },
-    {
-      "date": "2026-02-28",
-      "title": "What would be the most cost effective way to download mass amounts of transaction history from wallets?",
-      "score": 19,
-      "num_comments": 22,
-      "sent_score": -0.1174,
-      "url": "https://reddit.com/r/solana/comments/1rh5kwl/what_would_be_the_most_cost_effective_way_to/"
-    },
-    {
-      "date": "2026-03-18",
-      "title": "The official Backpack token ticker and address have been revealed",
-      "score": 19,
-      "num_comments": 2,
-      "sent_score": 0.0789,
-      "url": "https://reddit.com/r/solana/comments/1rwycxx/the_official_backpack_token_ticker_and_address/"
-    },
-    {
-      "date": "2026-03-24",
-      "title": "22 out of 26 trending coins on CB are of SOL origin",
-      "score": 19,
-      "num_comments": 23,
-      "sent_score": 0.098,
-      "url": "https://reddit.com/r/solana/comments/1s2oo5p/22_out_of_26_trending_coins_on_cb_are_of_sol/"
-    },
-    {
-      "date": "2026-03-13",
-      "title": "Passive income ideas??",
-      "score": 19,
+      "date": "2025-02-24",
+      "title": "Me when Sol was at 250",
+      "score": 607,
       "num_comments": 38,
-      "sent_score": 0.1245,
-      "url": "https://reddit.com/r/solana/comments/1rsd1j0/passive_income_ideas/"
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1ixg9wk/me_when_sol_was_at_250/"
     },
     {
-      "date": "2026-03-19",
-      "title": "Survived another cycle! The reality of 8 years in crypto",
-      "score": 18,
-      "num_comments": 18,
-      "sent_score": -0.1205,
-      "url": "https://reddit.com/r/solana/comments/1rycat3/survived_another_cycle_the_reality_of_8_years_in/"
+      "date": "2025-01-21",
+      "title": "Brand new sentence - \"I got rugged by the president of the United states\" 😄",
+      "score": 604,
+      "num_comments": 170,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i6cpfp/brand_new_sentence_i_got_rugged_by_the_president/"
     },
     {
-      "date": "2026-03-16",
-      "title": "The Quiet Revolution: Why Crypto Isn't Dead — It's Just Getting Started",
-      "score": 18,
-      "num_comments": 16,
-      "sent_score": -0.2518,
-      "url": "https://reddit.com/r/solana/comments/1ruzmaz/the_quiet_revolution_why_crypto_isnt_dead_its/"
+      "date": "2024-11-26",
+      "title": "Wallet drained. Trying to figure out how this could have happened.",
+      "score": 603,
+      "num_comments": 713,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1h0cyz4/wallet_drained_trying_to_figure_out_how_this/"
     },
     {
-      "date": "2026-03-24",
-      "title": "Polychain backs VeryAI’s $10M raise to build palm-scan identity system on Solana",
-      "score": 18,
-      "num_comments": 6,
-      "sent_score": 0.2667,
-      "url": "https://reddit.com/r/solana/comments/1s2f8d1/polychain_backs_veryais_10m_raise_to_build/"
+      "date": "2024-03-31",
+      "title": "I Finally Have Just Obtained My First SOL!",
+      "score": 602,
+      "num_comments": 186,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1bs422p/i_finally_have_just_obtained_my_first_sol/"
     },
     {
-      "date": "2026-03-27",
-      "title": "Solana Ranks #1 In All-time Developers With Over 10,000 Builders",
-      "score": 18,
-      "num_comments": 5,
-      "sent_score": 0.6195,
-      "url": "https://reddit.com/r/solana/comments/1s5gm3e/solana_ranks_1_in_alltime_developers_with_over/"
+      "date": "2026-02-04",
+      "title": "Breaking News: Meme Coins Are Officially Dead",
+      "score": 600,
+      "num_comments": 275,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1qv9r6w/breaking_news_meme_coins_are_officially_dead/"
     },
     {
-      "date": "2026-03-23",
-      "title": "Solana validator centralization still an issue or overblown?",
-      "score": 18,
-      "num_comments": 18,
-      "sent_score": -0.5435,
-      "url": "https://reddit.com/r/solana/comments/1s13akf/solana_validator_centralization_still_an_issue_or/"
+      "date": "2025-12-09",
+      "title": "Managing huge amount in my portfolio right now ;:)",
+      "score": 584,
+      "num_comments": 67,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1pi8jy1/managing_huge_amount_in_my_portfolio_right_now/"
     },
     {
-      "date": "2026-03-08",
-      "title": "Recent data shows growth in Solana RWA holders",
-      "score": 18,
-      "num_comments": 6,
-      "sent_score": 0.3957,
-      "url": "https://reddit.com/r/solana/comments/1roh9am/recent_data_shows_growth_in_solana_rwa_holders/"
+      "date": "2025-01-16",
+      "title": "Is this real? I bought a helium miner and forgot about it for maybe 2 years",
+      "score": 583,
+      "num_comments": 267,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1i2zywi/is_this_real_i_bought_a_helium_miner_and_forgot/"
+    },
+    {
+      "date": "2024-12-11",
+      "title": "i got drained today. all that i’ve worked for trading meme coins gone in a min. heartbreaking day.",
+      "score": 571,
+      "num_comments": 715,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1hbj6hl/i_got_drained_today_all_that_ive_worked_for/"
+    },
+    {
+      "date": "2024-11-21",
+      "title": "Lost all my money trading memecoins.",
+      "score": 566,
+      "num_comments": 739,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1gw2sy3/lost_all_my_money_trading_memecoins/"
+    },
+    {
+      "date": "2024-12-02",
+      "title": "This sub has become a shit coin sub filled with degenerates.",
+      "score": 565,
+      "num_comments": 224,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1h4v6zq/this_sub_has_become_a_shit_coin_sub_filled_with/"
+    },
+    {
+      "date": "2024-11-07",
+      "title": "Broke 200$ to the moon!",
+      "score": 561,
+      "num_comments": 167,
+      "sent_score": null,
+      "url": "https://reddit.com/r/solana/comments/1glwpyx/broke_200_to_the_moon/"
     }
   ]
 }
