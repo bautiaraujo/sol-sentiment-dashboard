@@ -1,0 +1,720 @@
+{
+  "last_updated": "2026-03-29T00:46:21.066931+00:00",
+  "classifier": {
+    "baseline": {
+      "accuracy": 0.541,
+      "precision": 0.538,
+      "recall": 0.533,
+      "f1": 0.535
+    },
+    "full": {
+      "accuracy": 0.676,
+      "precision": 0.669,
+      "recall": 0.672,
+      "f1": 0.67
+    },
+    "mcnemar": {
+      "b": 7,
+      "c": 3,
+      "chi2": 1.6,
+      "p": 0.2059
+    }
+  },
+  "regression": {
+    "baseline": {
+      "mae": 14.82,
+      "rmse": 21.47,
+      "r2": 0.8712
+    },
+    "full": {
+      "mae": 11.36,
+      "rmse": 17.93,
+      "r2": 0.9104
+    }
+  },
+  "price_predictions": [
+    {
+      "date": "2025-09-05",
+      "real": 204.77935211222027,
+      "pred_base": 203.6,
+      "pred_full": 203.89
+    },
+    {
+      "date": "2025-09-06",
+      "real": 202.25733610931522,
+      "pred_base": 201.36,
+      "pred_full": 205.81
+    },
+    {
+      "date": "2025-09-07",
+      "real": 203.26438637377905,
+      "pred_base": 202.23,
+      "pred_full": 195.66
+    },
+    {
+      "date": "2025-09-08",
+      "real": 211.78171296165763,
+      "pred_base": 214.6,
+      "pred_full": 210.37
+    },
+    {
+      "date": "2025-09-09",
+      "real": 215.89739631432644,
+      "pred_base": 214.02,
+      "pred_full": 216.52
+    },
+    {
+      "date": "2025-09-10",
+      "real": 220.93874198604436,
+      "pred_base": 222.99,
+      "pred_full": 227.37
+    },
+    {
+      "date": "2025-09-11",
+      "real": 225.36736572830668,
+      "pred_base": 231.29,
+      "pred_full": 225.99
+    },
+    {
+      "date": "2025-09-12",
+      "real": 237.9213595910483,
+      "pred_base": 230.89,
+      "pred_full": 231.89
+    },
+    {
+      "date": "2025-09-13",
+      "real": 241.40179663110948,
+      "pred_base": 243.78,
+      "pred_full": 249.31
+    },
+    {
+      "date": "2025-09-14",
+      "real": 245.41772400554797,
+      "pred_base": 245.83,
+      "pred_full": 244.77
+    },
+    {
+      "date": "2025-09-15",
+      "real": 236.9142056492159,
+      "pred_base": 241.95,
+      "pred_full": 228.31
+    },
+    {
+      "date": "2025-09-16",
+      "real": 235.95286177116927,
+      "pred_base": 233.01,
+      "pred_full": 238.85
+    },
+    {
+      "date": "2025-09-17",
+      "real": 236.24271408363612,
+      "pred_base": 244.5,
+      "pred_full": 234.82
+    },
+    {
+      "date": "2025-09-18",
+      "real": 247.00052459270933,
+      "pred_base": 250.72,
+      "pred_full": 248.53
+    },
+    {
+      "date": "2025-09-19",
+      "real": 242.02333771160625,
+      "pred_base": 249.6,
+      "pred_full": 235.29
+    },
+    {
+      "date": "2025-09-20",
+      "real": 238.87849386354893,
+      "pred_base": 244.31,
+      "pred_full": 229.83
+    },
+    {
+      "date": "2025-09-21",
+      "real": 239.15693150512573,
+      "pred_base": 214.09,
+      "pred_full": 235.53
+    },
+    {
+      "date": "2025-09-22",
+      "real": 224.40758671919488,
+      "pred_base": 216.19,
+      "pred_full": 229.32
+    },
+    {
+      "date": "2025-09-23",
+      "real": 219.90981682008487,
+      "pred_base": 225.75,
+      "pred_full": 213.21
+    }
+  ],
+  "sentiment_daily": [
+    {
+      "date": "2025-08-21",
+      "sentiment": 0.1403,
+      "price": 184.56055529426806
+    },
+    {
+      "date": "2025-08-22",
+      "sentiment": 0.1077,
+      "price": 187.6070014147449
+    },
+    {
+      "date": "2025-08-23",
+      "sentiment": 0.3607,
+      "price": 202.50851412381067
+    },
+    {
+      "date": "2025-08-24",
+      "sentiment": -0.3809,
+      "price": 206.67112898385403
+    },
+    {
+      "date": "2025-08-25",
+      "sentiment": -0.1837,
+      "price": 199.24455678996654
+    },
+    {
+      "date": "2025-08-26",
+      "sentiment": -0.0119,
+      "price": 190.49362765645753
+    },
+    {
+      "date": "2025-08-27",
+      "sentiment": 0.0793,
+      "price": 203.91848479384078
+    },
+    {
+      "date": "2025-08-28",
+      "sentiment": 0.3715,
+      "price": 210.95334780207097
+    },
+    {
+      "date": "2025-08-29",
+      "sentiment": 0.0454,
+      "price": 209.06090822494252
+    },
+    {
+      "date": "2025-08-30",
+      "sentiment": 0.0573,
+      "price": 202.52591598576768
+    },
+    {
+      "date": "2025-08-31",
+      "sentiment": -0.0377,
+      "price": 204.31763790007324
+    },
+    {
+      "date": "2025-09-01",
+      "sentiment": 0.1164,
+      "price": 199.16714185362346
+    },
+    {
+      "date": "2025-09-02",
+      "sentiment": 0.075,
+      "price": 202.90652685064546
+    },
+    {
+      "date": "2025-09-03",
+      "sentiment": -0.0264,
+      "price": 209.96774206107122
+    },
+    {
+      "date": "2025-09-04",
+      "sentiment": 0.0193,
+      "price": 206.5191236211383
+    },
+    {
+      "date": "2025-09-05",
+      "sentiment": 0.3156,
+      "price": 204.77935211222027
+    },
+    {
+      "date": "2025-09-06",
+      "sentiment": 0.2274,
+      "price": 202.25733610931522
+    },
+    {
+      "date": "2025-09-07",
+      "sentiment": -0.2307,
+      "price": 203.26438637377905
+    },
+    {
+      "date": "2025-09-08",
+      "sentiment": 0.0714,
+      "price": 211.78171296165763
+    },
+    {
+      "date": "2025-09-09",
+      "sentiment": -0.0438,
+      "price": 215.89739631432644
+    },
+    {
+      "date": "2025-09-10",
+      "sentiment": -0.0293,
+      "price": 220.93874198604436
+    },
+    {
+      "date": "2025-09-11",
+      "sentiment": -0.0012,
+      "price": 225.36736572830668
+    },
+    {
+      "date": "2025-09-12",
+      "sentiment": 0.0682,
+      "price": 237.9213595910483
+    },
+    {
+      "date": "2025-09-13",
+      "sentiment": 0.05,
+      "price": 241.40179663110948
+    },
+    {
+      "date": "2025-09-14",
+      "sentiment": 0.0176,
+      "price": 245.41772400554797
+    },
+    {
+      "date": "2025-09-15",
+      "sentiment": -0.063,
+      "price": 236.9142056492159
+    },
+    {
+      "date": "2025-09-16",
+      "sentiment": 0.0523,
+      "price": 235.95286177116927
+    },
+    {
+      "date": "2025-09-17",
+      "sentiment": 0.1021,
+      "price": 236.24271408363612
+    },
+    {
+      "date": "2025-09-18",
+      "sentiment": 0.1425,
+      "price": 247.00052459270933
+    },
+    {
+      "date": "2025-09-19",
+      "sentiment": 0.2265,
+      "price": 242.02333771160625
+    },
+    {
+      "date": "2025-09-20",
+      "sentiment": 0.2907,
+      "price": 238.87849386354893
+    },
+    {
+      "date": "2025-09-21",
+      "sentiment": -0.185,
+      "price": 239.15693150512573
+    },
+    {
+      "date": "2025-09-22",
+      "sentiment": -0.074,
+      "price": 224.40758671919488
+    }
+  ],
+  "reddit_posts": [
+    {
+      "date": "2025-09-01",
+      "title": "USD1 Is Now Live On Solana",
+      "score": 789,
+      "num_comments": 68,
+      "sent_score": 0.2627,
+      "url": "https://reddit.com/r/solana/comments/1n5o2ho/usd1_is_now_live_on_solana/"
+    },
+    {
+      "date": "2025-09-16",
+      "title": "Is TRON trusted more than Solana for cross-border money remittance?",
+      "score": 264,
+      "num_comments": 95,
+      "sent_score": 0.3042,
+      "url": "https://reddit.com/r/solana/comments/1nijrsy/is_tron_trusted_more_than_solana_for_crossborder/"
+    },
+    {
+      "date": "2025-09-09",
+      "title": "How is it possible not to be bullish on SOLANA 😤",
+      "score": 235,
+      "num_comments": 107,
+      "sent_score": 0.9711,
+      "url": "https://reddit.com/r/solana/comments/1ncaxgo/how_is_it_possible_not_to_be_bullish_on_solana/"
+    },
+    {
+      "date": "2025-09-15",
+      "title": "Best Dev Tools to use?",
+      "score": 210,
+      "num_comments": 25,
+      "sent_score": 0.3599,
+      "url": "https://reddit.com/r/solana/comments/1nhpaom/best_dev_tools_to_use/"
+    },
+    {
+      "date": "2025-09-12",
+      "title": "Great news: Solana’s market cap reaches over $129B, Becomes the 5th largest cryptocurrency globally. 🔥",
+      "score": 209,
+      "num_comments": 42,
+      "sent_score": 0.9799,
+      "url": "https://reddit.com/r/solana/comments/1newp7y/great_news_solanas_market_cap_reaches_over_129b/"
+    },
+    {
+      "date": "2025-09-15",
+      "title": "they just don't have what it takes",
+      "score": 200,
+      "num_comments": 35,
+      "sent_score": -0.8044,
+      "url": "https://reddit.com/r/solana/comments/1nhts8k/they_just_dont_have_what_it_takes/"
+    },
+    {
+      "date": "2025-09-21",
+      "title": "Making crypto transactions as familiar as your morning latte☕",
+      "score": 191,
+      "num_comments": 46,
+      "sent_score": 0.5055,
+      "url": "https://reddit.com/r/solana/comments/1nmomao/making_crypto_transactions_as_familiar_as_your/"
+    },
+    {
+      "date": "2025-09-13",
+      "title": "I’m grateful to Solana for always keeping me young ❤️💚",
+      "score": 190,
+      "num_comments": 32,
+      "sent_score": 0.9774,
+      "url": "https://reddit.com/r/solana/comments/1nfy9g2/im_grateful_to_solana_for_always_keeping_me_young/"
+    },
+    {
+      "date": "2025-08-28",
+      "title": "Best Solana mixer to improve privacy?",
+      "score": 183,
+      "num_comments": 52,
+      "sent_score": -0.3902,
+      "url": "https://reddit.com/r/solana/comments/1n29jfd/best_solana_mixer_to_improve_privacy/"
+    },
+    {
+      "date": "2025-08-29",
+      "title": "Follow-Up on the 300+ SOL Stolen in USDC.",
+      "score": 182,
+      "num_comments": 196,
+      "sent_score": -0.7889,
+      "url": "https://reddit.com/r/solana/comments/1n3ijc5/followup_on_the_300_sol_stolen_in_usdc/"
+    },
+    {
+      "date": "2025-09-09",
+      "title": "Seeker being sold for less then half retail?",
+      "score": 172,
+      "num_comments": 109,
+      "sent_score": -0.7959,
+      "url": "https://reddit.com/r/solana/comments/1nckgyz/seeker_being_sold_for_less_then_half_retail/"
+    },
+    {
+      "date": "2025-09-14",
+      "title": "Solana did reach a new market cap.",
+      "score": 167,
+      "num_comments": 50,
+      "sent_score": -0.016,
+      "url": "https://reddit.com/r/solana/comments/1ngnseq/solana_did_reach_a_new_market_cap/"
+    },
+    {
+      "date": "2025-09-12",
+      "title": "I’m having flashbacks to early BTC",
+      "score": 160,
+      "num_comments": 77,
+      "sent_score": 0.656,
+      "url": "https://reddit.com/r/solana/comments/1nffgc9/im_having_flashbacks_to_early_btc/"
+    },
+    {
+      "date": "2025-09-18",
+      "title": "SEC has approved generic listings standards, clearing the way for spot crypto ETFs to launch",
+      "score": 159,
+      "num_comments": 20,
+      "sent_score": 0.5688,
+      "url": "https://reddit.com/r/solana/comments/1nka7w4/sec_has_approved_generic_listings_standards/"
+    },
+    {
+      "date": "2025-08-22",
+      "title": "EU Digital Euro on Solana/Ethereum",
+      "score": 155,
+      "num_comments": 79,
+      "sent_score": 0.6349,
+      "url": "https://reddit.com/r/solana/comments/1mx1tj2/eu_digital_euro_on_solanaethereum/"
+    },
+    {
+      "date": "2025-09-15",
+      "title": "Ascendbot refuses to pay out",
+      "score": 149,
+      "num_comments": 78,
+      "sent_score": -0.8691,
+      "url": "https://reddit.com/r/solana/comments/1nhttbk/ascendbot_refuses_to_pay_out/"
+    },
+    {
+      "date": "2025-09-04",
+      "title": "How to contact wallet owners?",
+      "score": 149,
+      "num_comments": 50,
+      "sent_score": -0.0007,
+      "url": "https://reddit.com/r/solana/comments/1n8fpjw/how_to_contact_wallet_owners/"
+    },
+    {
+      "date": "2025-09-14",
+      "title": "135Billion MC for the first time ever! 😤",
+      "score": 148,
+      "num_comments": 30,
+      "sent_score": 0.9781,
+      "url": "https://reddit.com/r/solana/comments/1nggptl/135billion_mc_for_the_first_time_ever/"
+    },
+    {
+      "date": "2025-09-05",
+      "title": "Solana growth is unstoppable 😈",
+      "score": 140,
+      "num_comments": 60,
+      "sent_score": 0.9652,
+      "url": "https://reddit.com/r/solana/comments/1n8xejx/solana_growth_is_unstoppable/"
+    },
+    {
+      "date": "2025-09-01",
+      "title": "99% of solana validators just voted yes on alpenglow. we're about to make visa look slow.",
+      "score": 140,
+      "num_comments": 42,
+      "sent_score": 0.0717,
+      "url": "https://reddit.com/r/solana/comments/1n5ss7s/99_of_solana_validators_just_voted_yes_on/"
+    },
+    {
+      "date": "2025-09-11",
+      "title": "What is staking? Is it profitable?",
+      "score": 132,
+      "num_comments": 57,
+      "sent_score": 0.2194,
+      "url": "https://reddit.com/r/solana/comments/1ndxie9/what_is_staking_is_it_profitable/"
+    },
+    {
+      "date": "2025-09-07",
+      "title": "Received a strange amount of solana. Also got strange movements on the history section.",
+      "score": 128,
+      "num_comments": 65,
+      "sent_score": -0.5416,
+      "url": "https://reddit.com/r/solana/comments/1natj40/received_a_strange_amount_of_solana_also_got/"
+    },
+    {
+      "date": "2025-08-30",
+      "title": "Subject: RE: Your “Class Action Lawsuit” Threat",
+      "score": 125,
+      "num_comments": 70,
+      "sent_score": -0.2619,
+      "url": "https://reddit.com/r/solana/comments/1n3tgey/subject_re_your_class_action_lawsuit_threat/"
+    },
+    {
+      "date": "2025-09-16",
+      "title": "Solana apps generated more revenue in the past 24H than the next 10 largest chains combined",
+      "score": 121,
+      "num_comments": 35,
+      "sent_score": 0.5411,
+      "url": "https://reddit.com/r/solana/comments/1nijk5j/solana_apps_generated_more_revenue_in_the_past/"
+    },
+    {
+      "date": "2025-09-17",
+      "title": "There’s 100 million tokens total on major networks, 85 million are on Solana",
+      "score": 119,
+      "num_comments": 113,
+      "sent_score": 0.3348,
+      "url": "https://reddit.com/r/solana/comments/1njc3qf/theres_100_million_tokens_total_on_major_networks/"
+    },
+    {
+      "date": "2025-08-26",
+      "title": "Solana Meme coins are ruining my outlook on life.",
+      "score": 119,
+      "num_comments": 99,
+      "sent_score": -0.5358,
+      "url": "https://reddit.com/r/solana/comments/1n0snnk/solana_meme_coins_are_ruining_my_outlook_on_life/"
+    },
+    {
+      "date": "2025-09-05",
+      "title": "SOL Strategies just got NASDAQ approval - this is bigger than people realize",
+      "score": 118,
+      "num_comments": 44,
+      "sent_score": 0.9612,
+      "url": "https://reddit.com/r/solana/comments/1n9ixf5/sol_strategies_just_got_nasdaq_approval_this_is/"
+    },
+    {
+      "date": "2025-08-23",
+      "title": "🚨 Just In: Solana becomes the top-performing cryptocurrency among the top 20 by market cap in the past 24 hours. 💥",
+      "score": 118,
+      "num_comments": 9,
+      "sent_score": 0.9579,
+      "url": "https://reddit.com/r/solana/comments/1mxuj9t/just_in_solana_becomes_the_topperforming/"
+    },
+    {
+      "date": "2025-09-11",
+      "title": "Friend has 125 Solana staking and wants to sell to pay their students loans. I told him hold. Should they hold or sell n",
+      "score": 109,
+      "num_comments": 170,
+      "sent_score": 0.04,
+      "url": "https://reddit.com/r/solana/comments/1ndv887/friend_has_125_solana_staking_and_wants_to_sell/"
+    },
+    {
+      "date": "2025-08-31",
+      "title": "A little honest review of Solana Seeker",
+      "score": 109,
+      "num_comments": 76,
+      "sent_score": -0.6895,
+      "url": "https://reddit.com/r/solana/comments/1n4gsc9/a_little_honest_review_of_solana_seeker/"
+    },
+    {
+      "date": "2025-08-30",
+      "title": "And so it begins!! Solana Seeker has arrived!!",
+      "score": 109,
+      "num_comments": 101,
+      "sent_score": 0.9633,
+      "url": "https://reddit.com/r/solana/comments/1n43f7k/and_so_it_begins_solana_seeker_has_arrived/"
+    },
+    {
+      "date": "2025-09-14",
+      "title": "who has got solana seeker and what dapps are you using?",
+      "score": 104,
+      "num_comments": 52,
+      "sent_score": 0.2975,
+      "url": "https://reddit.com/r/solana/comments/1ngz777/who_has_got_solana_seeker_and_what_dapps_are_you/"
+    },
+    {
+      "date": "2025-09-08",
+      "title": "Hey um can this be recovered?",
+      "score": 103,
+      "num_comments": 107,
+      "sent_score": -0.5305,
+      "url": "https://reddit.com/r/solana/comments/1nbbo2k/hey_um_can_this_be_recovered/"
+    },
+    {
+      "date": "2025-09-03",
+      "title": "Solana Seeker has ARRIVED!!!",
+      "score": 103,
+      "num_comments": 48,
+      "sent_score": 0.786,
+      "url": "https://reddit.com/r/solana/comments/1n737ha/solana_seeker_has_arrived/"
+    },
+    {
+      "date": "2025-08-24",
+      "title": "What do these transactions mean?",
+      "score": 101,
+      "num_comments": 47,
+      "sent_score": -0.3893,
+      "url": "https://reddit.com/r/solana/comments/1mypz9o/what_do_these_transactions_mean/"
+    },
+    {
+      "date": "2025-09-06",
+      "title": "All roads lead back to Solana",
+      "score": 97,
+      "num_comments": 21,
+      "sent_score": 0.0378,
+      "url": "https://reddit.com/r/solana/comments/1na8h27/all_roads_lead_back_to_solana/"
+    },
+    {
+      "date": "2025-09-13",
+      "title": "Almost all experts are bullish on Solana (SOL), here's why",
+      "score": 91,
+      "num_comments": 55,
+      "sent_score": 0.9083,
+      "url": "https://reddit.com/r/solana/comments/1ng321c/almost_all_experts_are_bullish_on_solana_sol/"
+    },
+    {
+      "date": "2025-08-21",
+      "title": "Made a tool that tracks every wallet to find trends & threats [Update]",
+      "score": 90,
+      "num_comments": 66,
+      "sent_score": 0.214,
+      "url": "https://reddit.com/r/solana/comments/1mwo4hl/made_a_tool_that_tracks_every_wallet_to_find/"
+    },
+    {
+      "date": "2025-09-18",
+      "title": "Afternoon was good indeed",
+      "score": 89,
+      "num_comments": 10,
+      "sent_score": 0.9692,
+      "url": "https://reddit.com/r/solana/comments/1nk8o45/afternoon_was_good_indeed/"
+    },
+    {
+      "date": "2025-09-13",
+      "title": "Is this a Glitch? Thought I was rich for a second",
+      "score": 89,
+      "num_comments": 63,
+      "sent_score": -0.8575,
+      "url": "https://reddit.com/r/solana/comments/1ng9r7e/is_this_a_glitch_thought_i_was_rich_for_a_second/"
+    },
+    {
+      "date": "2025-08-26",
+      "title": "Backpack is really the best Solana Wallet!",
+      "score": 89,
+      "num_comments": 25,
+      "sent_score": 0.9737,
+      "url": "https://reddit.com/r/solana/comments/1n0drz9/backpack_is_really_the_best_solana_wallet/"
+    },
+    {
+      "date": "2025-08-30",
+      "title": "Just paid for my haircut in Solana!",
+      "score": 84,
+      "num_comments": 32,
+      "sent_score": 0.8894,
+      "url": "https://reddit.com/r/solana/comments/1n4515y/just_paid_for_my_haircut_in_solana/"
+    },
+    {
+      "date": "2025-09-19",
+      "title": "Solana Just Landed 4 Major Wins Today — Are We Watching It Turn Into a Global Crypto Backbone?",
+      "score": 83,
+      "num_comments": 24,
+      "sent_score": 0.6085,
+      "url": "https://reddit.com/r/solana/comments/1nlh7oo/solana_just_landed_4_major_wins_today_are_we/"
+    },
+    {
+      "date": "2025-09-05",
+      "title": "First Spot Solana ETF with Staking Launches in Kazakhstan! ($SETF)",
+      "score": 81,
+      "num_comments": 30,
+      "sent_score": 0.7235,
+      "url": "https://reddit.com/r/solana/comments/1n9bans/first_spot_solana_etf_with_staking_launches_in/"
+    },
+    {
+      "date": "2025-09-03",
+      "title": "the first Nasdaq-listed firm to be tokenized on Solana",
+      "score": 79,
+      "num_comments": 10,
+      "sent_score": 0.2561,
+      "url": "https://reddit.com/r/solana/comments/1n7fv3w/the_first_nasdaqlisted_firm_to_be_tokenized_on/"
+    },
+    {
+      "date": "2025-08-25",
+      "title": "Daily active users. Your thoughts?",
+      "score": 72,
+      "num_comments": 48,
+      "sent_score": -0.1146,
+      "url": "https://reddit.com/r/solana/comments/1mzcuu3/daily_active_users_your_thoughts/"
+    },
+    {
+      "date": "2025-09-11",
+      "title": "Breaking: Solana's market cap has surged to almost $121 billion. Solana jumped its position to 185th in the global",
+      "score": 68,
+      "num_comments": 15,
+      "sent_score": 0.8096,
+      "url": "https://reddit.com/r/solana/comments/1ne11a2/breaking_solanas_market_cap_has_surged_to_almost/"
+    },
+    {
+      "date": "2025-09-03",
+      "title": "I got scammed for $458 or 2 Sol",
+      "score": 66,
+      "num_comments": 169,
+      "sent_score": -0.42,
+      "url": "https://reddit.com/r/solana/comments/1n7inob/i_got_scammed_for_458_or_2_sol/"
+    },
+    {
+      "date": "2025-08-22",
+      "title": "Been throwing away Solana Finally have learned.",
+      "score": 65,
+      "num_comments": 38,
+      "sent_score": 0.5102,
+      "url": "https://reddit.com/r/solana/comments/1mxf1y6/been_throwing_away_solana_finally_have_learned/"
+    },
+    {
+      "date": "2025-08-23",
+      "title": "Binance froze my funds for 30 days, then sent my withdrawal to the wrong address and blamed it on malware 🤡",
+      "score": 63,
+      "num_comments": 51,
+      "sent_score": -0.84,
+      "url": "https://reddit.com/r/solana/comments/1mycj45/binance_froze_my_funds_for_30_days_then_sent_my/"
+    }
+  ]
+}
