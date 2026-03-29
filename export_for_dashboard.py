@@ -8,6 +8,7 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score,
 CUTOFF        = pd.Timestamp("2024-01-01")
 FORECAST_DAYS = 7
 SENT_WINDOW   = 7    # rolling window para suavizar sentimiento
+MODEL_MIN_DAYS = 120  # minimo de dias para entrenar el modelo
 
 def mcnemar(y_true, pa, pb):
     ca = pa == y_true; cb = pb == y_true
@@ -36,35 +37,51 @@ def load():
     sd_real = se.groupby("date")["sent_score"].mean().reset_index()
     sd_real.columns = ["date", "sent_raw"]
 
-    # Merge con precios y calcular retorno
     df = pr.merge(sd_real, on="date", how="left")
     df["has_real_sent"] = df["sent_raw"].notna()
     df["return"] = df["price"].pct_change()
-
-    # Rolling mean de sentimiento (solo hacia atras, sin look-ahead)
     df["sent_score"] = df["sent_raw"].rolling(window=SENT_WINDOW, min_periods=1).mean()
     df["sent_score"] = df["sent_score"].fillna(0.0)
-
     df = df.dropna(subset=["price", "return"]).reset_index(drop=True)
     return df, se, sd_real, re
 
 
 def get_model_df(df):
     """
-    Para el entrenamiento usamos solo el periodo donde hay cobertura real
-    de sentimiento: desde el primer dia con dato real hasta hoy.
-    Esto garantiza que el sentimiento no es inventado en la mayoria de filas.
+    Determina el periodo de entrenamiento:
+    - Preferencia: el rango donde hay sentimiento real de Reddit
+    - Garantia: siempre al menos MODEL_MIN_DAYS dias de datos
+    Esto asegura que el modelo tenga suficiente historia de precios
+    sin importar cuan corta sea la cobertura de Reddit.
     """
     real_dates = df[df["has_real_sent"]]["date"]
+
     if real_dates.empty:
-        print("  WARN: no hay sentimiento real. Usando todos los datos.")
-        return df.copy()
+        # Sin sentimiento real: usar ultimos MODEL_MIN_DAYS dias
+        start = df["date"].max() - pd.Timedelta(days=MODEL_MIN_DAYS)
+        print(f"  WARN: sin sentimiento real. Usando ultimos {MODEL_MIN_DAYS} dias.")
+        df_model = df[df["date"] >= start].copy().reset_index(drop=True)
+        return df_model, 0.0
 
     first_real = real_dates.min()
-    df_model = df[df["date"] >= first_real].copy().reset_index(drop=True)
-    coverage = round(df_model["has_real_sent"].mean() * 100, 1)
-    print(f"  Rango modelo: {first_real.date()} -> {df_model['date'].max().date()} ({len(df_model)} dias)")
-    print(f"  Cobertura sentimiento real en periodo de entrenamiento: {coverage}%")
+    last_real  = real_dates.max()
+    reddit_days = (last_real - first_real).days + 1
+
+    # Si el periodo con Reddit es muy corto (< MODEL_MIN_DAYS),
+    # extender hacia atras para dar mas contexto al modelo
+    if reddit_days < MODEL_MIN_DAYS:
+        extended_start = last_real - pd.Timedelta(days=MODEL_MIN_DAYS - 1)
+        model_start = min(first_real, extended_start)
+        print(f"  Reddit cubre solo {reddit_days} dias -> extendiendo a {MODEL_MIN_DAYS} dias")
+    else:
+        model_start = first_real
+
+    df_model = df[df["date"] >= model_start].copy().reset_index(drop=True)
+    coverage  = round(df_model["has_real_sent"].mean() * 100, 1)
+
+    print(f"  Periodo Reddit: {first_real.date()} -> {last_real.date()} ({reddit_days} dias)")
+    print(f"  Periodo modelo: {model_start.date()} -> {df_model['date'].max().date()} ({len(df_model)} dias)")
+    print(f"  Cobertura sentimiento real: {coverage}%")
     return df_model, coverage
 
 
@@ -103,16 +120,16 @@ def regress_and_forecast(df_all, df_model):
         "r2":r2_score(yt,yh)}.items()}
     metrics = {"baseline":rm(yte,ypb),"full":rm(yte,ypf)}
 
-    # Historia completa de precios (2024+) para la visualizacion
+    # Historia completa 2024+ para visualizacion
     history = [{"date":str(dd.date()),"real":round(float(p),2)}
                for dd,p in zip(df_all["date"],df_all["price"])]
 
-    # Test set: predicciones vs real
+    # Test set con predicciones (ultimo 20% del periodo del modelo)
     test_s = [{"date":str(dd.date()),"real":round(float(r),2),
                "pred_base":round(float(pb2),2),"pred_full":round(float(pf2),2)}
               for dd,r,pb2,pf2 in zip(dte,yte.values,ypb,ypf)]
 
-    # Forecast recursivo 7 dias desde hoy
+    # Forecast recursivo 7 dias
     pc = float(df_all["price"].iloc[-1]); pp = float(df_all["price"].iloc[-2])
     rc = (pc-pp)/pp if pp!=0 else 0.0
     sc = float(df_all["sent_score"].tail(SENT_WINDOW).mean())
@@ -127,24 +144,21 @@ def regress_and_forecast(df_all, df_model):
 
 
 def main():
-    print("Cargando datos...")
+    print("Cargando datos 2024+...")
     df_all, sentiment, sent_daily, reddit = load()
     n_real = int(df_all["has_real_sent"].sum())
-    print(f"  Total precios 2024+: {len(df_all)} dias | Dias con sent. real: {n_real}")
+    total  = len(df_all)
+    print(f"  Precios: {total} dias | Dias con Reddit real: {n_real} ({round(n_real/total*100,1)}%)")
 
-    result = get_model_df(df_all)
-    if isinstance(result, tuple):
-        df_model, coverage = result
-    else:
-        df_model = result; coverage = 0.0
+    df_model, coverage = get_model_df(df_all)
 
-    print("Clasificador (entrenado en periodo con sentimiento)...")
+    print(f"Entrenando clasificador ({len(df_model)} dias)...")
     clf_res = classify(df_model)
 
-    print("Regresor + Forecast 7d...")
+    print("Entrenando regresor + forecast 7d...")
     reg_res, hist, test_s, fc = regress_and_forecast(df_all, df_model)
 
-    # Sentimiento diario real para el grafico
+    # Sentimiento diario para el grafico
     sw = sent_daily.merge(df_all[["date","price"]], on="date", how="inner").sort_values("date")
     sent_out = [{"date":str(r["date"].date()),
                  "sentiment":round(float(r["sent_raw"]),4),
@@ -169,6 +183,8 @@ def main():
         "today_price":  hist[-1]["real"] if hist else None,
         "today_date":   hist[-1]["date"] if hist else None,
         "model_start_date": str(df_model["date"].min().date()),
+        "model_end_date":   str(df_model["date"].max().date()),
+        "model_days":       len(df_model),
         "sentiment_coverage_pct": coverage,
         "classifier":  clf_res,
         "regression":  reg_res,
@@ -184,12 +200,12 @@ def main():
         json.dump(pkg, fh, ensure_ascii=False, indent=2)
 
     print(f"\nExportado -> {out_path}")
-    print(f"  Precio hoy:  ${pkg['today_price']} ({pkg['today_date']})")
-    print(f"  Modelo desde: {pkg['model_start_date']}")
+    print(f"  Hoy:     ${pkg['today_price']} ({pkg['today_date']})")
+    print(f"  Modelo:  {pkg['model_start_date']} -> {pkg['model_end_date']} ({pkg['model_days']} dias)")
     print(f"  Cobertura sentimiento: {coverage}%")
-    print(f"  Clf  baseline acc={clf_res['baseline']['accuracy']}  full={clf_res['full']['accuracy']}")
-    print(f"  Reg  baseline MAE={reg_res['baseline']['mae']}  full={reg_res['full']['mae']}")
-    print(f"  Forecast: {[x['pred_full'] for x in fc]}")
+    print(f"  Clf: baseline={clf_res['baseline']['accuracy']} | full={clf_res['full']['accuracy']}")
+    print(f"  Reg: baseline MAE={reg_res['baseline']['mae']} | full MAE={reg_res['full']['mae']}")
+    print(f"  Forecast 7d: {[x['pred_full'] for x in fc]}")
 
 if __name__ == "__main__":
     main()
