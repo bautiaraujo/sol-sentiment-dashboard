@@ -1,42 +1,42 @@
 {
-  "last_updated": "2026-03-29T21:03:05.821589+00:00",
+  "last_updated": "2026-03-29T21:54:57.922059+00:00",
   "today_price": 81.68,
   "today_date": "2026-03-29",
-  "model_start_date": "2025-08-21",
-  "model_end_date": "2025-09-22",
-  "model_days": 33,
+  "model_start_date": "2024-01-02",
+  "model_end_date": "2026-03-29",
+  "model_days": 734,
   "total_price_days": 818,
-  "sentiment_coverage_pct": 4.0,
+  "sentiment_coverage_pct": 89.7,
   "classifier": {
     "baseline": {
-      "accuracy": 0.5714,
-      "precision": 0.5,
-      "recall": 0.6667,
-      "f1": 0.5714
+      "accuracy": 0.517,
+      "precision": 0.4107,
+      "recall": 0.377,
+      "f1": 0.3932
     },
     "full": {
-      "accuracy": 0.5714,
-      "precision": 0.5,
-      "recall": 0.6667,
-      "f1": 0.5714
+      "accuracy": 0.4626,
+      "precision": 0.35,
+      "recall": 0.3443,
+      "f1": 0.3471
     },
     "mcnemar": {
-      "b": 0,
-      "c": 0,
-      "chi2": 0.0,
-      "p": 1.0
+      "b": 9,
+      "c": 17,
+      "chi2": 1.8846,
+      "p": 0.1698
     }
   },
   "regression": {
     "baseline": {
-      "mae": 10.5402,
-      "rmse": 15.0755,
-      "r2": -2.5203
+      "mae": 3.7417,
+      "rmse": 5.1781,
+      "r2": 0.9585
     },
     "full": {
-      "mae": 12.0867,
-      "rmse": 13.5272,
-      "r2": -1.8343
+      "mae": 3.9929,
+      "rmse": 5.6704,
+      "r2": 0.9503
     }
   },
   "price_history": [
@@ -3315,652 +3315,4997 @@
   ],
   "price_test": [
     {
-      "date": "2025-09-15",
-      "real": 236.99,
-      "pred_base": 235.79,
-      "pred_full": 241.58
+      "date": "2025-11-02",
+      "real": 166.09,
+      "pred_base": 186.16,
+      "pred_full": 190.35
     },
     {
-      "date": "2025-09-16",
-      "real": 244.86,
-      "pred_base": 216.01,
-      "pred_full": 227.24
+      "date": "2025-11-03",
+      "real": 155.4,
+      "pred_base": 176.28,
+      "pred_full": 180.62
     },
     {
-      "date": "2025-09-17",
-      "real": 247.64,
-      "pred_base": 254.06,
-      "pred_full": 256.99
+      "date": "2025-11-04",
+      "real": 162.57,
+      "pred_base": 153.06,
+      "pred_full": 155.04
     },
     {
-      "date": "2025-09-18",
-      "real": 238.55,
-      "pred_base": 225.71,
-      "pred_full": 250.32
+      "date": "2025-11-05",
+      "real": 155.07,
+      "pred_base": 160.97,
+      "pred_full": 160.53
     },
     {
-      "date": "2025-09-19",
-      "real": 239.59,
-      "pred_base": 240.01,
-      "pred_full": 253.32
+      "date": "2025-11-06",
+      "real": 161.71,
+      "pred_base": 153.93,
+      "pred_full": 151.09
     },
     {
-      "date": "2025-09-20",
-      "real": 236.58,
-      "pred_base": 237.16,
-      "pred_full": 241.53
+      "date": "2025-11-07",
+      "real": 158.1,
+      "pred_base": 161.64,
+      "pred_full": 161.28
     },
     {
-      "date": "2025-09-21",
-      "real": 220.5,
-      "pred_base": 243.96,
-      "pred_full": 243.09
+      "date": "2025-11-08",
+      "real": 164.45,
+      "pred_base": 161.11,
+      "pred_full": 160.4
+    },
+    {
+      "date": "2025-11-09",
+      "real": 167.37,
+      "pred_base": 169.82,
+      "pred_full": 162.47
+    },
+    {
+      "date": "2025-11-10",
+      "real": 154.57,
+      "pred_base": 169.03,
+      "pred_full": 168.87
+    },
+    {
+      "date": "2025-11-11",
+      "real": 153.26,
+      "pred_base": 155.18,
+      "pred_full": 156.74
+    },
+    {
+      "date": "2025-11-12",
+      "real": 145.11,
+      "pred_base": 153.03,
+      "pred_full": 157.46
+    },
+    {
+      "date": "2025-11-13",
+      "real": 138.68,
+      "pred_base": 147.41,
+      "pred_full": 147.31
+    },
+    {
+      "date": "2025-11-14",
+      "real": 139.54,
+      "pred_base": 137.25,
+      "pred_full": 138.3
+    },
+    {
+      "date": "2025-11-15",
+      "real": 137.27,
+      "pred_base": 139.33,
+      "pred_full": 140.63
+    },
+    {
+      "date": "2025-11-16",
+      "real": 130.85,
+      "pred_base": 137.51,
+      "pred_full": 135.82
+    },
+    {
+      "date": "2025-11-17",
+      "real": 140.71,
+      "pred_base": 129.89,
+      "pred_full": 129.23
+    },
+    {
+      "date": "2025-11-18",
+      "real": 136.77,
+      "pred_base": 137.53,
+      "pred_full": 143.12
+    },
+    {
+      "date": "2025-11-19",
+      "real": 133.52,
+      "pred_base": 136.2,
+      "pred_full": 136.58
+    },
+    {
+      "date": "2025-11-20",
+      "real": 128.5,
+      "pred_base": 126.29,
+      "pred_full": 129.81
+    },
+    {
+      "date": "2025-11-21",
+      "real": 127.55,
+      "pred_base": 131.99,
+      "pred_full": 128.81
+    },
+    {
+      "date": "2025-11-22",
+      "real": 130.71,
+      "pred_base": 128.37,
+      "pred_full": 127.62
+    },
+    {
+      "date": "2025-11-23",
+      "real": 138.37,
+      "pred_base": 133.13,
+      "pred_full": 133.11
+    },
+    {
+      "date": "2025-11-24",
+      "real": 138.89,
+      "pred_base": 136.74,
+      "pred_full": 140.17
+    },
+    {
+      "date": "2025-11-25",
+      "real": 143.01,
+      "pred_base": 146.58,
+      "pred_full": 143.98
+    },
+    {
+      "date": "2025-11-26",
+      "real": 140.85,
+      "pred_base": 142.18,
+      "pred_full": 138.28
+    },
+    {
+      "date": "2025-11-27",
+      "real": 137.39,
+      "pred_base": 141.58,
+      "pred_full": 141.8
+    },
+    {
+      "date": "2025-11-28",
+      "real": 136.08,
+      "pred_base": 137.02,
+      "pred_full": 133.99
+    },
+    {
+      "date": "2025-11-29",
+      "real": 133.56,
+      "pred_base": 135.05,
+      "pred_full": 136.56
+    },
+    {
+      "date": "2025-11-30",
+      "real": 126.71,
+      "pred_base": 130.98,
+      "pred_full": 130.05
+    },
+    {
+      "date": "2025-12-01",
+      "real": 138.67,
+      "pred_base": 127.49,
+      "pred_full": 125.15
+    },
+    {
+      "date": "2025-12-02",
+      "real": 144.9,
+      "pred_base": 137.46,
+      "pred_full": 136.48
+    },
+    {
+      "date": "2025-12-03",
+      "real": 139.01,
+      "pred_base": 143.3,
+      "pred_full": 143.43
+    },
+    {
+      "date": "2025-12-04",
+      "real": 133.32,
+      "pred_base": 137.61,
+      "pred_full": 140.56
+    },
+    {
+      "date": "2025-12-05",
+      "real": 132.35,
+      "pred_base": 130.35,
+      "pred_full": 133.53
+    },
+    {
+      "date": "2025-12-06",
+      "real": 132.09,
+      "pred_base": 133.2,
+      "pred_full": 133.51
+    },
+    {
+      "date": "2025-12-07",
+      "real": 133.28,
+      "pred_base": 131.41,
+      "pred_full": 132.01
+    },
+    {
+      "date": "2025-12-08",
+      "real": 137.9,
+      "pred_base": 131.65,
+      "pred_full": 131.75
+    },
+    {
+      "date": "2025-12-09",
+      "real": 136.47,
+      "pred_base": 138.33,
+      "pred_full": 138.0
+    },
+    {
+      "date": "2025-12-10",
+      "real": 136.37,
+      "pred_base": 135.01,
+      "pred_full": 135.37
+    },
+    {
+      "date": "2025-12-11",
+      "real": 132.32,
+      "pred_base": 138.89,
+      "pred_full": 138.68
+    },
+    {
+      "date": "2025-12-12",
+      "real": 133.25,
+      "pred_base": 131.8,
+      "pred_full": 133.85
+    },
+    {
+      "date": "2025-12-13",
+      "real": 129.48,
+      "pred_base": 133.0,
+      "pred_full": 133.65
+    },
+    {
+      "date": "2025-12-14",
+      "real": 127.76,
+      "pred_base": 128.94,
+      "pred_full": 131.78
+    },
+    {
+      "date": "2025-12-15",
+      "real": 129.25,
+      "pred_base": 128.43,
+      "pred_full": 128.76
+    },
+    {
+      "date": "2025-12-16",
+      "real": 123.12,
+      "pred_base": 129.21,
+      "pred_full": 130.66
+    },
+    {
+      "date": "2025-12-17",
+      "real": 119.57,
+      "pred_base": 122.83,
+      "pred_full": 122.08
+    },
+    {
+      "date": "2025-12-18",
+      "real": 126.19,
+      "pred_base": 117.94,
+      "pred_full": 117.36
+    },
+    {
+      "date": "2025-12-19",
+      "real": 125.81,
+      "pred_base": 126.2,
+      "pred_full": 126.36
+    },
+    {
+      "date": "2025-12-20",
+      "real": 125.99,
+      "pred_base": 125.89,
+      "pred_full": 123.81
+    },
+    {
+      "date": "2025-12-21",
+      "real": 125.8,
+      "pred_base": 127.13,
+      "pred_full": 127.38
+    },
+    {
+      "date": "2025-12-22",
+      "real": 123.86,
+      "pred_base": 124.27,
+      "pred_full": 125.22
+    },
+    {
+      "date": "2025-12-23",
+      "real": 122.46,
+      "pred_base": 124.51,
+      "pred_full": 125.15
+    },
+    {
+      "date": "2025-12-24",
+      "real": 119.95,
+      "pred_base": 122.22,
+      "pred_full": 123.52
+    },
+    {
+      "date": "2025-12-25",
+      "real": 122.2,
+      "pred_base": 113.97,
+      "pred_full": 117.29
+    },
+    {
+      "date": "2025-12-26",
+      "real": 124.65,
+      "pred_base": 122.92,
+      "pred_full": 123.92
+    },
+    {
+      "date": "2025-12-27",
+      "real": 125.2,
+      "pred_base": 124.88,
+      "pred_full": 124.77
+    },
+    {
+      "date": "2025-12-28",
+      "real": 123.13,
+      "pred_base": 123.36,
+      "pred_full": 124.54
+    },
+    {
+      "date": "2025-12-29",
+      "real": 124.93,
+      "pred_base": 123.11,
+      "pred_full": 126.68
+    },
+    {
+      "date": "2025-12-30",
+      "real": 124.48,
+      "pred_base": 125.23,
+      "pred_full": 124.73
+    },
+    {
+      "date": "2025-12-31",
+      "real": 126.76,
+      "pred_base": 124.45,
+      "pred_full": 126.94
+    },
+    {
+      "date": "2026-01-01",
+      "real": 132.13,
+      "pred_base": 127.51,
+      "pred_full": 127.67
+    },
+    {
+      "date": "2026-01-02",
+      "real": 133.3,
+      "pred_base": 134.8,
+      "pred_full": 131.93
+    },
+    {
+      "date": "2026-01-03",
+      "real": 133.9,
+      "pred_base": 131.67,
+      "pred_full": 133.95
+    },
+    {
+      "date": "2026-01-04",
+      "real": 137.99,
+      "pred_base": 131.94,
+      "pred_full": 133.78
+    },
+    {
+      "date": "2026-01-05",
+      "real": 141.1,
+      "pred_base": 137.91,
+      "pred_full": 138.3
+    },
+    {
+      "date": "2026-01-06",
+      "real": 136.31,
+      "pred_base": 144.06,
+      "pred_full": 143.02
+    },
+    {
+      "date": "2026-01-07",
+      "real": 138.29,
+      "pred_base": 132.7,
+      "pred_full": 133.48
+    },
+    {
+      "date": "2026-01-08",
+      "real": 135.76,
+      "pred_base": 138.63,
+      "pred_full": 137.46
+    },
+    {
+      "date": "2026-01-09",
+      "real": 135.73,
+      "pred_base": 133.13,
+      "pred_full": 134.68
+    },
+    {
+      "date": "2026-01-10",
+      "real": 139.49,
+      "pred_base": 136.13,
+      "pred_full": 136.14
+    },
+    {
+      "date": "2026-01-11",
+      "real": 139.14,
+      "pred_base": 139.74,
+      "pred_full": 139.5
+    },
+    {
+      "date": "2026-01-12",
+      "real": 145.36,
+      "pred_base": 138.35,
+      "pred_full": 138.39
+    },
+    {
+      "date": "2026-01-13",
+      "real": 146.75,
+      "pred_base": 143.75,
+      "pred_full": 144.91
+    },
+    {
+      "date": "2026-01-14",
+      "real": 142.33,
+      "pred_base": 143.5,
+      "pred_full": 145.57
+    },
+    {
+      "date": "2026-01-15",
+      "real": 144.86,
+      "pred_base": 141.77,
+      "pred_full": 142.97
+    },
+    {
+      "date": "2026-01-16",
+      "real": 143.73,
+      "pred_base": 145.72,
+      "pred_full": 146.85
+    },
+    {
+      "date": "2026-01-17",
+      "real": 138.0,
+      "pred_base": 141.09,
+      "pred_full": 142.74
+    },
+    {
+      "date": "2026-01-18",
+      "real": 133.34,
+      "pred_base": 137.28,
+      "pred_full": 138.47
+    },
+    {
+      "date": "2026-01-19",
+      "real": 125.71,
+      "pred_base": 129.8,
+      "pred_full": 131.15
+    },
+    {
+      "date": "2026-01-20",
+      "real": 129.38,
+      "pred_base": 129.3,
+      "pred_full": 127.33
+    },
+    {
+      "date": "2026-01-21",
+      "real": 128.29,
+      "pred_base": 128.27,
+      "pred_full": 132.07
+    },
+    {
+      "date": "2026-01-22",
+      "real": 127.36,
+      "pred_base": 128.1,
+      "pred_full": 126.86
+    },
+    {
+      "date": "2026-01-23",
+      "real": 127.05,
+      "pred_base": 128.18,
+      "pred_full": 127.1
+    },
+    {
+      "date": "2026-01-24",
+      "real": 118.77,
+      "pred_base": 126.33,
+      "pred_full": 126.26
+    },
+    {
+      "date": "2026-01-25",
+      "real": 124.14,
+      "pred_base": 118.49,
+      "pred_full": 118.48
+    },
+    {
+      "date": "2026-01-26",
+      "real": 127.05,
+      "pred_base": 122.77,
+      "pred_full": 121.88
+    },
+    {
+      "date": "2026-01-27",
+      "real": 125.12,
+      "pred_base": 129.31,
+      "pred_full": 129.28
+    },
+    {
+      "date": "2026-01-28",
+      "real": 117.61,
+      "pred_base": 125.77,
+      "pred_full": 127.1
+    },
+    {
+      "date": "2026-01-29",
+      "real": 117.36,
+      "pred_base": 116.33,
+      "pred_full": 116.8
+    },
+    {
+      "date": "2026-01-30",
+      "real": 105.44,
+      "pred_base": 116.75,
+      "pred_full": 119.94
+    },
+    {
+      "date": "2026-01-31",
+      "real": 100.85,
+      "pred_base": 103.9,
+      "pred_full": 105.0
+    },
+    {
+      "date": "2026-02-01",
+      "real": 104.47,
+      "pred_base": 99.94,
+      "pred_full": 100.68
+    },
+    {
+      "date": "2026-02-02",
+      "real": 97.56,
+      "pred_base": 107.09,
+      "pred_full": 105.24
+    },
+    {
+      "date": "2026-02-03",
+      "real": 92.03,
+      "pred_base": 97.19,
+      "pred_full": 96.14
+    },
+    {
+      "date": "2026-02-04",
+      "real": 78.19,
+      "pred_base": 94.66,
+      "pred_full": 93.84
+    },
+    {
+      "date": "2026-02-05",
+      "real": 87.46,
+      "pred_base": 77.86,
+      "pred_full": 77.85
+    },
+    {
+      "date": "2026-02-06",
+      "real": 87.64,
+      "pred_base": 89.67,
+      "pred_full": 87.31
+    },
+    {
+      "date": "2026-02-07",
+      "real": 87.04,
+      "pred_base": 88.43,
+      "pred_full": 88.08
+    },
+    {
+      "date": "2026-02-08",
+      "real": 86.7,
+      "pred_base": 86.13,
+      "pred_full": 86.08
+    },
+    {
+      "date": "2026-02-09",
+      "real": 82.92,
+      "pred_base": 86.68,
+      "pred_full": 87.03
+    },
+    {
+      "date": "2026-02-10",
+      "real": 79.25,
+      "pred_base": 82.17,
+      "pred_full": 84.32
+    },
+    {
+      "date": "2026-02-11",
+      "real": 78.35,
+      "pred_base": 78.54,
+      "pred_full": 78.83
+    },
+    {
+      "date": "2026-02-12",
+      "real": 84.32,
+      "pred_base": 78.2,
+      "pred_full": 78.08
+    },
+    {
+      "date": "2026-02-13",
+      "real": 88.16,
+      "pred_base": 82.41,
+      "pred_full": 82.47
+    },
+    {
+      "date": "2026-02-14",
+      "real": 86.01,
+      "pred_base": 87.19,
+      "pred_full": 86.35
+    },
+    {
+      "date": "2026-02-15",
+      "real": 86.43,
+      "pred_base": 85.78,
+      "pred_full": 85.06
+    },
+    {
+      "date": "2026-02-16",
+      "real": 85.2,
+      "pred_base": 85.16,
+      "pred_full": 85.46
+    },
+    {
+      "date": "2026-02-17",
+      "real": 81.57,
+      "pred_base": 87.15,
+      "pred_full": 86.19
+    },
+    {
+      "date": "2026-02-18",
+      "real": 82.39,
+      "pred_base": 80.05,
+      "pred_full": 80.13
+    },
+    {
+      "date": "2026-02-19",
+      "real": 84.64,
+      "pred_base": 82.41,
+      "pred_full": 82.14
+    },
+    {
+      "date": "2026-02-20",
+      "real": 85.21,
+      "pred_base": 85.08,
+      "pred_full": 85.22
+    },
+    {
+      "date": "2026-02-21",
+      "real": 82.79,
+      "pred_base": 85.06,
+      "pred_full": 85.07
+    },
+    {
+      "date": "2026-02-22",
+      "real": 77.75,
+      "pred_base": 82.45,
+      "pred_full": 84.68
+    },
+    {
+      "date": "2026-02-23",
+      "real": 79.04,
+      "pred_base": 76.91,
+      "pred_full": 77.14
+    },
+    {
+      "date": "2026-02-24",
+      "real": 87.92,
+      "pred_base": 79.08,
+      "pred_full": 78.24
+    },
+    {
+      "date": "2026-02-25",
+      "real": 85.91,
+      "pred_base": 88.03,
+      "pred_full": 90.26
+    },
+    {
+      "date": "2026-02-26",
+      "real": 81.95,
+      "pred_base": 86.09,
+      "pred_full": 86.43
+    },
+    {
+      "date": "2026-02-27",
+      "real": 84.37,
+      "pred_base": 81.35,
+      "pred_full": 76.91
+    },
+    {
+      "date": "2026-02-28",
+      "real": 83.58,
+      "pred_base": 83.87,
+      "pred_full": 82.94
+    },
+    {
+      "date": "2026-03-01",
+      "real": 86.63,
+      "pred_base": 83.1,
+      "pred_full": 82.86
+    },
+    {
+      "date": "2026-03-02",
+      "real": 87.02,
+      "pred_base": 85.24,
+      "pred_full": 85.83
+    },
+    {
+      "date": "2026-03-03",
+      "real": 90.83,
+      "pred_base": 85.74,
+      "pred_full": 87.33
+    },
+    {
+      "date": "2026-03-04",
+      "real": 88.69,
+      "pred_base": 89.83,
+      "pred_full": 89.91
+    },
+    {
+      "date": "2026-03-05",
+      "real": 84.68,
+      "pred_base": 83.89,
+      "pred_full": 84.95
+    },
+    {
+      "date": "2026-03-06",
+      "real": 83.18,
+      "pred_base": 84.06,
+      "pred_full": 85.04
+    },
+    {
+      "date": "2026-03-07",
+      "real": 81.62,
+      "pred_base": 81.57,
+      "pred_full": 81.97
+    },
+    {
+      "date": "2026-03-08",
+      "real": 84.94,
+      "pred_base": 82.61,
+      "pred_full": 82.15
+    },
+    {
+      "date": "2026-03-09",
+      "real": 85.84,
+      "pred_base": 87.71,
+      "pred_full": 88.8
+    },
+    {
+      "date": "2026-03-10",
+      "real": 86.56,
+      "pred_base": 85.85,
+      "pred_full": 85.59
+    },
+    {
+      "date": "2026-03-11",
+      "real": 86.87,
+      "pred_base": 85.41,
+      "pred_full": 85.15
+    },
+    {
+      "date": "2026-03-12",
+      "real": 88.15,
+      "pred_base": 91.68,
+      "pred_full": 88.83
+    },
+    {
+      "date": "2026-03-13",
+      "real": 88.07,
+      "pred_base": 88.36,
+      "pred_full": 87.96
+    },
+    {
+      "date": "2026-03-14",
+      "real": 92.25,
+      "pred_base": 87.0,
+      "pred_full": 87.33
+    },
+    {
+      "date": "2026-03-15",
+      "real": 96.22,
+      "pred_base": 90.92,
+      "pred_full": 89.05
+    },
+    {
+      "date": "2026-03-16",
+      "real": 94.71,
+      "pred_base": 96.19,
+      "pred_full": 96.84
+    },
+    {
+      "date": "2026-03-17",
+      "real": 90.07,
+      "pred_base": 95.13,
+      "pred_full": 95.27
+    },
+    {
+      "date": "2026-03-18",
+      "real": 88.92,
+      "pred_base": 95.13,
+      "pred_full": 92.11
+    },
+    {
+      "date": "2026-03-19",
+      "real": 89.85,
+      "pred_base": 89.8,
+      "pred_full": 89.08
+    },
+    {
+      "date": "2026-03-20",
+      "real": 87.47,
+      "pred_base": 89.86,
+      "pred_full": 90.35
+    },
+    {
+      "date": "2026-03-21",
+      "real": 86.13,
+      "pred_base": 85.39,
+      "pred_full": 85.76
+    },
+    {
+      "date": "2026-03-22",
+      "real": 91.42,
+      "pred_base": 86.58,
+      "pred_full": 85.12
+    },
+    {
+      "date": "2026-03-23",
+      "real": 90.82,
+      "pred_base": 91.76,
+      "pred_full": 92.43
+    },
+    {
+      "date": "2026-03-24",
+      "real": 91.71,
+      "pred_base": 89.87,
+      "pred_full": 90.38
+    },
+    {
+      "date": "2026-03-25",
+      "real": 86.44,
+      "pred_base": 91.73,
+      "pred_full": 92.07
+    },
+    {
+      "date": "2026-03-26",
+      "real": 83.02,
+      "pred_base": 88.08,
+      "pred_full": 86.99
+    },
+    {
+      "date": "2026-03-27",
+      "real": 82.02,
+      "pred_base": 82.59,
+      "pred_full": 81.57
+    },
+    {
+      "date": "2026-03-28",
+      "real": 81.68,
+      "pred_base": 81.5,
+      "pred_full": 81.6
     }
   ],
   "forecast_7d": [
     {
       "date": "2026-03-30",
-      "pred_base": 79.72,
-      "pred_full": 81.92
+      "pred_base": 81.65,
+      "pred_full": 81.77
     },
     {
       "date": "2026-03-31",
-      "pred_base": 81.09,
-      "pred_full": 82.82
+      "pred_base": 81.58,
+      "pred_full": 82.41
     },
     {
       "date": "2026-04-01",
-      "pred_base": 75.49,
-      "pred_full": 81.14
+      "pred_base": 81.68,
+      "pred_full": 82.38
     },
     {
       "date": "2026-04-02",
-      "pred_base": 81.63,
-      "pred_full": 83.64
+      "pred_base": 82.63,
+      "pred_full": 83.27
     },
     {
       "date": "2026-04-03",
-      "pred_base": 88.42,
-      "pred_full": 88.47
+      "pred_base": 81.24,
+      "pred_full": 82.54
     },
     {
       "date": "2026-04-04",
-      "pred_base": 84.81,
-      "pred_full": 88.72
+      "pred_base": 80.52,
+      "pred_full": 81.67
     },
     {
       "date": "2026-04-05",
-      "pred_base": 87.82,
-      "pred_full": 89.7
+      "pred_base": 80.79,
+      "pred_full": 81.33
     }
   ],
   "sentiment_daily": [
     {
+      "date": "2024-01-02",
+      "sentiment": 0.5556,
+      "price": 106.61
+    },
+    {
+      "date": "2024-01-03",
+      "sentiment": -0.1917,
+      "price": 98.59
+    },
+    {
+      "date": "2024-01-04",
+      "sentiment": 0.9033,
+      "price": 105.08
+    },
+    {
+      "date": "2024-01-06",
+      "sentiment": 0.0219,
+      "price": 93.86
+    },
+    {
+      "date": "2024-01-07",
+      "sentiment": 0.1358,
+      "price": 89.28
+    },
+    {
+      "date": "2024-01-08",
+      "sentiment": 0.823,
+      "price": 97.79
+    },
+    {
+      "date": "2024-01-10",
+      "sentiment": -0.3996,
+      "price": 102.03
+    },
+    {
+      "date": "2024-01-11",
+      "sentiment": 0.3926,
+      "price": 99.91
+    },
+    {
+      "date": "2024-01-12",
+      "sentiment": 0.3037,
+      "price": 91.72
+    },
+    {
+      "date": "2024-01-13",
+      "sentiment": 0.3573,
+      "price": 95.73
+    },
+    {
+      "date": "2024-01-14",
+      "sentiment": 0.7738,
+      "price": 94.13
+    },
+    {
+      "date": "2024-01-15",
+      "sentiment": -0.0528,
+      "price": 94.49
+    },
+    {
+      "date": "2024-01-16",
+      "sentiment": -0.0198,
+      "price": 97.63
+    },
+    {
+      "date": "2024-01-17",
+      "sentiment": -0.0896,
+      "price": 102.06
+    },
+    {
+      "date": "2024-01-19",
+      "sentiment": 0.2357,
+      "price": 93.39
+    },
+    {
+      "date": "2024-01-20",
+      "sentiment": 0.119,
+      "price": 92.57
+    },
+    {
+      "date": "2024-01-21",
+      "sentiment": -0.1358,
+      "price": 90.85
+    },
+    {
+      "date": "2024-01-22",
+      "sentiment": 0.025,
+      "price": 83.62
+    },
+    {
+      "date": "2024-01-23",
+      "sentiment": 0.4481,
+      "price": 84.27
+    },
+    {
+      "date": "2024-01-28",
+      "sentiment": 0.0959,
+      "price": 95.94
+    },
+    {
+      "date": "2024-01-29",
+      "sentiment": 0.0913,
+      "price": 101.57
+    },
+    {
+      "date": "2024-01-30",
+      "sentiment": -0.0779,
+      "price": 101.47
+    },
+    {
+      "date": "2024-01-31",
+      "sentiment": -0.5182,
+      "price": 97.03
+    },
+    {
+      "date": "2024-02-01",
+      "sentiment": -0.5028,
+      "price": 97.85
+    },
+    {
+      "date": "2024-02-03",
+      "sentiment": 0.929,
+      "price": 97.88
+    },
+    {
+      "date": "2024-02-05",
+      "sentiment": 0.0572,
+      "price": 95.55
+    },
+    {
+      "date": "2024-02-06",
+      "sentiment": -0.1707,
+      "price": 96.86
+    },
+    {
+      "date": "2024-02-09",
+      "sentiment": -0.8198,
+      "price": 106.93
+    },
+    {
+      "date": "2024-02-10",
+      "sentiment": -0.4187,
+      "price": 109.13
+    },
+    {
+      "date": "2024-02-11",
+      "sentiment": 0.0497,
+      "price": 107.5
+    },
+    {
+      "date": "2024-02-13",
+      "sentiment": 0.4832,
+      "price": 112.58
+    },
+    {
+      "date": "2024-02-14",
+      "sentiment": -0.0023,
+      "price": 116.98
+    },
+    {
+      "date": "2024-02-16",
+      "sentiment": 0.0773,
+      "price": 110.45
+    },
+    {
+      "date": "2024-02-18",
+      "sentiment": -0.8253,
+      "price": 112.17
+    },
+    {
+      "date": "2024-02-19",
+      "sentiment": 0.607,
+      "price": 111.49
+    },
+    {
+      "date": "2024-02-20",
+      "sentiment": -0.6854,
+      "price": 108.46
+    },
+    {
+      "date": "2024-02-21",
+      "sentiment": 0.1158,
+      "price": 105.13
+    },
+    {
+      "date": "2024-02-22",
+      "sentiment": 0.2303,
+      "price": 101.67
+    },
+    {
+      "date": "2024-02-23",
+      "sentiment": 0.161,
+      "price": 99.95
+    },
+    {
+      "date": "2024-02-24",
+      "sentiment": 0.0383,
+      "price": 104.13
+    },
+    {
+      "date": "2024-02-26",
+      "sentiment": 0.91,
+      "price": 109.92
+    },
+    {
+      "date": "2024-02-27",
+      "sentiment": -0.7615,
+      "price": 108.39
+    },
+    {
+      "date": "2024-02-28",
+      "sentiment": -0.2008,
+      "price": 118.05
+    },
+    {
+      "date": "2024-02-29",
+      "sentiment": -0.5264,
+      "price": 125.71
+    },
+    {
+      "date": "2024-03-01",
+      "sentiment": -0.3444,
+      "price": 129.99
+    },
+    {
+      "date": "2024-03-02",
+      "sentiment": -0.0627,
+      "price": 129.7
+    },
+    {
+      "date": "2024-03-03",
+      "sentiment": 0.0965,
+      "price": 130.45
+    },
+    {
+      "date": "2024-03-04",
+      "sentiment": 0.3646,
+      "price": 133.19
+    },
+    {
+      "date": "2024-03-06",
+      "sentiment": 0.3908,
+      "price": 130.74
+    },
+    {
+      "date": "2024-03-07",
+      "sentiment": 0.2593,
+      "price": 143.98
+    },
+    {
+      "date": "2024-03-08",
+      "sentiment": -0.1999,
+      "price": 145.24
+    },
+    {
+      "date": "2024-03-10",
+      "sentiment": 0.1154,
+      "price": 144.52
+    },
+    {
+      "date": "2024-03-11",
+      "sentiment": -0.6576,
+      "price": 148.75
+    },
+    {
+      "date": "2024-03-12",
+      "sentiment": -0.0463,
+      "price": 151.02
+    },
+    {
+      "date": "2024-03-13",
+      "sentiment": -0.3037,
+      "price": 163.84
+    },
+    {
+      "date": "2024-03-14",
+      "sentiment": -0.124,
+      "price": 176.68
+    },
+    {
+      "date": "2024-03-15",
+      "sentiment": 0.2629,
+      "price": 182.96
+    },
+    {
+      "date": "2024-03-16",
+      "sentiment": -0.2704,
+      "price": 181.88
+    },
+    {
+      "date": "2024-03-17",
+      "sentiment": -0.1172,
+      "price": 202.12
+    },
+    {
+      "date": "2024-03-18",
+      "sentiment": 0.0361,
+      "price": 195.99
+    },
+    {
+      "date": "2024-03-19",
+      "sentiment": 0.1605,
+      "price": 170.02
+    },
+    {
+      "date": "2024-03-20",
+      "sentiment": 0.2485,
+      "price": 191.55
+    },
+    {
+      "date": "2024-03-21",
+      "sentiment": 0.014,
+      "price": 179.22
+    },
+    {
+      "date": "2024-03-22",
+      "sentiment": -0.5368,
+      "price": 174.36
+    },
+    {
+      "date": "2024-03-23",
+      "sentiment": 0.0049,
+      "price": 172.9
+    },
+    {
+      "date": "2024-03-24",
+      "sentiment": -0.4088,
+      "price": 183.57
+    },
+    {
+      "date": "2024-03-25",
+      "sentiment": -0.0683,
+      "price": 189.08
+    },
+    {
+      "date": "2024-03-26",
+      "sentiment": -0.0606,
+      "price": 190.7
+    },
+    {
+      "date": "2024-03-27",
+      "sentiment": -0.7209,
+      "price": 186.36
+    },
+    {
+      "date": "2024-03-28",
+      "sentiment": -0.502,
+      "price": 189.62
+    },
+    {
+      "date": "2024-03-29",
+      "sentiment": 0.5178,
+      "price": 192.23
+    },
+    {
+      "date": "2024-03-30",
+      "sentiment": -0.0659,
+      "price": 194.39
+    },
+    {
+      "date": "2024-03-31",
+      "sentiment": 0.7162,
+      "price": 202.87
+    },
+    {
+      "date": "2024-04-01",
+      "sentiment": -0.0175,
+      "price": 192.57
+    },
+    {
+      "date": "2024-04-02",
+      "sentiment": -0.2659,
+      "price": 181.17
+    },
+    {
+      "date": "2024-04-03",
+      "sentiment": 0.019,
+      "price": 185.25
+    },
+    {
+      "date": "2024-04-04",
+      "sentiment": -0.5078,
+      "price": 183.96
+    },
+    {
+      "date": "2024-04-05",
+      "sentiment": -0.2005,
+      "price": 174.5
+    },
+    {
+      "date": "2024-04-06",
+      "sentiment": -0.0752,
+      "price": 178.92
+    },
+    {
+      "date": "2024-04-07",
+      "sentiment": 0.1596,
+      "price": 179.65
+    },
+    {
+      "date": "2024-04-08",
+      "sentiment": 0.0021,
+      "price": 180.78
+    },
+    {
+      "date": "2024-04-09",
+      "sentiment": -0.2818,
+      "price": 172.41
+    },
+    {
+      "date": "2024-04-10",
+      "sentiment": 0.9193,
+      "price": 173.44
+    },
+    {
+      "date": "2024-04-11",
+      "sentiment": -0.1832,
+      "price": 172.58
+    },
+    {
+      "date": "2024-04-12",
+      "sentiment": -0.5694,
+      "price": 153.64
+    },
+    {
+      "date": "2024-04-13",
+      "sentiment": -0.1372,
+      "price": 139.34
+    },
+    {
+      "date": "2024-04-15",
+      "sentiment": 0.063,
+      "price": 138.51
+    },
+    {
+      "date": "2024-04-16",
+      "sentiment": 0.1428,
+      "price": 136.28
+    },
+    {
+      "date": "2024-04-17",
+      "sentiment": -0.0232,
+      "price": 131.87
+    },
+    {
+      "date": "2024-04-18",
+      "sentiment": 0.7159,
+      "price": 142.08
+    },
+    {
+      "date": "2024-04-19",
+      "sentiment": -0.1689,
+      "price": 142.68
+    },
+    {
+      "date": "2024-04-20",
+      "sentiment": 0.2233,
+      "price": 151.13
+    },
+    {
+      "date": "2024-04-23",
+      "sentiment": -0.59,
+      "price": 154.7
+    },
+    {
+      "date": "2024-04-24",
+      "sentiment": 0.0005,
+      "price": 147.75
+    },
+    {
+      "date": "2024-04-25",
+      "sentiment": -0.055,
+      "price": 144.89
+    },
+    {
+      "date": "2024-04-26",
+      "sentiment": -0.1486,
+      "price": 139.1
+    },
+    {
+      "date": "2024-04-27",
+      "sentiment": -0.5457,
+      "price": 141.29
+    },
+    {
+      "date": "2024-04-28",
+      "sentiment": 0.2207,
+      "price": 137.86
+    },
+    {
+      "date": "2024-04-29",
+      "sentiment": 0.0325,
+      "price": 137.78
+    },
+    {
+      "date": "2024-05-01",
+      "sentiment": 0.9106,
+      "price": 134.63
+    },
+    {
+      "date": "2024-05-02",
+      "sentiment": -0.7565,
+      "price": 137.81
+    },
+    {
+      "date": "2024-05-03",
+      "sentiment": -0.3203,
+      "price": 143.77
+    },
+    {
+      "date": "2024-05-04",
+      "sentiment": -0.5284,
+      "price": 146.14
+    },
+    {
+      "date": "2024-05-07",
+      "sentiment": 0.2503,
+      "price": 148.13
+    },
+    {
+      "date": "2024-05-09",
+      "sentiment": 0.4342,
+      "price": 152.85
+    },
+    {
+      "date": "2024-05-10",
+      "sentiment": -0.2036,
+      "price": 146.22
+    },
+    {
+      "date": "2024-05-11",
+      "sentiment": -0.0015,
+      "price": 145.31
+    },
+    {
+      "date": "2024-05-12",
+      "sentiment": 0.876,
+      "price": 143.52
+    },
+    {
+      "date": "2024-05-13",
+      "sentiment": -0.0857,
+      "price": 147.28
+    },
+    {
+      "date": "2024-05-15",
+      "sentiment": 0.4233,
+      "price": 158.19
+    },
+    {
+      "date": "2024-05-16",
+      "sentiment": -0.0516,
+      "price": 159.12
+    },
+    {
+      "date": "2024-05-18",
+      "sentiment": 0.4769,
+      "price": 172.54
+    },
+    {
+      "date": "2024-05-19",
+      "sentiment": 0.6347,
+      "price": 170.09
+    },
+    {
+      "date": "2024-05-20",
+      "sentiment": 0.211,
+      "price": 186.52
+    },
+    {
+      "date": "2024-05-21",
+      "sentiment": -0.1355,
+      "price": 178.12
+    },
+    {
+      "date": "2024-05-22",
+      "sentiment": 0.0953,
+      "price": 176.86
+    },
+    {
+      "date": "2024-05-23",
+      "sentiment": -0.4834,
+      "price": 175.99
+    },
+    {
+      "date": "2024-05-24",
+      "sentiment": 0.0082,
+      "price": 167.8
+    },
+    {
+      "date": "2024-05-25",
+      "sentiment": 0.0775,
+      "price": 168.44
+    },
+    {
+      "date": "2024-05-26",
+      "sentiment": -0.3562,
+      "price": 163.35
+    },
+    {
+      "date": "2024-05-27",
+      "sentiment": 0.4887,
+      "price": 170.0
+    },
+    {
+      "date": "2024-05-28",
+      "sentiment": -0.2834,
+      "price": 168.65
+    },
+    {
+      "date": "2024-05-29",
+      "sentiment": -0.0548,
+      "price": 168.07
+    },
+    {
+      "date": "2024-05-30",
+      "sentiment": 0.2458,
+      "price": 166.98
+    },
+    {
+      "date": "2024-05-31",
+      "sentiment": 0.1486,
+      "price": 165.64
+    },
+    {
+      "date": "2024-06-01",
+      "sentiment": 0.3875,
+      "price": 166.03
+    },
+    {
+      "date": "2024-06-03",
+      "sentiment": 0.0529,
+      "price": 164.92
+    },
+    {
+      "date": "2024-06-05",
+      "sentiment": 0.7322,
+      "price": 173.48
+    },
+    {
+      "date": "2024-06-06",
+      "sentiment": 0.663,
+      "price": 170.02
+    },
+    {
+      "date": "2024-06-07",
+      "sentiment": -0.6856,
+      "price": 162.51
+    },
+    {
+      "date": "2024-06-08",
+      "sentiment": 0.0511,
+      "price": 157.97
+    },
+    {
+      "date": "2024-06-09",
+      "sentiment": 0.179,
+      "price": 162.08
+    },
+    {
+      "date": "2024-06-10",
+      "sentiment": -0.1729,
+      "price": 158.93
+    },
+    {
+      "date": "2024-06-11",
+      "sentiment": 0.0674,
+      "price": 149.43
+    },
+    {
+      "date": "2024-06-12",
+      "sentiment": -0.0776,
+      "price": 155.18
+    },
+    {
+      "date": "2024-06-13",
+      "sentiment": 0.1352,
+      "price": 147.31
+    },
+    {
+      "date": "2024-06-14",
+      "sentiment": 0.0347,
+      "price": 143.09
+    },
+    {
+      "date": "2024-06-18",
+      "sentiment": 0.5654,
+      "price": 137.5
+    },
+    {
+      "date": "2024-06-19",
+      "sentiment": -0.0036,
+      "price": 135.61
+    },
+    {
+      "date": "2024-06-20",
+      "sentiment": 0.3631,
+      "price": 133.47
+    },
+    {
+      "date": "2024-06-21",
+      "sentiment": -0.3835,
+      "price": 134.59
+    },
+    {
+      "date": "2024-06-23",
+      "sentiment": -0.5634,
+      "price": 128.59
+    },
+    {
+      "date": "2024-06-25",
+      "sentiment": -0.5622,
+      "price": 136.56
+    },
+    {
+      "date": "2024-06-26",
+      "sentiment": -0.4379,
+      "price": 136.61
+    },
+    {
+      "date": "2024-06-27",
+      "sentiment": 0.1587,
+      "price": 149.45
+    },
+    {
+      "date": "2024-06-28",
+      "sentiment": 0.2093,
+      "price": 139.7
+    },
+    {
+      "date": "2024-06-29",
+      "sentiment": -0.7027,
+      "price": 140.01
+    },
+    {
+      "date": "2024-07-01",
+      "sentiment": 0.1352,
+      "price": 146.6
+    },
+    {
+      "date": "2024-07-03",
+      "sentiment": 0.3915,
+      "price": 140.73
+    },
+    {
+      "date": "2024-07-04",
+      "sentiment": -0.1846,
+      "price": 127.55
+    },
+    {
+      "date": "2024-07-05",
+      "sentiment": -0.2475,
+      "price": 134.37
+    },
+    {
+      "date": "2024-07-06",
+      "sentiment": -0.8544,
+      "price": 143.24
+    },
+    {
+      "date": "2024-07-07",
+      "sentiment": 0.0976,
+      "price": 131.77
+    },
+    {
+      "date": "2024-07-09",
+      "sentiment": -0.0889,
+      "price": 141.35
+    },
+    {
+      "date": "2024-07-10",
+      "sentiment": 0.5052,
+      "price": 141.97
+    },
+    {
+      "date": "2024-07-11",
+      "sentiment": 0.1152,
+      "price": 135.88
+    },
+    {
+      "date": "2024-07-12",
+      "sentiment": 0.391,
+      "price": 139.53
+    },
+    {
+      "date": "2024-07-13",
+      "sentiment": -0.3018,
+      "price": 141.92
+    },
+    {
+      "date": "2024-07-15",
+      "sentiment": 0.2992,
+      "price": 159.93
+    },
+    {
+      "date": "2024-07-16",
+      "sentiment": -0.4356,
+      "price": 160.55
+    },
+    {
+      "date": "2024-07-18",
+      "sentiment": -0.2898,
+      "price": 159.07
+    },
+    {
+      "date": "2024-07-19",
+      "sentiment": 0.8891,
+      "price": 169.19
+    },
+    {
+      "date": "2024-07-20",
+      "sentiment": 0.0014,
+      "price": 173.89
+    },
+    {
+      "date": "2024-07-21",
+      "sentiment": 0.0922,
+      "price": 184.54
+    },
+    {
+      "date": "2024-07-22",
+      "sentiment": -0.0376,
+      "price": 178.98
+    },
+    {
+      "date": "2024-07-23",
+      "sentiment": -0.6565,
+      "price": 172.76
+    },
+    {
+      "date": "2024-07-24",
+      "sentiment": 0.2335,
+      "price": 178.03
+    },
+    {
+      "date": "2024-07-25",
+      "sentiment": 0.2205,
+      "price": 171.96
+    },
+    {
+      "date": "2024-07-26",
+      "sentiment": -0.5847,
+      "price": 183.14
+    },
+    {
+      "date": "2024-07-27",
+      "sentiment": 0.0155,
+      "price": 184.09
+    },
+    {
+      "date": "2024-07-28",
+      "sentiment": 0.5366,
+      "price": 184.89
+    },
+    {
+      "date": "2024-07-29",
+      "sentiment": -0.58,
+      "price": 182.78
+    },
+    {
+      "date": "2024-08-01",
+      "sentiment": -0.8774,
+      "price": 167.67
+    },
+    {
+      "date": "2024-08-03",
+      "sentiment": 0.2633,
+      "price": 142.92
+    },
+    {
+      "date": "2024-08-04",
+      "sentiment": -0.2843,
+      "price": 138.06
+    },
+    {
+      "date": "2024-08-05",
+      "sentiment": -0.6847,
+      "price": 129.86
+    },
+    {
+      "date": "2024-08-06",
+      "sentiment": -0.5078,
+      "price": 144.09
+    },
+    {
+      "date": "2024-08-07",
+      "sentiment": 0.3994,
+      "price": 144.63
+    },
+    {
+      "date": "2024-08-08",
+      "sentiment": 0.333,
+      "price": 162.93
+    },
+    {
+      "date": "2024-08-10",
+      "sentiment": 0.1317,
+      "price": 153.96
+    },
+    {
+      "date": "2024-08-12",
+      "sentiment": 0.0655,
+      "price": 146.45
+    },
+    {
+      "date": "2024-08-14",
+      "sentiment": -0.6981,
+      "price": 143.92
+    },
+    {
+      "date": "2024-08-15",
+      "sentiment": -0.0906,
+      "price": 142.75
+    },
+    {
+      "date": "2024-08-18",
+      "sentiment": -0.1633,
+      "price": 142.59
+    },
+    {
+      "date": "2024-08-19",
+      "sentiment": -0.1233,
+      "price": 144.34
+    },
+    {
+      "date": "2024-08-20",
+      "sentiment": -0.2632,
+      "price": 143.17
+    },
+    {
+      "date": "2024-08-22",
+      "sentiment": -0.3301,
+      "price": 143.26
+    },
+    {
+      "date": "2024-08-25",
+      "sentiment": 0.0358,
+      "price": 158.91
+    },
+    {
+      "date": "2024-08-26",
+      "sentiment": -0.0882,
+      "price": 157.24
+    },
+    {
+      "date": "2024-08-27",
+      "sentiment": 0.1124,
+      "price": 146.9
+    },
+    {
+      "date": "2024-08-28",
+      "sentiment": 0.6081,
+      "price": 143.89
+    },
+    {
+      "date": "2024-08-29",
+      "sentiment": 0.2164,
+      "price": 140.05
+    },
+    {
+      "date": "2024-08-30",
+      "sentiment": 0.3507,
+      "price": 138.1
+    },
+    {
+      "date": "2024-08-31",
+      "sentiment": 0.0481,
+      "price": 135.37
+    },
+    {
+      "date": "2024-09-01",
+      "sentiment": -0.2538,
+      "price": 128.69
+    },
+    {
+      "date": "2024-09-02",
+      "sentiment": 0.233,
+      "price": 135.0
+    },
+    {
+      "date": "2024-09-03",
+      "sentiment": -0.0845,
+      "price": 127.58
+    },
+    {
+      "date": "2024-09-04",
+      "sentiment": -0.4482,
+      "price": 133.6
+    },
+    {
+      "date": "2024-09-06",
+      "sentiment": 0.4757,
+      "price": 124.99
+    },
+    {
+      "date": "2024-09-08",
+      "sentiment": -0.8365,
+      "price": 129.99
+    },
+    {
+      "date": "2024-09-10",
+      "sentiment": 0.4039,
+      "price": 135.64
+    },
+    {
+      "date": "2024-09-11",
+      "sentiment": 0.108,
+      "price": 132.5
+    },
+    {
+      "date": "2024-09-13",
+      "sentiment": 0.037,
+      "price": 139.1
+    },
+    {
+      "date": "2024-09-15",
+      "sentiment": -0.0261,
+      "price": 131.5
+    },
+    {
+      "date": "2024-09-16",
+      "sentiment": -0.5973,
+      "price": 131.47
+    },
+    {
+      "date": "2024-09-22",
+      "sentiment": -0.1948,
+      "price": 144.8
+    },
+    {
+      "date": "2024-09-23",
+      "sentiment": 0.1611,
+      "price": 144.81
+    },
+    {
+      "date": "2024-09-24",
+      "sentiment": -0.0108,
+      "price": 152.89
+    },
+    {
+      "date": "2024-09-26",
+      "sentiment": 0.3436,
+      "price": 155.58
+    },
+    {
+      "date": "2024-09-27",
+      "sentiment": -0.5973,
+      "price": 157.75
+    },
+    {
+      "date": "2024-09-29",
+      "sentiment": 0.085,
+      "price": 158.63
+    },
+    {
+      "date": "2024-10-01",
+      "sentiment": 0.1162,
+      "price": 145.29
+    },
+    {
+      "date": "2024-10-02",
+      "sentiment": 0.1681,
+      "price": 140.39
+    },
+    {
+      "date": "2024-10-03",
+      "sentiment": 0.8701,
+      "price": 136.79
+    },
+    {
+      "date": "2024-10-04",
+      "sentiment": -0.2747,
+      "price": 143.17
+    },
+    {
+      "date": "2024-10-07",
+      "sentiment": -0.1347,
+      "price": 143.99
+    },
+    {
+      "date": "2024-10-08",
+      "sentiment": 0.8744,
+      "price": 143.39
+    },
+    {
+      "date": "2024-10-09",
+      "sentiment": 0.2371,
+      "price": 139.32
+    },
+    {
+      "date": "2024-10-10",
+      "sentiment": -0.2047,
+      "price": 138.89
+    },
+    {
+      "date": "2024-10-11",
+      "sentiment": 0.2079,
+      "price": 145.38
+    },
+    {
+      "date": "2024-10-12",
+      "sentiment": 0.5448,
+      "price": 146.5
+    },
+    {
+      "date": "2024-10-13",
+      "sentiment": 0.5875,
+      "price": 147.57
+    },
+    {
+      "date": "2024-10-14",
+      "sentiment": -0.2537,
+      "price": 157.45
+    },
+    {
+      "date": "2024-10-15",
+      "sentiment": 0.9347,
+      "price": 154.72
+    },
+    {
+      "date": "2024-10-17",
+      "sentiment": 0.1151,
+      "price": 150.32
+    },
+    {
+      "date": "2024-10-18",
+      "sentiment": 0.9012,
+      "price": 154.98
+    },
+    {
+      "date": "2024-10-19",
+      "sentiment": -0.3483,
+      "price": 159.64
+    },
+    {
+      "date": "2024-10-21",
+      "sentiment": 0.0653,
+      "price": 166.22
+    },
+    {
+      "date": "2024-10-22",
+      "sentiment": 0.1446,
+      "price": 167.26
+    },
+    {
+      "date": "2024-10-23",
+      "sentiment": -0.0496,
+      "price": 170.93
+    },
+    {
+      "date": "2024-10-24",
+      "sentiment": 0.8927,
+      "price": 177.16
+    },
+    {
+      "date": "2024-10-25",
+      "sentiment": -0.2537,
+      "price": 164.76
+    },
+    {
+      "date": "2024-10-26",
+      "sentiment": -0.4725,
+      "price": 170.71
+    },
+    {
+      "date": "2024-10-27",
+      "sentiment": -0.4795,
+      "price": 176.55
+    },
+    {
+      "date": "2024-10-28",
+      "sentiment": -0.0697,
+      "price": 178.1
+    },
+    {
+      "date": "2024-10-29",
+      "sentiment": 0.2255,
+      "price": 179.36
+    },
+    {
+      "date": "2024-10-30",
+      "sentiment": 0.046,
+      "price": 174.92
+    },
+    {
+      "date": "2024-11-02",
+      "sentiment": -0.0169,
+      "price": 166.01
+    },
+    {
+      "date": "2024-11-04",
+      "sentiment": 0.075,
+      "price": 157.75
+    },
+    {
+      "date": "2024-11-06",
+      "sentiment": -0.2083,
+      "price": 186.95
+    },
+    {
+      "date": "2024-11-07",
+      "sentiment": 0.0515,
+      "price": 196.33
+    },
+    {
+      "date": "2024-11-08",
+      "sentiment": 0.4994,
+      "price": 199.94
+    },
+    {
+      "date": "2024-11-09",
+      "sentiment": -0.5263,
+      "price": 200.19
+    },
+    {
+      "date": "2024-11-10",
+      "sentiment": -0.1321,
+      "price": 210.61
+    },
+    {
+      "date": "2024-11-11",
+      "sentiment": -0.4091,
+      "price": 222.64
+    },
+    {
+      "date": "2024-11-12",
+      "sentiment": 0.2739,
+      "price": 212.23
+    },
+    {
+      "date": "2024-11-14",
+      "sentiment": -0.0435,
+      "price": 209.22
+    },
+    {
+      "date": "2024-11-15",
+      "sentiment": 0.2095,
+      "price": 218.09
+    },
+    {
+      "date": "2024-11-16",
+      "sentiment": -0.4367,
+      "price": 215.85
+    },
+    {
+      "date": "2024-11-17",
+      "sentiment": 0.0675,
+      "price": 237.58
+    },
+    {
+      "date": "2024-11-18",
+      "sentiment": -0.3751,
+      "price": 239.79
+    },
+    {
+      "date": "2024-11-19",
+      "sentiment": -0.5438,
+      "price": 238.1
+    },
+    {
+      "date": "2024-11-20",
+      "sentiment": -0.2264,
+      "price": 235.42
+    },
+    {
+      "date": "2024-11-21",
+      "sentiment": -0.3979,
+      "price": 257.07
+    },
+    {
+      "date": "2024-11-22",
+      "sentiment": -0.2677,
+      "price": 256.52
+    },
+    {
+      "date": "2024-11-23",
+      "sentiment": -0.4377,
+      "price": 255.18
+    },
+    {
+      "date": "2024-11-24",
+      "sentiment": -0.0448,
+      "price": 252.92
+    },
+    {
+      "date": "2024-11-25",
+      "sentiment": 0.7647,
+      "price": 234.45
+    },
+    {
+      "date": "2024-11-26",
+      "sentiment": -0.4756,
+      "price": 230.98
+    },
+    {
+      "date": "2024-11-27",
+      "sentiment": -0.1348,
+      "price": 242.3
+    },
+    {
+      "date": "2024-11-28",
+      "sentiment": -0.215,
+      "price": 237.76
+    },
+    {
+      "date": "2024-11-29",
+      "sentiment": -0.2981,
+      "price": 243.55
+    },
+    {
+      "date": "2024-11-30",
+      "sentiment": -0.6187,
+      "price": 237.74
+    },
+    {
+      "date": "2024-12-01",
+      "sentiment": -0.3002,
+      "price": 237.07
+    },
+    {
+      "date": "2024-12-02",
+      "sentiment": -0.511,
+      "price": 225.76
+    },
+    {
+      "date": "2024-12-03",
+      "sentiment": -0.2317,
+      "price": 234.2
+    },
+    {
+      "date": "2024-12-04",
+      "sentiment": 0.0398,
+      "price": 229.12
+    },
+    {
+      "date": "2024-12-05",
+      "sentiment": -0.2269,
+      "price": 234.0
+    },
+    {
+      "date": "2024-12-06",
+      "sentiment": -0.2263,
+      "price": 237.05
+    },
+    {
+      "date": "2024-12-07",
+      "sentiment": -0.0098,
+      "price": 238.55
+    },
+    {
+      "date": "2024-12-08",
+      "sentiment": 0.3005,
+      "price": 236.67
+    },
+    {
+      "date": "2024-12-09",
+      "sentiment": -0.5755,
+      "price": 217.34
+    },
+    {
+      "date": "2024-12-10",
+      "sentiment": -0.3478,
+      "price": 213.82
+    },
+    {
+      "date": "2024-12-11",
+      "sentiment": -0.4,
+      "price": 227.45
+    },
+    {
+      "date": "2024-12-12",
+      "sentiment": 0.0792,
+      "price": 227.03
+    },
+    {
+      "date": "2024-12-13",
+      "sentiment": 0.0248,
+      "price": 224.84
+    },
+    {
+      "date": "2024-12-14",
+      "sentiment": 0.0104,
+      "price": 219.84
+    },
+    {
+      "date": "2024-12-15",
+      "sentiment": -0.0123,
+      "price": 223.66
+    },
+    {
+      "date": "2024-12-17",
+      "sentiment": 0.1066,
+      "price": 222.82
+    },
+    {
+      "date": "2024-12-18",
+      "sentiment": -0.1261,
+      "price": 206.38
+    },
+    {
+      "date": "2024-12-19",
+      "sentiment": -0.248,
+      "price": 194.28
+    },
+    {
+      "date": "2024-12-20",
+      "sentiment": -0.2979,
+      "price": 194.21
+    },
+    {
+      "date": "2024-12-21",
+      "sentiment": -0.5154,
+      "price": 181.3
+    },
+    {
+      "date": "2024-12-22",
+      "sentiment": -0.5674,
+      "price": 180.17
+    },
+    {
+      "date": "2024-12-23",
+      "sentiment": -0.1266,
+      "price": 189.75
+    },
+    {
+      "date": "2024-12-24",
+      "sentiment": -0.2709,
+      "price": 196.99
+    },
+    {
+      "date": "2024-12-25",
+      "sentiment": -0.3343,
+      "price": 197.48
+    },
+    {
+      "date": "2024-12-26",
+      "sentiment": 0.785,
+      "price": 188.22
+    },
+    {
+      "date": "2024-12-27",
+      "sentiment": -0.0337,
+      "price": 183.83
+    },
+    {
+      "date": "2024-12-28",
+      "sentiment": -0.2481,
+      "price": 195.01
+    },
+    {
+      "date": "2024-12-29",
+      "sentiment": -0.1262,
+      "price": 189.74
+    },
+    {
+      "date": "2024-12-30",
+      "sentiment": -0.1264,
+      "price": 191.03
+    },
+    {
+      "date": "2024-12-31",
+      "sentiment": 0.063,
+      "price": 189.26
+    },
+    {
+      "date": "2025-01-01",
+      "sentiment": -0.6478,
+      "price": 193.87
+    },
+    {
+      "date": "2025-01-02",
+      "sentiment": -0.255,
+      "price": 207.77
+    },
+    {
+      "date": "2025-01-03",
+      "sentiment": 0.4371,
+      "price": 217.75
+    },
+    {
+      "date": "2025-01-04",
+      "sentiment": 0.0831,
+      "price": 216.62
+    },
+    {
+      "date": "2025-01-05",
+      "sentiment": 0.5337,
+      "price": 213.39
+    },
+    {
+      "date": "2025-01-06",
+      "sentiment": -0.2413,
+      "price": 218.72
+    },
+    {
+      "date": "2025-01-07",
+      "sentiment": -0.0769,
+      "price": 202.23
+    },
+    {
+      "date": "2025-01-08",
+      "sentiment": -0.1425,
+      "price": 197.56
+    },
+    {
+      "date": "2025-01-09",
+      "sentiment": 0.0812,
+      "price": 185.03
+    },
+    {
+      "date": "2025-01-10",
+      "sentiment": 0.0648,
+      "price": 187.58
+    },
+    {
+      "date": "2025-01-11",
+      "sentiment": -0.0163,
+      "price": 188.0
+    },
+    {
+      "date": "2025-01-12",
+      "sentiment": -0.0036,
+      "price": 188.56
+    },
+    {
+      "date": "2025-01-14",
+      "sentiment": 0.0038,
+      "price": 187.5
+    },
+    {
+      "date": "2025-01-16",
+      "sentiment": 0.1271,
+      "price": 211.23
+    },
+    {
+      "date": "2025-01-17",
+      "sentiment": 0.3171,
+      "price": 219.62
+    },
+    {
+      "date": "2025-01-18",
+      "sentiment": -0.1345,
+      "price": 261.87
+    },
+    {
+      "date": "2025-01-19",
+      "sentiment": -0.1489,
+      "price": 250.59
+    },
+    {
+      "date": "2025-01-20",
+      "sentiment": -0.5209,
+      "price": 242.25
+    },
+    {
+      "date": "2025-01-21",
+      "sentiment": -0.1868,
+      "price": 250.41
+    },
+    {
+      "date": "2025-01-22",
+      "sentiment": -0.0524,
+      "price": 257.24
+    },
+    {
+      "date": "2025-01-23",
+      "sentiment": -0.128,
+      "price": 253.46
+    },
+    {
+      "date": "2025-01-24",
+      "sentiment": 0.3444,
+      "price": 253.36
+    },
+    {
+      "date": "2025-01-25",
+      "sentiment": -0.239,
+      "price": 256.07
+    },
+    {
+      "date": "2025-01-26",
+      "sentiment": 0.2442,
+      "price": 240.88
+    },
+    {
+      "date": "2025-01-27",
+      "sentiment": -0.0048,
+      "price": 235.07
+    },
+    {
+      "date": "2025-01-28",
+      "sentiment": -0.0318,
+      "price": 227.2
+    },
+    {
+      "date": "2025-01-29",
+      "sentiment": -0.0577,
+      "price": 227.94
+    },
+    {
+      "date": "2025-01-30",
+      "sentiment": -0.8584,
+      "price": 239.02
+    },
+    {
+      "date": "2025-01-31",
+      "sentiment": -0.1002,
+      "price": 231.64
+    },
+    {
+      "date": "2025-02-02",
+      "sentiment": -0.1817,
+      "price": 203.12
+    },
+    {
+      "date": "2025-02-03",
+      "sentiment": -0.3947,
+      "price": 216.15
+    },
+    {
+      "date": "2025-02-04",
+      "sentiment": -0.1266,
+      "price": 207.09
+    },
+    {
+      "date": "2025-02-05",
+      "sentiment": 0.0073,
+      "price": 195.99
+    },
+    {
+      "date": "2025-02-06",
+      "sentiment": -0.1289,
+      "price": 189.77
+    },
+    {
+      "date": "2025-02-07",
+      "sentiment": -0.5354,
+      "price": 192.2
+    },
+    {
+      "date": "2025-02-08",
+      "sentiment": -0.1061,
+      "price": 199.6
+    },
+    {
+      "date": "2025-02-11",
+      "sentiment": -0.0683,
+      "price": 197.98
+    },
+    {
+      "date": "2025-02-12",
+      "sentiment": -0.6863,
+      "price": 196.77
+    },
+    {
+      "date": "2025-02-13",
+      "sentiment": -0.7414,
+      "price": 194.46
+    },
+    {
+      "date": "2025-02-14",
+      "sentiment": 0.3223,
+      "price": 199.94
+    },
+    {
+      "date": "2025-02-15",
+      "sentiment": 0.1201,
+      "price": 194.48
+    },
+    {
+      "date": "2025-02-16",
+      "sentiment": -0.0308,
+      "price": 188.49
+    },
+    {
+      "date": "2025-02-17",
+      "sentiment": -0.4559,
+      "price": 177.69
+    },
+    {
+      "date": "2025-02-18",
+      "sentiment": -0.1781,
+      "price": 169.08
+    },
+    {
+      "date": "2025-02-19",
+      "sentiment": -0.216,
+      "price": 169.01
+    },
+    {
+      "date": "2025-02-20",
+      "sentiment": 0.0764,
+      "price": 176.05
+    },
+    {
+      "date": "2025-02-22",
+      "sentiment": 0.1221,
+      "price": 172.16
+    },
+    {
+      "date": "2025-02-23",
+      "sentiment": -0.4108,
+      "price": 168.04
+    },
+    {
+      "date": "2025-02-24",
+      "sentiment": 0.146,
+      "price": 141.99
+    },
+    {
+      "date": "2025-02-25",
+      "sentiment": -0.215,
+      "price": 144.11
+    },
+    {
+      "date": "2025-02-26",
+      "sentiment": -0.1902,
+      "price": 134.83
+    },
+    {
+      "date": "2025-02-27",
+      "sentiment": 0.6763,
+      "price": 137.62
+    },
+    {
+      "date": "2025-02-28",
+      "sentiment": 0.0858,
+      "price": 148.03
+    },
+    {
+      "date": "2025-03-01",
+      "sentiment": -0.2975,
+      "price": 143.68
+    },
+    {
+      "date": "2025-03-02",
+      "sentiment": -0.1969,
+      "price": 178.5
+    },
+    {
+      "date": "2025-03-03",
+      "sentiment": 0.0373,
+      "price": 142.02
+    },
+    {
+      "date": "2025-03-04",
+      "sentiment": -0.4717,
+      "price": 144.92
+    },
+    {
+      "date": "2025-03-05",
+      "sentiment": 0.0555,
+      "price": 146.27
+    },
+    {
+      "date": "2025-03-06",
+      "sentiment": -0.4156,
+      "price": 143.36
+    },
+    {
+      "date": "2025-03-07",
+      "sentiment": -0.2939,
+      "price": 139.21
+    },
+    {
+      "date": "2025-03-08",
+      "sentiment": -0.0281,
+      "price": 136.94
+    },
+    {
+      "date": "2025-03-10",
+      "sentiment": -0.4272,
+      "price": 118.29
+    },
+    {
+      "date": "2025-03-11",
+      "sentiment": -0.0574,
+      "price": 125.26
+    },
+    {
+      "date": "2025-03-13",
+      "sentiment": -0.541,
+      "price": 123.29
+    },
+    {
+      "date": "2025-03-14",
+      "sentiment": 0.7155,
+      "price": 133.31
+    },
+    {
+      "date": "2025-03-15",
+      "sentiment": -0.0205,
+      "price": 135.91
+    },
+    {
+      "date": "2025-03-16",
+      "sentiment": 0.1159,
+      "price": 125.99
+    },
+    {
+      "date": "2025-03-18",
+      "sentiment": 0.2328,
+      "price": 125.31
+    },
+    {
+      "date": "2025-03-19",
+      "sentiment": 0.1113,
+      "price": 135.57
+    },
+    {
+      "date": "2025-03-20",
+      "sentiment": -0.0808,
+      "price": 127.5
+    },
+    {
+      "date": "2025-03-21",
+      "sentiment": -0.3426,
+      "price": 128.43
+    },
+    {
+      "date": "2025-03-22",
+      "sentiment": 0.1496,
+      "price": 128.48
+    },
+    {
+      "date": "2025-03-23",
+      "sentiment": -0.1734,
+      "price": 132.6
+    },
+    {
+      "date": "2025-03-24",
+      "sentiment": 0.5035,
+      "price": 140.87
+    },
+    {
+      "date": "2025-03-25",
+      "sentiment": 0.8438,
+      "price": 143.82
+    },
+    {
+      "date": "2025-03-26",
+      "sentiment": -0.3223,
+      "price": 137.29
+    },
+    {
+      "date": "2025-03-27",
+      "sentiment": -0.0172,
+      "price": 138.35
+    },
+    {
+      "date": "2025-03-29",
+      "sentiment": -0.2297,
+      "price": 124.59
+    },
+    {
+      "date": "2025-03-30",
+      "sentiment": -0.3428,
+      "price": 124.64
+    },
+    {
+      "date": "2025-03-31",
+      "sentiment": -0.4103,
+      "price": 124.69
+    },
+    {
+      "date": "2025-04-01",
+      "sentiment": -0.09,
+      "price": 126.68
+    },
+    {
+      "date": "2025-04-02",
+      "sentiment": -0.1198,
+      "price": 117.76
+    },
+    {
+      "date": "2025-04-03",
+      "sentiment": -0.3438,
+      "price": 117.06
+    },
+    {
+      "date": "2025-04-04",
+      "sentiment": 0.063,
+      "price": 122.79
+    },
+    {
+      "date": "2025-04-05",
+      "sentiment": -0.407,
+      "price": 120.26
+    },
+    {
+      "date": "2025-04-06",
+      "sentiment": -0.4159,
+      "price": 105.71
+    },
+    {
+      "date": "2025-04-07",
+      "sentiment": -0.1173,
+      "price": 106.9
+    },
+    {
+      "date": "2025-04-08",
+      "sentiment": 0.1944,
+      "price": 105.51
+    },
+    {
+      "date": "2025-04-09",
+      "sentiment": -0.2384,
+      "price": 119.06
+    },
+    {
+      "date": "2025-04-10",
+      "sentiment": -0.078,
+      "price": 112.8
+    },
+    {
+      "date": "2025-04-11",
+      "sentiment": 0.1394,
+      "price": 121.53
+    },
+    {
+      "date": "2025-04-12",
+      "sentiment": 0.0047,
+      "price": 132.26
+    },
+    {
+      "date": "2025-04-13",
+      "sentiment": 0.0043,
+      "price": 128.58
+    },
+    {
+      "date": "2025-04-14",
+      "sentiment": 0.0135,
+      "price": 129.31
+    },
+    {
+      "date": "2025-04-15",
+      "sentiment": 0.221,
+      "price": 126.26
+    },
+    {
+      "date": "2025-04-16",
+      "sentiment": -0.0076,
+      "price": 131.45
+    },
+    {
+      "date": "2025-04-17",
+      "sentiment": 0.0833,
+      "price": 134.7
+    },
+    {
+      "date": "2025-04-18",
+      "sentiment": 0.1142,
+      "price": 134.07
+    },
+    {
+      "date": "2025-04-19",
+      "sentiment": -0.2071,
+      "price": 139.75
+    },
+    {
+      "date": "2025-04-20",
+      "sentiment": -0.3317,
+      "price": 137.77
+    },
+    {
+      "date": "2025-04-21",
+      "sentiment": -0.1045,
+      "price": 136.7
+    },
+    {
+      "date": "2025-04-22",
+      "sentiment": 0.0857,
+      "price": 148.74
+    },
+    {
+      "date": "2025-04-23",
+      "sentiment": -0.0239,
+      "price": 151.15
+    },
+    {
+      "date": "2025-04-24",
+      "sentiment": -0.1092,
+      "price": 152.3
+    },
+    {
+      "date": "2025-04-26",
+      "sentiment": 0.4521,
+      "price": 149.29
+    },
+    {
+      "date": "2025-04-27",
+      "sentiment": 0.0571,
+      "price": 148.25
+    },
+    {
+      "date": "2025-04-28",
+      "sentiment": 0.0422,
+      "price": 147.81
+    },
+    {
+      "date": "2025-04-29",
+      "sentiment": -0.0337,
+      "price": 146.43
+    },
+    {
+      "date": "2025-04-30",
+      "sentiment": 0.3066,
+      "price": 147.64
+    },
+    {
+      "date": "2025-05-01",
+      "sentiment": 0.1549,
+      "price": 150.85
+    },
+    {
+      "date": "2025-05-02",
+      "sentiment": 0.0061,
+      "price": 148.05
+    },
+    {
+      "date": "2025-05-03",
+      "sentiment": -0.287,
+      "price": 146.8
+    },
+    {
+      "date": "2025-05-04",
+      "sentiment": -0.015,
+      "price": 143.98
+    },
+    {
+      "date": "2025-05-05",
+      "sentiment": 0.1097,
+      "price": 146.7
+    },
+    {
+      "date": "2025-05-06",
+      "sentiment": -0.1118,
+      "price": 146.77
+    },
+    {
+      "date": "2025-05-07",
+      "sentiment": 0.0447,
+      "price": 147.21
+    },
+    {
+      "date": "2025-05-08",
+      "sentiment": 0.1818,
+      "price": 163.96
+    },
+    {
+      "date": "2025-05-09",
+      "sentiment": 0.1412,
+      "price": 172.83
+    },
+    {
+      "date": "2025-05-10",
+      "sentiment": -0.1847,
+      "price": 177.62
+    },
+    {
+      "date": "2025-05-11",
+      "sentiment": -0.0189,
+      "price": 173.03
+    },
+    {
+      "date": "2025-05-12",
+      "sentiment": -0.0939,
+      "price": 174.25
+    },
+    {
+      "date": "2025-05-13",
+      "sentiment": 0.1244,
+      "price": 184.01
+    },
+    {
+      "date": "2025-05-14",
+      "sentiment": -0.0073,
+      "price": 176.71
+    },
+    {
+      "date": "2025-05-15",
+      "sentiment": 0.3093,
+      "price": 169.01
+    },
+    {
+      "date": "2025-05-16",
+      "sentiment": 0.0031,
+      "price": 167.33
+    },
+    {
+      "date": "2025-05-17",
+      "sentiment": -0.024,
+      "price": 165.93
+    },
+    {
+      "date": "2025-05-18",
+      "sentiment": 0.0888,
+      "price": 173.9
+    },
+    {
+      "date": "2025-05-19",
+      "sentiment": 0.0726,
+      "price": 166.86
+    },
+    {
+      "date": "2025-05-20",
+      "sentiment": -0.1489,
+      "price": 168.48
+    },
+    {
+      "date": "2025-05-21",
+      "sentiment": 0.1579,
+      "price": 173.68
+    },
+    {
+      "date": "2025-05-22",
+      "sentiment": 0.1276,
+      "price": 179.69
+    },
+    {
+      "date": "2025-05-23",
+      "sentiment": 0.0924,
+      "price": 173.83
+    },
+    {
+      "date": "2025-05-24",
+      "sentiment": 0.1551,
+      "price": 176.04
+    },
+    {
+      "date": "2025-05-25",
+      "sentiment": -0.6087,
+      "price": 175.73
+    },
+    {
+      "date": "2025-05-26",
+      "sentiment": 0.4309,
+      "price": 174.91
+    },
+    {
+      "date": "2025-05-27",
+      "sentiment": -0.0926,
+      "price": 176.82
+    },
+    {
+      "date": "2025-05-28",
+      "sentiment": -0.0677,
+      "price": 172.19
+    },
+    {
+      "date": "2025-05-29",
+      "sentiment": -0.0399,
+      "price": 166.59
+    },
+    {
+      "date": "2025-05-30",
+      "sentiment": 0.2506,
+      "price": 156.23
+    },
+    {
+      "date": "2025-05-31",
+      "sentiment": -0.0412,
+      "price": 156.64
+    },
+    {
+      "date": "2025-06-01",
+      "sentiment": -0.0153,
+      "price": 157.78
+    },
+    {
+      "date": "2025-06-02",
+      "sentiment": 0.2113,
+      "price": 157.0
+    },
+    {
+      "date": "2025-06-03",
+      "sentiment": 0.3281,
+      "price": 155.34
+    },
+    {
+      "date": "2025-06-04",
+      "sentiment": 0.0015,
+      "price": 153.36
+    },
+    {
+      "date": "2025-06-05",
+      "sentiment": -0.0577,
+      "price": 144.54
+    },
+    {
+      "date": "2025-06-06",
+      "sentiment": 0.056,
+      "price": 147.91
+    },
+    {
+      "date": "2025-06-07",
+      "sentiment": -0.1239,
+      "price": 150.13
+    },
+    {
+      "date": "2025-06-08",
+      "sentiment": 0.3005,
+      "price": 152.43
+    },
+    {
+      "date": "2025-06-09",
+      "sentiment": -0.2969,
+      "price": 161.09
+    },
+    {
+      "date": "2025-06-10",
+      "sentiment": 0.0314,
+      "price": 165.03
+    },
+    {
+      "date": "2025-06-11",
+      "sentiment": 0.0676,
+      "price": 161.06
+    },
+    {
+      "date": "2025-06-12",
+      "sentiment": 0.1719,
+      "price": 152.79
+    },
+    {
+      "date": "2025-06-13",
+      "sentiment": -0.1396,
+      "price": 148.63
+    },
+    {
+      "date": "2025-06-14",
+      "sentiment": -0.2047,
+      "price": 144.76
+    },
+    {
+      "date": "2025-06-15",
+      "sentiment": -0.2775,
+      "price": 152.81
+    },
+    {
+      "date": "2025-06-16",
+      "sentiment": 0.2337,
+      "price": 150.87
+    },
+    {
+      "date": "2025-06-17",
+      "sentiment": 0.0304,
+      "price": 147.75
+    },
+    {
+      "date": "2025-06-18",
+      "sentiment": 0.0851,
+      "price": 146.35
+    },
+    {
+      "date": "2025-06-19",
+      "sentiment": -0.0939,
+      "price": 147.07
+    },
+    {
+      "date": "2025-06-20",
+      "sentiment": 0.0284,
+      "price": 140.17
+    },
+    {
+      "date": "2025-06-21",
+      "sentiment": -0.0354,
+      "price": 135.16
+    },
+    {
+      "date": "2025-06-22",
+      "sentiment": -0.2809,
+      "price": 131.62
+    },
+    {
+      "date": "2025-06-23",
+      "sentiment": 0.0657,
+      "price": 144.85
+    },
+    {
+      "date": "2025-06-24",
+      "sentiment": -0.4861,
+      "price": 145.95
+    },
+    {
+      "date": "2025-06-25",
+      "sentiment": 0.5019,
+      "price": 143.51
+    },
+    {
+      "date": "2025-06-26",
+      "sentiment": -0.1474,
+      "price": 139.06
+    },
+    {
+      "date": "2025-06-27",
+      "sentiment": 0.3231,
+      "price": 142.19
+    },
+    {
+      "date": "2025-06-28",
+      "sentiment": 0.1821,
+      "price": 150.83
+    },
+    {
+      "date": "2025-06-29",
+      "sentiment": -0.0561,
+      "price": 153.35
+    },
+    {
+      "date": "2025-06-30",
+      "sentiment": 0.1812,
+      "price": 154.74
+    },
+    {
+      "date": "2025-07-01",
+      "sentiment": 0.1182,
+      "price": 146.93
+    },
+    {
+      "date": "2025-07-02",
+      "sentiment": 0.229,
+      "price": 152.23
+    },
+    {
+      "date": "2025-07-03",
+      "sentiment": 0.3141,
+      "price": 152.4
+    },
+    {
+      "date": "2025-07-04",
+      "sentiment": 0.185,
+      "price": 147.76
+    },
+    {
+      "date": "2025-07-05",
+      "sentiment": 0.0597,
+      "price": 147.64
+    },
+    {
+      "date": "2025-07-06",
+      "sentiment": 0.0066,
+      "price": 151.87
+    },
+    {
+      "date": "2025-07-07",
+      "sentiment": -0.6408,
+      "price": 148.87
+    },
+    {
+      "date": "2025-07-08",
+      "sentiment": 0.0857,
+      "price": 151.81
+    },
+    {
+      "date": "2025-07-09",
+      "sentiment": 0.4158,
+      "price": 157.28
+    },
+    {
+      "date": "2025-07-10",
+      "sentiment": -0.0638,
+      "price": 164.06
+    },
+    {
+      "date": "2025-07-11",
+      "sentiment": 0.153,
+      "price": 162.88
+    },
+    {
+      "date": "2025-07-12",
+      "sentiment": -0.1425,
+      "price": 160.68
+    },
+    {
+      "date": "2025-07-13",
+      "sentiment": 0.264,
+      "price": 161.19
+    },
+    {
+      "date": "2025-07-14",
+      "sentiment": 0.4697,
+      "price": 162.28
+    },
+    {
+      "date": "2025-07-15",
+      "sentiment": 0.2658,
+      "price": 163.95
+    },
+    {
+      "date": "2025-07-16",
+      "sentiment": 0.2507,
+      "price": 173.71
+    },
+    {
+      "date": "2025-07-17",
+      "sentiment": 0.0689,
+      "price": 175.79
+    },
+    {
+      "date": "2025-07-18",
+      "sentiment": -0.0026,
+      "price": 177.38
+    },
+    {
+      "date": "2025-07-19",
+      "sentiment": -0.0063,
+      "price": 177.07
+    },
+    {
+      "date": "2025-07-20",
+      "sentiment": -0.0678,
+      "price": 181.55
+    },
+    {
+      "date": "2025-07-21",
+      "sentiment": 0.3994,
+      "price": 195.99
+    },
+    {
+      "date": "2025-07-22",
+      "sentiment": 0.1495,
+      "price": 205.7
+    },
+    {
+      "date": "2025-07-23",
+      "sentiment": 0.0902,
+      "price": 189.54
+    },
+    {
+      "date": "2025-07-24",
+      "sentiment": -0.0787,
+      "price": 182.61
+    },
+    {
+      "date": "2025-07-25",
+      "sentiment": -0.1656,
+      "price": 186.78
+    },
+    {
+      "date": "2025-07-26",
+      "sentiment": -0.0574,
+      "price": 184.91
+    },
+    {
+      "date": "2025-07-28",
+      "sentiment": 0.3105,
+      "price": 182.54
+    },
+    {
+      "date": "2025-07-29",
+      "sentiment": -0.0863,
+      "price": 181.34
+    },
+    {
+      "date": "2025-07-30",
+      "sentiment": 0.0383,
+      "price": 177.69
+    },
+    {
+      "date": "2025-07-31",
+      "sentiment": -0.1498,
+      "price": 172.42
+    },
+    {
+      "date": "2025-08-01",
+      "sentiment": -0.1668,
+      "price": 162.88
+    },
+    {
+      "date": "2025-08-02",
+      "sentiment": -0.0446,
+      "price": 158.48
+    },
+    {
+      "date": "2025-08-03",
+      "sentiment": 0.3425,
+      "price": 161.95
+    },
+    {
+      "date": "2025-08-04",
+      "sentiment": 0.3751,
+      "price": 169.43
+    },
+    {
+      "date": "2025-08-05",
+      "sentiment": 0.1385,
+      "price": 164.1
+    },
+    {
+      "date": "2025-08-06",
+      "sentiment": -0.128,
+      "price": 168.18
+    },
+    {
+      "date": "2025-08-07",
+      "sentiment": 0.223,
+      "price": 175.49
+    },
+    {
+      "date": "2025-08-08",
+      "sentiment": 0.187,
+      "price": 176.76
+    },
+    {
+      "date": "2025-08-09",
+      "sentiment": 0.4436,
+      "price": 180.18
+    },
+    {
+      "date": "2025-08-10",
+      "sentiment": 0.0713,
+      "price": 182.9
+    },
+    {
+      "date": "2025-08-11",
+      "sentiment": 0.0477,
+      "price": 174.98
+    },
+    {
+      "date": "2025-08-12",
+      "sentiment": 0.3035,
+      "price": 191.86
+    },
+    {
+      "date": "2025-08-13",
+      "sentiment": 0.05,
+      "price": 201.59
+    },
+    {
+      "date": "2025-08-14",
+      "sentiment": -0.0039,
+      "price": 192.59
+    },
+    {
+      "date": "2025-08-15",
+      "sentiment": -0.0506,
+      "price": 185.74
+    },
+    {
+      "date": "2025-08-16",
+      "sentiment": 0.0288,
+      "price": 189.77
+    },
+    {
+      "date": "2025-08-17",
+      "sentiment": 0.1811,
+      "price": 191.16
+    },
+    {
+      "date": "2025-08-18",
+      "sentiment": -0.1277,
+      "price": 183.07
+    },
+    {
+      "date": "2025-08-19",
+      "sentiment": 0.6838,
+      "price": 176.11
+    },
+    {
+      "date": "2025-08-20",
+      "sentiment": 0.1177,
+      "price": 187.59
+    },
+    {
       "date": "2025-08-21",
-      "sentiment": 0.1403,
+      "sentiment": 0.1734,
       "price": 180.28
     },
     {
       "date": "2025-08-22",
-      "sentiment": 0.1077,
+      "sentiment": 0.1103,
       "price": 200.65
     },
     {
       "date": "2025-08-23",
-      "sentiment": 0.3607,
+      "sentiment": 0.2949,
       "price": 203.94
     },
     {
       "date": "2025-08-24",
-      "sentiment": -0.3809,
+      "sentiment": -0.3875,
       "price": 205.85
     },
     {
       "date": "2025-08-25",
-      "sentiment": -0.1837,
+      "sentiment": -0.0961,
       "price": 187.28
     },
     {
       "date": "2025-08-26",
-      "sentiment": -0.0119,
+      "sentiment": -0.0001,
       "price": 195.91
     },
     {
       "date": "2025-08-27",
-      "sentiment": 0.0793,
+      "sentiment": 0.096,
       "price": 202.92
     },
     {
       "date": "2025-08-28",
-      "sentiment": 0.3715,
+      "sentiment": 0.2486,
       "price": 214.41
     },
     {
       "date": "2025-08-29",
-      "sentiment": 0.0454,
+      "sentiment": 0.1005,
       "price": 205.22
     },
     {
       "date": "2025-08-30",
-      "sentiment": 0.0573,
+      "sentiment": 0.0717,
       "price": 202.86
     },
     {
       "date": "2025-08-31",
-      "sentiment": -0.0377,
+      "sentiment": 0.0872,
       "price": 200.86
     },
     {
       "date": "2025-09-01",
-      "sentiment": 0.1164,
+      "sentiment": 0.1178,
       "price": 197.11
     },
     {
       "date": "2025-09-02",
-      "sentiment": 0.075,
+      "sentiment": 0.0655,
       "price": 209.48
     },
     {
       "date": "2025-09-03",
-      "sentiment": -0.0264,
+      "sentiment": -0.0403,
       "price": 210.75
     },
     {
       "date": "2025-09-04",
-      "sentiment": 0.0193,
+      "sentiment": 0.0249,
       "price": 202.56
     },
     {
       "date": "2025-09-05",
-      "sentiment": 0.3156,
+      "sentiment": 0.2851,
       "price": 203.5
     },
     {
       "date": "2025-09-06",
-      "sentiment": 0.2274,
+      "sentiment": 0.1509,
       "price": 200.25
     },
     {
       "date": "2025-09-07",
-      "sentiment": -0.2307,
+      "sentiment": -0.2286,
       "price": 206.47
     },
     {
       "date": "2025-09-08",
-      "sentiment": 0.0714,
+      "sentiment": 0.0351,
       "price": 214.19
     },
     {
       "date": "2025-09-09",
-      "sentiment": -0.0438,
+      "sentiment": -0.0402,
       "price": 217.25
     },
     {
       "date": "2025-09-10",
-      "sentiment": -0.0293,
+      "sentiment": -0.0087,
       "price": 223.99
     },
     {
       "date": "2025-09-11",
-      "sentiment": -0.0012,
+      "sentiment": 0.0022,
       "price": 228.76
     },
     {
       "date": "2025-09-12",
-      "sentiment": 0.0682,
+      "sentiment": 0.0843,
       "price": 242.3
     },
     {
       "date": "2025-09-13",
-      "sentiment": 0.05,
+      "sentiment": 0.0877,
       "price": 242.6
     },
     {
       "date": "2025-09-14",
-      "sentiment": 0.0176,
+      "sentiment": -0.0334,
       "price": 240.56
     },
     {
       "date": "2025-09-15",
-      "sentiment": -0.063,
+      "sentiment": -0.0845,
       "price": 234.36
     },
     {
       "date": "2025-09-16",
-      "sentiment": 0.0523,
+      "sentiment": 0.067,
       "price": 236.99
     },
     {
       "date": "2025-09-17",
-      "sentiment": 0.1021,
+      "sentiment": 0.1711,
       "price": 244.86
     },
     {
       "date": "2025-09-18",
-      "sentiment": 0.1425,
+      "sentiment": 0.1573,
       "price": 247.64
     },
     {
       "date": "2025-09-19",
-      "sentiment": 0.2265,
+      "sentiment": 0.0965,
       "price": 238.55
     },
     {
       "date": "2025-09-20",
-      "sentiment": 0.2907,
+      "sentiment": 0.2053,
       "price": 239.59
     },
     {
       "date": "2025-09-21",
-      "sentiment": -0.185,
+      "sentiment": -0.1433,
       "price": 236.58
     },
     {
       "date": "2025-09-22",
-      "sentiment": -0.074,
+      "sentiment": -0.0197,
       "price": 220.5
+    },
+    {
+      "date": "2025-09-23",
+      "sentiment": 0.0544,
+      "price": 213.72
+    },
+    {
+      "date": "2025-09-24",
+      "sentiment": -0.022,
+      "price": 211.76
+    },
+    {
+      "date": "2025-09-25",
+      "sentiment": 0.2544,
+      "price": 192.38
+    },
+    {
+      "date": "2025-09-26",
+      "sentiment": 0.0267,
+      "price": 205.35
+    },
+    {
+      "date": "2025-09-27",
+      "sentiment": 0.1449,
+      "price": 203.58
+    },
+    {
+      "date": "2025-09-28",
+      "sentiment": 0.2341,
+      "price": 210.74
+    },
+    {
+      "date": "2025-09-29",
+      "sentiment": 0.3227,
+      "price": 213.05
+    },
+    {
+      "date": "2025-09-30",
+      "sentiment": 0.2159,
+      "price": 208.74
+    },
+    {
+      "date": "2025-10-01",
+      "sentiment": 0.91,
+      "price": 221.68
+    },
+    {
+      "date": "2025-10-02",
+      "sentiment": 0.0627,
+      "price": 234.86
+    },
+    {
+      "date": "2025-10-03",
+      "sentiment": 0.0199,
+      "price": 233.0
+    },
+    {
+      "date": "2025-10-04",
+      "sentiment": 0.1435,
+      "price": 228.0
+    },
+    {
+      "date": "2025-10-05",
+      "sentiment": 0.302,
+      "price": 228.6
+    },
+    {
+      "date": "2025-10-06",
+      "sentiment": 0.2519,
+      "price": 232.52
+    },
+    {
+      "date": "2025-10-07",
+      "sentiment": 0.199,
+      "price": 220.48
+    },
+    {
+      "date": "2025-10-08",
+      "sentiment": 0.0319,
+      "price": 229.1
+    },
+    {
+      "date": "2025-10-09",
+      "sentiment": -0.101,
+      "price": 220.99
+    },
+    {
+      "date": "2025-10-10",
+      "sentiment": -0.3266,
+      "price": 188.66
+    },
+    {
+      "date": "2025-10-11",
+      "sentiment": -0.1752,
+      "price": 178.05
+    },
+    {
+      "date": "2025-10-12",
+      "sentiment": -0.0722,
+      "price": 197.51
+    },
+    {
+      "date": "2025-10-13",
+      "sentiment": -0.1921,
+      "price": 208.37
+    },
+    {
+      "date": "2025-10-14",
+      "sentiment": 0.071,
+      "price": 202.46
+    },
+    {
+      "date": "2025-10-15",
+      "sentiment": 0.003,
+      "price": 194.02
+    },
+    {
+      "date": "2025-10-16",
+      "sentiment": 0.2618,
+      "price": 184.69
+    },
+    {
+      "date": "2025-10-17",
+      "sentiment": 0.2114,
+      "price": 182.03
+    },
+    {
+      "date": "2025-10-18",
+      "sentiment": -0.0112,
+      "price": 187.66
+    },
+    {
+      "date": "2025-10-19",
+      "sentiment": -0.0169,
+      "price": 187.8
+    },
+    {
+      "date": "2025-10-20",
+      "sentiment": 0.4328,
+      "price": 189.75
+    },
+    {
+      "date": "2025-10-21",
+      "sentiment": -0.0654,
+      "price": 185.67
+    },
+    {
+      "date": "2025-10-22",
+      "sentiment": 0.1271,
+      "price": 180.15
+    },
+    {
+      "date": "2025-10-23",
+      "sentiment": 0.379,
+      "price": 191.39
+    },
+    {
+      "date": "2025-10-24",
+      "sentiment": -0.022,
+      "price": 193.56
+    },
+    {
+      "date": "2025-10-25",
+      "sentiment": 0.1633,
+      "price": 194.04
+    },
+    {
+      "date": "2025-10-26",
+      "sentiment": 0.0344,
+      "price": 200.03
+    },
+    {
+      "date": "2025-10-27",
+      "sentiment": -0.0475,
+      "price": 198.74
+    },
+    {
+      "date": "2025-10-28",
+      "sentiment": 0.1766,
+      "price": 194.44
+    },
+    {
+      "date": "2025-10-29",
+      "sentiment": 0.5755,
+      "price": 194.41
+    },
+    {
+      "date": "2025-10-30",
+      "sentiment": 0.2373,
+      "price": 184.62
+    },
+    {
+      "date": "2025-10-31",
+      "sentiment": -0.0069,
+      "price": 187.21
+    },
+    {
+      "date": "2025-11-01",
+      "sentiment": 0.0635,
+      "price": 186.38
+    },
+    {
+      "date": "2025-11-02",
+      "sentiment": 0.2162,
+      "price": 187.83
+    },
+    {
+      "date": "2025-11-03",
+      "sentiment": 0.1402,
+      "price": 166.09
+    },
+    {
+      "date": "2025-11-04",
+      "sentiment": 0.4537,
+      "price": 155.4
+    },
+    {
+      "date": "2025-11-05",
+      "sentiment": 0.0336,
+      "price": 162.57
+    },
+    {
+      "date": "2025-11-06",
+      "sentiment": -0.0357,
+      "price": 155.07
+    },
+    {
+      "date": "2025-11-07",
+      "sentiment": 0.2717,
+      "price": 161.71
+    },
+    {
+      "date": "2025-11-08",
+      "sentiment": 0.0528,
+      "price": 158.1
+    },
+    {
+      "date": "2025-11-09",
+      "sentiment": -0.1407,
+      "price": 164.45
+    },
+    {
+      "date": "2025-11-10",
+      "sentiment": 0.2852,
+      "price": 167.37
+    },
+    {
+      "date": "2025-11-11",
+      "sentiment": 0.2229,
+      "price": 154.57
+    },
+    {
+      "date": "2025-11-12",
+      "sentiment": 0.2058,
+      "price": 153.26
+    },
+    {
+      "date": "2025-11-13",
+      "sentiment": 0.2718,
+      "price": 145.11
+    },
+    {
+      "date": "2025-11-14",
+      "sentiment": -0.2279,
+      "price": 138.68
+    },
+    {
+      "date": "2025-11-15",
+      "sentiment": 0.166,
+      "price": 139.54
+    },
+    {
+      "date": "2025-11-16",
+      "sentiment": 0.0179,
+      "price": 137.27
+    },
+    {
+      "date": "2025-11-17",
+      "sentiment": 0.0329,
+      "price": 130.85
+    },
+    {
+      "date": "2025-11-18",
+      "sentiment": 0.0407,
+      "price": 140.71
+    },
+    {
+      "date": "2025-11-19",
+      "sentiment": 0.5376,
+      "price": 136.77
+    },
+    {
+      "date": "2025-11-20",
+      "sentiment": -0.0234,
+      "price": 133.52
+    },
+    {
+      "date": "2025-11-21",
+      "sentiment": -0.1163,
+      "price": 128.5
+    },
+    {
+      "date": "2025-11-22",
+      "sentiment": 0.1261,
+      "price": 127.55
+    },
+    {
+      "date": "2025-11-23",
+      "sentiment": 0.4607,
+      "price": 130.71
+    },
+    {
+      "date": "2025-11-24",
+      "sentiment": 0.1822,
+      "price": 138.37
+    },
+    {
+      "date": "2025-11-25",
+      "sentiment": 0.2839,
+      "price": 138.89
+    },
+    {
+      "date": "2025-11-26",
+      "sentiment": 0.5738,
+      "price": 143.01
+    },
+    {
+      "date": "2025-11-27",
+      "sentiment": 0.0973,
+      "price": 140.85
+    },
+    {
+      "date": "2025-11-28",
+      "sentiment": -0.0279,
+      "price": 137.39
+    },
+    {
+      "date": "2025-11-29",
+      "sentiment": 0.3597,
+      "price": 136.08
+    },
+    {
+      "date": "2025-11-30",
+      "sentiment": 0.1357,
+      "price": 133.56
+    },
+    {
+      "date": "2025-12-01",
+      "sentiment": -0.017,
+      "price": 126.71
+    },
+    {
+      "date": "2025-12-02",
+      "sentiment": -0.3652,
+      "price": 138.67
+    },
+    {
+      "date": "2025-12-03",
+      "sentiment": 0.1334,
+      "price": 144.9
+    },
+    {
+      "date": "2025-12-04",
+      "sentiment": 0.1858,
+      "price": 139.01
+    },
+    {
+      "date": "2025-12-05",
+      "sentiment": -0.1814,
+      "price": 133.32
+    },
+    {
+      "date": "2025-12-06",
+      "sentiment": 0.1638,
+      "price": 132.35
+    },
+    {
+      "date": "2025-12-07",
+      "sentiment": -0.5295,
+      "price": 132.09
+    },
+    {
+      "date": "2025-12-08",
+      "sentiment": 0.1241,
+      "price": 133.28
+    },
+    {
+      "date": "2025-12-09",
+      "sentiment": 0.8908,
+      "price": 137.9
+    },
+    {
+      "date": "2025-12-10",
+      "sentiment": 0.4938,
+      "price": 136.47
+    },
+    {
+      "date": "2025-12-11",
+      "sentiment": 0.2527,
+      "price": 136.37
+    },
+    {
+      "date": "2025-12-12",
+      "sentiment": 0.3766,
+      "price": 132.32
+    },
+    {
+      "date": "2025-12-13",
+      "sentiment": -0.0629,
+      "price": 133.25
+    },
+    {
+      "date": "2025-12-14",
+      "sentiment": 0.3263,
+      "price": 129.48
+    },
+    {
+      "date": "2025-12-15",
+      "sentiment": 0.4337,
+      "price": 127.76
+    },
+    {
+      "date": "2025-12-16",
+      "sentiment": 0.3807,
+      "price": 129.25
+    },
+    {
+      "date": "2025-12-17",
+      "sentiment": 0.0803,
+      "price": 123.12
+    },
+    {
+      "date": "2025-12-18",
+      "sentiment": -0.018,
+      "price": 119.57
+    },
+    {
+      "date": "2025-12-19",
+      "sentiment": 0.0564,
+      "price": 126.19
+    },
+    {
+      "date": "2025-12-20",
+      "sentiment": -0.1495,
+      "price": 125.81
+    },
+    {
+      "date": "2025-12-21",
+      "sentiment": 0.0544,
+      "price": 125.99
+    },
+    {
+      "date": "2025-12-22",
+      "sentiment": 0.1308,
+      "price": 125.8
+    },
+    {
+      "date": "2025-12-23",
+      "sentiment": -0.3357,
+      "price": 123.86
+    },
+    {
+      "date": "2025-12-24",
+      "sentiment": 0.3496,
+      "price": 122.46
+    },
+    {
+      "date": "2025-12-25",
+      "sentiment": -0.5534,
+      "price": 119.95
+    },
+    {
+      "date": "2025-12-26",
+      "sentiment": 0.386,
+      "price": 122.2
+    },
+    {
+      "date": "2025-12-27",
+      "sentiment": 0.2268,
+      "price": 124.65
+    },
+    {
+      "date": "2025-12-28",
+      "sentiment": 0.164,
+      "price": 125.2
+    },
+    {
+      "date": "2025-12-29",
+      "sentiment": 0.198,
+      "price": 123.13
+    },
+    {
+      "date": "2025-12-30",
+      "sentiment": 0.8863,
+      "price": 124.93
+    },
+    {
+      "date": "2025-12-31",
+      "sentiment": -0.2261,
+      "price": 124.48
+    },
+    {
+      "date": "2026-01-01",
+      "sentiment": -0.0429,
+      "price": 126.76
+    },
+    {
+      "date": "2026-01-02",
+      "sentiment": -0.603,
+      "price": 132.13
+    },
+    {
+      "date": "2026-01-03",
+      "sentiment": 0.1469,
+      "price": 133.3
+    },
+    {
+      "date": "2026-01-04",
+      "sentiment": -0.1789,
+      "price": 133.9
+    },
+    {
+      "date": "2026-01-05",
+      "sentiment": 0.2711,
+      "price": 137.99
+    },
+    {
+      "date": "2026-01-06",
+      "sentiment": 0.2316,
+      "price": 141.1
+    },
+    {
+      "date": "2026-01-07",
+      "sentiment": 0.1266,
+      "price": 136.31
+    },
+    {
+      "date": "2026-01-08",
+      "sentiment": 0.0268,
+      "price": 138.29
+    },
+    {
+      "date": "2026-01-09",
+      "sentiment": 0.1116,
+      "price": 135.76
+    },
+    {
+      "date": "2026-01-10",
+      "sentiment": 0.1118,
+      "price": 135.73
+    },
+    {
+      "date": "2026-01-11",
+      "sentiment": 0.1032,
+      "price": 139.49
+    },
+    {
+      "date": "2026-01-12",
+      "sentiment": 0.2248,
+      "price": 139.14
+    },
+    {
+      "date": "2026-01-13",
+      "sentiment": 0.3845,
+      "price": 145.36
+    },
+    {
+      "date": "2026-01-14",
+      "sentiment": 0.1268,
+      "price": 146.75
+    },
+    {
+      "date": "2026-01-15",
+      "sentiment": 0.1335,
+      "price": 142.33
+    },
+    {
+      "date": "2026-01-16",
+      "sentiment": 0.1774,
+      "price": 144.86
+    },
+    {
+      "date": "2026-01-17",
+      "sentiment": 0.2485,
+      "price": 143.73
+    },
+    {
+      "date": "2026-01-18",
+      "sentiment": -0.0674,
+      "price": 138.0
+    },
+    {
+      "date": "2026-01-19",
+      "sentiment": 0.0594,
+      "price": 133.34
+    },
+    {
+      "date": "2026-01-20",
+      "sentiment": 0.2346,
+      "price": 125.71
+    },
+    {
+      "date": "2026-01-21",
+      "sentiment": 0.2035,
+      "price": 129.38
+    },
+    {
+      "date": "2026-01-22",
+      "sentiment": -0.1134,
+      "price": 128.29
+    },
+    {
+      "date": "2026-01-23",
+      "sentiment": 0.2451,
+      "price": 127.36
+    },
+    {
+      "date": "2026-01-24",
+      "sentiment": 0.0634,
+      "price": 127.05
+    },
+    {
+      "date": "2026-01-25",
+      "sentiment": -0.2365,
+      "price": 118.77
+    },
+    {
+      "date": "2026-01-26",
+      "sentiment": 0.0883,
+      "price": 124.14
+    },
+    {
+      "date": "2026-01-27",
+      "sentiment": 0.0548,
+      "price": 127.05
+    },
+    {
+      "date": "2026-01-28",
+      "sentiment": 0.1939,
+      "price": 125.12
+    },
+    {
+      "date": "2026-01-29",
+      "sentiment": 0.0852,
+      "price": 117.61
+    },
+    {
+      "date": "2026-01-30",
+      "sentiment": 0.2016,
+      "price": 117.36
+    },
+    {
+      "date": "2026-01-31",
+      "sentiment": -0.0721,
+      "price": 105.44
+    },
+    {
+      "date": "2026-02-01",
+      "sentiment": -0.34,
+      "price": 100.85
+    },
+    {
+      "date": "2026-02-02",
+      "sentiment": 0.1118,
+      "price": 104.47
+    },
+    {
+      "date": "2026-02-03",
+      "sentiment": -0.116,
+      "price": 97.56
+    },
+    {
+      "date": "2026-02-04",
+      "sentiment": 0.0601,
+      "price": 92.03
+    },
+    {
+      "date": "2026-02-05",
+      "sentiment": 0.0041,
+      "price": 78.19
+    },
+    {
+      "date": "2026-02-06",
+      "sentiment": -0.1262,
+      "price": 87.46
+    },
+    {
+      "date": "2026-02-07",
+      "sentiment": 0.0344,
+      "price": 87.64
+    },
+    {
+      "date": "2026-02-08",
+      "sentiment": 0.1198,
+      "price": 87.04
+    },
+    {
+      "date": "2026-02-09",
+      "sentiment": 0.1785,
+      "price": 86.7
+    },
+    {
+      "date": "2026-02-10",
+      "sentiment": 0.0389,
+      "price": 82.92
+    },
+    {
+      "date": "2026-02-11",
+      "sentiment": 0.0975,
+      "price": 79.25
+    },
+    {
+      "date": "2026-02-12",
+      "sentiment": 0.1208,
+      "price": 78.35
+    },
+    {
+      "date": "2026-02-13",
+      "sentiment": -0.1028,
+      "price": 84.32
+    },
+    {
+      "date": "2026-02-14",
+      "sentiment": 0.0224,
+      "price": 88.16
+    },
+    {
+      "date": "2026-02-15",
+      "sentiment": -0.0149,
+      "price": 86.01
+    },
+    {
+      "date": "2026-02-16",
+      "sentiment": 0.2769,
+      "price": 86.43
+    },
+    {
+      "date": "2026-02-17",
+      "sentiment": 0.0336,
+      "price": 85.2
+    },
+    {
+      "date": "2026-02-18",
+      "sentiment": 0.0874,
+      "price": 81.57
+    },
+    {
+      "date": "2026-02-19",
+      "sentiment": -0.0012,
+      "price": 82.39
+    },
+    {
+      "date": "2026-02-20",
+      "sentiment": 0.2465,
+      "price": 84.64
+    },
+    {
+      "date": "2026-02-21",
+      "sentiment": -0.0143,
+      "price": 85.21
+    },
+    {
+      "date": "2026-02-22",
+      "sentiment": -0.2262,
+      "price": 82.79
+    },
+    {
+      "date": "2026-02-23",
+      "sentiment": 0.2457,
+      "price": 77.75
+    },
+    {
+      "date": "2026-02-24",
+      "sentiment": -0.0198,
+      "price": 79.04
+    },
+    {
+      "date": "2026-02-25",
+      "sentiment": 0.2138,
+      "price": 87.92
+    },
+    {
+      "date": "2026-02-26",
+      "sentiment": 0.1199,
+      "price": 85.91
+    },
+    {
+      "date": "2026-02-27",
+      "sentiment": -0.1361,
+      "price": 81.95
+    },
+    {
+      "date": "2026-02-28",
+      "sentiment": -0.0983,
+      "price": 84.37
+    },
+    {
+      "date": "2026-03-01",
+      "sentiment": -0.0959,
+      "price": 83.58
+    },
+    {
+      "date": "2026-03-02",
+      "sentiment": 0.0534,
+      "price": 86.63
+    },
+    {
+      "date": "2026-03-03",
+      "sentiment": 0.0463,
+      "price": 87.02
+    },
+    {
+      "date": "2026-03-04",
+      "sentiment": 0.1329,
+      "price": 90.83
+    },
+    {
+      "date": "2026-03-05",
+      "sentiment": -0.0175,
+      "price": 88.69
+    },
+    {
+      "date": "2026-03-06",
+      "sentiment": -0.2141,
+      "price": 84.68
+    },
+    {
+      "date": "2026-03-07",
+      "sentiment": 0.0201,
+      "price": 83.18
+    },
+    {
+      "date": "2026-03-08",
+      "sentiment": -0.0438,
+      "price": 81.62
+    },
+    {
+      "date": "2026-03-09",
+      "sentiment": 0.0447,
+      "price": 84.94
+    },
+    {
+      "date": "2026-03-10",
+      "sentiment": -0.0042,
+      "price": 85.84
+    },
+    {
+      "date": "2026-03-11",
+      "sentiment": 0.0283,
+      "price": 86.56
+    },
+    {
+      "date": "2026-03-12",
+      "sentiment": -0.0178,
+      "price": 86.87
+    },
+    {
+      "date": "2026-03-13",
+      "sentiment": -0.0924,
+      "price": 88.15
+    },
+    {
+      "date": "2026-03-14",
+      "sentiment": 0.1121,
+      "price": 88.07
+    },
+    {
+      "date": "2026-03-15",
+      "sentiment": -0.0291,
+      "price": 92.25
+    },
+    {
+      "date": "2026-03-16",
+      "sentiment": 0.1471,
+      "price": 96.22
+    },
+    {
+      "date": "2026-03-17",
+      "sentiment": 0.0981,
+      "price": 94.71
+    },
+    {
+      "date": "2026-03-18",
+      "sentiment": -0.0317,
+      "price": 90.07
+    },
+    {
+      "date": "2026-03-19",
+      "sentiment": -0.0042,
+      "price": 88.92
+    },
+    {
+      "date": "2026-03-20",
+      "sentiment": 0.093,
+      "price": 89.85
+    },
+    {
+      "date": "2026-03-21",
+      "sentiment": -0.1114,
+      "price": 87.47
+    },
+    {
+      "date": "2026-03-22",
+      "sentiment": -0.0191,
+      "price": 86.13
+    },
+    {
+      "date": "2026-03-23",
+      "sentiment": -0.0681,
+      "price": 91.42
+    },
+    {
+      "date": "2026-03-24",
+      "sentiment": 0.0582,
+      "price": 90.82
+    },
+    {
+      "date": "2026-03-25",
+      "sentiment": 0.1552,
+      "price": 91.71
+    },
+    {
+      "date": "2026-03-26",
+      "sentiment": -0.0943,
+      "price": 86.44
+    },
+    {
+      "date": "2026-03-27",
+      "sentiment": -0.0384,
+      "price": 83.02
+    },
+    {
+      "date": "2026-03-28",
+      "sentiment": 0.0909,
+      "price": 82.02
+    },
+    {
+      "date": "2026-03-29",
+      "sentiment": 0.0523,
+      "price": 81.68
     }
   ],
   "reddit_posts": [
     {
-      "date": "2025-09-01",
-      "title": "USD1 Is Now Live On Solana",
-      "score": 789,
-      "num_comments": 68,
-      "sent_score": 0.2627,
-      "url": "https://reddit.com/r/solana/comments/1n5o2ho/usd1_is_now_live_on_solana/"
+      "date": "2025-06-04",
+      "title": "My goal was to make $50K in Crypto this year, only $75K more to go...",
+      "score": 56132,
+      "num_comments": 902,
+      "sent_score": 0.7808,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1l38nmd/my_goal_was_to_make_50k_in_crypto_this_year_only/"
     },
     {
-      "date": "2025-09-16",
-      "title": "Is TRON trusted more than Solana for cross-border money remittance?",
-      "score": 264,
-      "num_comments": 95,
-      "sent_score": 0.3042,
-      "url": "https://reddit.com/r/solana/comments/1nijrsy/is_tron_trusted_more_than_solana_for_crossborder/"
+      "date": "2025-10-11",
+      "title": "Crime season",
+      "score": 55066,
+      "num_comments": 1202,
+      "sent_score": -0.2458,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1o3u526/crime_season/"
     },
     {
-      "date": "2025-09-09",
-      "title": "How is it possible not to be bullish on SOLANA 😤",
-      "score": 235,
-      "num_comments": 107,
-      "sent_score": 0.9711,
-      "url": "https://reddit.com/r/solana/comments/1ncaxgo/how_is_it_possible_not_to_be_bullish_on_solana/"
+      "date": "2025-07-04",
+      "title": "This dude sold 10,000 BTC after 14 yrs today, bought it for $0.78 per bitcoin back in 2011. The amount of patience it ta",
+      "score": 38683,
+      "num_comments": 1882,
+      "sent_score": 0.0062,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1lrd6xr/this_dude_sold_10000_btc_after_14_yrs_today/"
     },
     {
-      "date": "2025-09-15",
-      "title": "Best Dev Tools to use?",
-      "score": 210,
-      "num_comments": 25,
-      "sent_score": 0.3599,
-      "url": "https://reddit.com/r/solana/comments/1nhpaom/best_dev_tools_to_use/"
+      "date": "2024-12-05",
+      "title": "Hawk Tuah Girl responds as people call for her to be jailed with fans 'losing life savings' after buying her cryptocurre",
+      "score": 28114,
+      "num_comments": 4933,
+      "sent_score": -0.7303,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1h7ggy9/hawk_tuah_girl_responds_as_people_call_for_her_to/"
     },
     {
-      "date": "2025-09-12",
-      "title": "Great news: Solana’s market cap reaches over $129B, Becomes the 5th largest cryptocurrency globally. 🔥",
-      "score": 209,
-      "num_comments": 42,
-      "sent_score": 0.9799,
-      "url": "https://reddit.com/r/solana/comments/1newp7y/great_news_solanas_market_cap_reaches_over_129b/"
+      "date": "2025-02-17",
+      "title": "A story in two pictures",
+      "score": 23497,
+      "num_comments": 1697,
+      "sent_score": 0.1414,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1irl532/a_story_in_two_pictures/"
     },
     {
-      "date": "2025-09-15",
-      "title": "they just don't have what it takes",
-      "score": 200,
-      "num_comments": 35,
-      "sent_score": -0.8044,
-      "url": "https://reddit.com/r/solana/comments/1nhts8k/they_just_dont_have_what_it_takes/"
+      "date": "2024-08-28",
+      "title": "Kamala Harris proposes 25% tax on unrealized gains for high-net-worth individuals",
+      "score": 21201,
+      "num_comments": 2596,
+      "sent_score": 0.2707,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1f3f91t/kamala_harris_proposes_25_tax_on_unrealized_gains/"
     },
     {
-      "date": "2025-09-21",
-      "title": "Making crypto transactions as familiar as your morning latte☕",
-      "score": 191,
-      "num_comments": 46,
-      "sent_score": 0.5055,
-      "url": "https://reddit.com/r/solana/comments/1nmomao/making_crypto_transactions_as_familiar_as_your/"
+      "date": "2025-02-15",
+      "title": "Me In 2009 Instead of Buying Bitcoin (BTC)",
+      "score": 20447,
+      "num_comments": 354,
+      "sent_score": 0.0027,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1iq3fe9/me_in_2009_instead_of_buying_bitcoin_btc/"
     },
     {
-      "date": "2025-09-13",
-      "title": "I’m grateful to Solana for always keeping me young ❤️💚",
-      "score": 190,
-      "num_comments": 32,
-      "sent_score": 0.9774,
-      "url": "https://reddit.com/r/solana/comments/1nfy9g2/im_grateful_to_solana_for_always_keeping_me_young/"
+      "date": "2024-12-07",
+      "title": "Hawk Tuah Girl is being investigated by law firms over possible lawsuit as fans 'lose life savings' after buying her cry",
+      "score": 20172,
+      "num_comments": 1770,
+      "sent_score": -0.5149,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1h9589n/hawk_tuah_girl_is_being_investigated_by_law_firms/"
     },
     {
-      "date": "2025-08-28",
-      "title": "Best Solana mixer to improve privacy?",
-      "score": 183,
-      "num_comments": 52,
-      "sent_score": -0.3902,
-      "url": "https://reddit.com/r/solana/comments/1n29jfd/best_solana_mixer_to_improve_privacy/"
+      "date": "2025-01-20",
+      "title": "Tragicomedy in 6 screenshots",
+      "score": 18457,
+      "num_comments": 1285,
+      "sent_score": -0.7915,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1i5p13z/tragicomedy_in_6_screenshots/"
     },
     {
-      "date": "2025-08-29",
-      "title": "Follow-Up on the 300+ SOL Stolen in USDC.",
-      "score": 182,
-      "num_comments": 196,
-      "sent_score": -0.7889,
-      "url": "https://reddit.com/r/solana/comments/1n3ijc5/followup_on_the_300_sol_stolen_in_usdc/"
+      "date": "2025-02-04",
+      "title": "Musk has confirmed he wants to put the U.S. Treasury on a blockchain",
+      "score": 16974,
+      "num_comments": 2795,
+      "sent_score": 0.2189,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ihklcy/musk_has_confirmed_he_wants_to_put_the_us/"
     },
     {
-      "date": "2025-09-09",
-      "title": "Seeker being sold for less then half retail?",
-      "score": 172,
-      "num_comments": 109,
-      "sent_score": -0.7959,
-      "url": "https://reddit.com/r/solana/comments/1nckgyz/seeker_being_sold_for_less_then_half_retail/"
+      "date": "2025-01-19",
+      "title": "The price of Trump just nosedived 40% after Trump retweeted the new \"Melania\" Token. (This somehow isn't a joke)",
+      "score": 16498,
+      "num_comments": 2146,
+      "sent_score": -0.5949,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1i59wor/the_price_of_trump_just_nosedived_40_after_trump/"
+    },
+    {
+      "date": "2026-01-13",
+      "title": "Former NYC Mayor Eric Adams rugs his own memecoin just 30 minutes after launch and pockets over $2.5M",
+      "score": 16400,
+      "num_comments": 829,
+      "sent_score": 0.215,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1qbdgdt/former_nyc_mayor_eric_adams_rugs_his_own_memecoin/"
+    },
+    {
+      "date": "2026-02-05",
+      "title": "BTC 69k with different energy",
+      "score": 14365,
+      "num_comments": 372,
+      "sent_score": 0.1005,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1qwk7tk/btc_69k_with_different_energy/"
+    },
+    {
+      "date": "2025-01-19",
+      "title": "Coinbase listing a 1 day old memecoin with 80% of the supply owned by insiders but avoid listing coins with actual teams",
+      "score": 13819,
+      "num_comments": 935,
+      "sent_score": -0.1611,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1i4xl4s/coinbase_listing_a_1_day_old_memecoin_with_80_of/"
+    },
+    {
+      "date": "2024-12-09",
+      "title": "Hawk Tuah girl stops questions on crypto 'scam' and says 'I'm going to bed'",
+      "score": 13450,
+      "num_comments": 1330,
+      "sent_score": -0.2867,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ha3tud/hawk_tuah_girl_stops_questions_on_crypto_scam_and/"
+    },
+    {
+      "date": "2025-04-03",
+      "title": "Dude bought $10K worth of ETH for his wife 7 years ago, it’s  now worth $13.5K",
+      "score": 12973,
+      "num_comments": 814,
+      "sent_score": 0.0868,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1jqhhoy/dude_bought_10k_worth_of_eth_for_his_wife_7_years/"
+    },
+    {
+      "date": "2025-01-22",
+      "title": "Silk Road founder Ross Ulbricht leaving prison after spending over 11 years in prison and being pardoned",
+      "score": 12921,
+      "num_comments": 1358,
+      "sent_score": -0.0059,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1i7f8fr/silk_road_founder_ross_ulbricht_leaving_prison/"
+    },
+    {
+      "date": "2025-12-15",
+      "title": "Me managing my $500 in crypto",
+      "score": 12837,
+      "num_comments": 346,
+      "sent_score": 0.2245,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1pn9nr4/me_managing_my_500_in_crypto/"
+    },
+    {
+      "date": "2025-10-14",
+      "title": "I think my parents are still mad about buying BTC at 127K",
+      "score": 12663,
+      "num_comments": 331,
+      "sent_score": -0.6807,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1o6p76d/i_think_my_parents_are_still_mad_about_buying_btc/"
+    },
+    {
+      "date": "2025-02-06",
+      "title": "This 20-year-old scammed someone of 4,100 BTC ($402M) and then bought 31 supercars, $2M watch, spent $569k in one night ",
+      "score": 11276,
+      "num_comments": 1180,
+      "sent_score": -0.8042,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ij8cid/this_20yearold_scammed_someone_of_4100_btc_402m/"
+    },
+    {
+      "date": "2025-06-22",
+      "title": "Dude is a menace…",
+      "score": 11086,
+      "num_comments": 544,
+      "sent_score": -0.902,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1lhtx1c/dude_is_a_menace/"
+    },
+    {
+      "date": "2024-12-19",
+      "title": "Hawk Tuah girl, Hailey Welch, sued over the memecoin collapse",
+      "score": 10062,
+      "num_comments": 932,
+      "sent_score": -0.3202,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1hi59z7/hawk_tuah_girl_hailey_welch_sued_over_the/"
+    },
+    {
+      "date": "2024-12-23",
+      "title": "Make it make sense",
+      "score": 9991,
+      "num_comments": 557,
+      "sent_score": -0.1266,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1hkraa3/make_it_make_sense/"
+    },
+    {
+      "date": "2025-05-25",
+      "title": "220 people collectively spend almost $148 Million on Trump's Memecoin and were rewarded with this dinner",
+      "score": 9637,
+      "num_comments": 776,
+      "sent_score": -0.2635,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1kvcuzq/220_people_collectively_spend_almost_148_million/"
+    },
+    {
+      "date": "2025-02-07",
+      "title": "This space is full of absolute fucking losers",
+      "score": 9245,
+      "num_comments": 1340,
+      "sent_score": -0.8777,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ik8r7q/this_space_is_full_of_absolute_fucking_losers/"
+    },
+    {
+      "date": "2025-01-07",
+      "title": "A Guy got paid 32 BTC to wear that hat and hold that sign on a busy street in 2011",
+      "score": 8711,
+      "num_comments": 282,
+      "sent_score": -0.0769,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1hvk2sl/a_guy_got_paid_32_btc_to_wear_that_hat_and_hold/"
+    },
+    {
+      "date": "2025-03-04",
+      "title": "Donald Trump supporters lose $12,000,000,000 after his meme coin collapses",
+      "score": 8595,
+      "num_comments": 507,
+      "sent_score": -0.8227,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1j3ox2l/donald_trump_supporters_lose_12000000000_after/"
+    },
+    {
+      "date": "2025-02-07",
+      "title": "Explaining Bitcoin 12 Years Ago When It Was Worth Below $100—To an Empty Room",
+      "score": 8438,
+      "num_comments": 288,
+      "sent_score": -0.1931,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ik2qgu/explaining_bitcoin_12_years_ago_when_it_was_worth/"
+    },
+    {
+      "date": "2026-01-16",
+      "title": "In December 2020, guy takes our $46k loan to buy 2.55 Bitcoin. I’d say it worked out for him",
+      "score": 8347,
+      "num_comments": 354,
+      "sent_score": 0.6657,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1qe26os/in_december_2020_guy_takes_our_46k_loan_to_buy/"
+    },
+    {
+      "date": "2025-02-27",
+      "title": "Thanks Crypto",
+      "score": 8329,
+      "num_comments": 243,
+      "sent_score": 0.8802,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1izk0ur/thanks_crypto/"
+    },
+    {
+      "date": "2025-01-30",
+      "title": "Us senator john cornyn rugpulled a memecoin",
+      "score": 8284,
+      "num_comments": 895,
+      "sent_score": -0.8584,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1idcm70/us_senator_john_cornyn_rugpulled_a_memecoin/"
+    },
+    {
+      "date": "2025-01-11",
+      "title": "This explains everything",
+      "score": 8160,
+      "num_comments": 179,
+      "sent_score": 0.2252,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1hz3i4j/this_explains_everything/"
     },
     {
       "date": "2025-09-14",
-      "title": "Solana did reach a new market cap.",
-      "score": 167,
-      "num_comments": 50,
-      "sent_score": -0.016,
-      "url": "https://reddit.com/r/solana/comments/1ngnseq/solana_did_reach_a_new_market_cap/"
+      "title": "This dude sold his life savings into bitcoins 12 yrs ago and then disappeared into void.",
+      "score": 8121,
+      "num_comments": 554,
+      "sent_score": -0.8207,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ngrvij/this_dude_sold_his_life_savings_into_bitcoins_12/"
     },
     {
-      "date": "2025-09-12",
-      "title": "I’m having flashbacks to early BTC",
-      "score": 160,
-      "num_comments": 77,
-      "sent_score": 0.656,
-      "url": "https://reddit.com/r/solana/comments/1nffgc9/im_having_flashbacks_to_early_btc/"
+      "date": "2024-05-28",
+      "title": "Trump is NOT \"better\" for crypto.",
+      "score": 8012,
+      "num_comments": 2032,
+      "sent_score": -0.8451,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1d2oxco/trump_is_not_better_for_crypto/"
     },
     {
-      "date": "2025-09-18",
-      "title": "SEC has approved generic listings standards, clearing the way for spot crypto ETFs to launch",
-      "score": 159,
-      "num_comments": 20,
-      "sent_score": 0.5688,
-      "url": "https://reddit.com/r/solana/comments/1nka7w4/sec_has_approved_generic_listings_standards/"
+      "date": "2025-02-16",
+      "title": "Argentina's president Javier Milei to be impeached for crypto rug pull",
+      "score": 7945,
+      "num_comments": 417,
+      "sent_score": -0.4811,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1iqjda4/argentinas_president_javier_milei_to_be_impeached/"
     },
     {
-      "date": "2025-08-22",
-      "title": "EU Digital Euro on Solana/Ethereum",
-      "score": 155,
-      "num_comments": 79,
-      "sent_score": 0.6349,
-      "url": "https://reddit.com/r/solana/comments/1mx1tj2/eu_digital_euro_on_solanaethereum/"
+      "date": "2025-03-14",
+      "title": "We're back",
+      "score": 7905,
+      "num_comments": 193,
+      "sent_score": 0.7155,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1jb9ivw/were_back/"
     },
     {
-      "date": "2025-09-04",
-      "title": "How to contact wallet owners?",
-      "score": 149,
-      "num_comments": 50,
-      "sent_score": -0.0007,
-      "url": "https://reddit.com/r/solana/comments/1n8fpjw/how_to_contact_wallet_owners/"
+      "date": "2024-12-05",
+      "title": "On February 9th 2011 Bitcoin first touched $1. Less than 14 years later Bitcoin has surpassed $100k. An increase of 10 M",
+      "score": 7832,
+      "num_comments": 486,
+      "sent_score": 0.8282,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1h6yoqp/on_february_9th_2011_bitcoin_first_touched_1_less/"
     },
     {
-      "date": "2025-09-15",
-      "title": "Ascendbot refuses to pay out",
-      "score": 149,
-      "num_comments": 78,
-      "sent_score": -0.8691,
-      "url": "https://reddit.com/r/solana/comments/1nhttbk/ascendbot_refuses_to_pay_out/"
+      "date": "2025-08-16",
+      "title": "Someone just launched a coin and used the price action to draw an image of a dog  on the chart.",
+      "score": 7800,
+      "num_comments": 306,
+      "sent_score": -0.142,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ms2h8z/someone_just_launched_a_coin_and_used_the_price/"
     },
     {
-      "date": "2025-09-14",
-      "title": "135Billion MC for the first time ever! 😤",
-      "score": 148,
-      "num_comments": 30,
-      "sent_score": 0.9781,
-      "url": "https://reddit.com/r/solana/comments/1nggptl/135billion_mc_for_the_first_time_ever/"
+      "date": "2024-08-29",
+      "title": "Crypto trader turns $1 million into $9k in an hour",
+      "score": 7789,
+      "num_comments": 611,
+      "sent_score": 0.3025,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1f44jbi/crypto_trader_turns_1_million_into_9k_in_an_hour/"
     },
     {
-      "date": "2025-09-05",
-      "title": "Solana growth is unstoppable 😈",
-      "score": 140,
-      "num_comments": 60,
-      "sent_score": 0.9652,
-      "url": "https://reddit.com/r/solana/comments/1n8xejx/solana_growth_is_unstoppable/"
+      "date": "2025-10-19",
+      "title": "Just keep going to the right",
+      "score": 7729,
+      "num_comments": 280,
+      "sent_score": 0.0786,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1oap0wg/just_keep_going_to_the_right/"
     },
     {
-      "date": "2025-09-01",
-      "title": "99% of solana validators just voted yes on alpenglow. we're about to make visa look slow.",
-      "score": 140,
-      "num_comments": 42,
-      "sent_score": 0.0717,
-      "url": "https://reddit.com/r/solana/comments/1n5ss7s/99_of_solana_validators_just_voted_yes_on/"
+      "date": "2026-01-26",
+      "title": "This dude back in 2021 bought the NFT of the first tweet in history for $2.9M calling it digital Mona Lisa and now it’s ",
+      "score": 7565,
+      "num_comments": 548,
+      "sent_score": -0.1014,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1qnvgqf/this_dude_back_in_2021_bought_the_nft_of_the/"
     },
     {
-      "date": "2025-09-11",
-      "title": "What is staking? Is it profitable?",
-      "score": 132,
-      "num_comments": 57,
-      "sent_score": 0.2194,
-      "url": "https://reddit.com/r/solana/comments/1ndxie9/what_is_staking_is_it_profitable/"
+      "date": "2025-11-13",
+      "title": "I want bull season again",
+      "score": 7536,
+      "num_comments": 248,
+      "sent_score": 0.5548,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ow7xc0/i_want_bull_season_again/"
     },
     {
-      "date": "2025-09-07",
-      "title": "Received a strange amount of solana. Also got strange movements on the history section.",
-      "score": 128,
-      "num_comments": 65,
-      "sent_score": -0.5416,
-      "url": "https://reddit.com/r/solana/comments/1natj40/received_a_strange_amount_of_solana_also_got/"
+      "date": "2025-04-06",
+      "title": "Over $200 million has been liquidated from the crypto market in the last hour.",
+      "score": 7464,
+      "num_comments": 1008,
+      "sent_score": -0.6155,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1jt2umf/over_200_million_has_been_liquidated_from_the/"
     },
     {
-      "date": "2025-08-30",
-      "title": "Subject: RE: Your “Class Action Lawsuit” Threat",
-      "score": 125,
-      "num_comments": 70,
-      "sent_score": -0.2619,
-      "url": "https://reddit.com/r/solana/comments/1n3tgey/subject_re_your_class_action_lawsuit_threat/"
+      "date": "2024-12-11",
+      "title": "This Anonymous guy received $50 worth of Bitcoin back in 2012, HODLed through 13 Majestic Years, sold them for $1M in 20",
+      "score": 7415,
+      "num_comments": 450,
+      "sent_score": -0.1406,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1hbsf6a/this_anonymous_guy_received_50_worth_of_bitcoin/"
     },
     {
-      "date": "2025-09-16",
-      "title": "Solana apps generated more revenue in the past 24H than the next 10 largest chains combined",
-      "score": 121,
-      "num_comments": 35,
-      "sent_score": 0.5411,
-      "url": "https://reddit.com/r/solana/comments/1nijk5j/solana_apps_generated_more_revenue_in_the_past/"
+      "date": "2025-01-27",
+      "title": "The half brother of Barack Obama, Malik Obama just launched and rugged a token called \"Obama\" on Solana.",
+      "score": 7240,
+      "num_comments": 587,
+      "sent_score": 0.1548,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1ibe1zj/the_half_brother_of_barack_obama_malik_obama_just/"
     },
     {
-      "date": "2025-09-17",
-      "title": "There’s 100 million tokens total on major networks, 85 million are on Solana",
-      "score": 119,
-      "num_comments": 113,
-      "sent_score": 0.3348,
-      "url": "https://reddit.com/r/solana/comments/1njc3qf/theres_100_million_tokens_total_on_major_networks/"
-    },
-    {
-      "date": "2025-08-26",
-      "title": "Solana Meme coins are ruining my outlook on life.",
-      "score": 119,
-      "num_comments": 99,
-      "sent_score": -0.5358,
-      "url": "https://reddit.com/r/solana/comments/1n0snnk/solana_meme_coins_are_ruining_my_outlook_on_life/"
-    },
-    {
-      "date": "2025-09-05",
-      "title": "SOL Strategies just got NASDAQ approval - this is bigger than people realize",
-      "score": 118,
-      "num_comments": 44,
-      "sent_score": 0.9612,
-      "url": "https://reddit.com/r/solana/comments/1n9ixf5/sol_strategies_just_got_nasdaq_approval_this_is/"
-    },
-    {
-      "date": "2025-08-23",
-      "title": "🚨 Just In: Solana becomes the top-performing cryptocurrency among the top 20 by market cap in the past 24 hours. 💥",
-      "score": 118,
-      "num_comments": 9,
-      "sent_score": 0.9579,
-      "url": "https://reddit.com/r/solana/comments/1mxuj9t/just_in_solana_becomes_the_topperforming/"
-    },
-    {
-      "date": "2025-08-31",
-      "title": "A little honest review of Solana Seeker",
-      "score": 109,
-      "num_comments": 76,
-      "sent_score": -0.6895,
-      "url": "https://reddit.com/r/solana/comments/1n4gsc9/a_little_honest_review_of_solana_seeker/"
-    },
-    {
-      "date": "2025-09-11",
-      "title": "Friend has 125 Solana staking and wants to sell to pay their students loans. I told him hold. Should they hold or sell n",
-      "score": 109,
-      "num_comments": 170,
-      "sent_score": 0.04,
-      "url": "https://reddit.com/r/solana/comments/1ndv887/friend_has_125_solana_staking_and_wants_to_sell/"
-    },
-    {
-      "date": "2025-08-30",
-      "title": "And so it begins!! Solana Seeker has arrived!!",
-      "score": 109,
-      "num_comments": 101,
-      "sent_score": 0.9633,
-      "url": "https://reddit.com/r/solana/comments/1n43f7k/and_so_it_begins_solana_seeker_has_arrived/"
-    },
-    {
-      "date": "2025-09-14",
-      "title": "who has got solana seeker and what dapps are you using?",
-      "score": 104,
-      "num_comments": 52,
-      "sent_score": 0.2975,
-      "url": "https://reddit.com/r/solana/comments/1ngz777/who_has_got_solana_seeker_and_what_dapps_are_you/"
-    },
-    {
-      "date": "2025-09-03",
-      "title": "Solana Seeker has ARRIVED!!!",
-      "score": 103,
-      "num_comments": 48,
-      "sent_score": 0.786,
-      "url": "https://reddit.com/r/solana/comments/1n737ha/solana_seeker_has_arrived/"
-    },
-    {
-      "date": "2025-09-08",
-      "title": "Hey um can this be recovered?",
-      "score": 103,
-      "num_comments": 107,
-      "sent_score": -0.5305,
-      "url": "https://reddit.com/r/solana/comments/1nbbo2k/hey_um_can_this_be_recovered/"
-    },
-    {
-      "date": "2025-08-24",
-      "title": "What do these transactions mean?",
-      "score": 101,
-      "num_comments": 47,
-      "sent_score": -0.3893,
-      "url": "https://reddit.com/r/solana/comments/1mypz9o/what_do_these_transactions_mean/"
-    },
-    {
-      "date": "2025-09-06",
-      "title": "All roads lead back to Solana",
-      "score": 97,
-      "num_comments": 21,
-      "sent_score": 0.0378,
-      "url": "https://reddit.com/r/solana/comments/1na8h27/all_roads_lead_back_to_solana/"
-    },
-    {
-      "date": "2025-09-13",
-      "title": "Almost all experts are bullish on Solana (SOL), here's why",
-      "score": 91,
-      "num_comments": 55,
-      "sent_score": 0.9083,
-      "url": "https://reddit.com/r/solana/comments/1ng321c/almost_all_experts_are_bullish_on_solana_sol/"
-    },
-    {
-      "date": "2025-08-21",
-      "title": "Made a tool that tracks every wallet to find trends & threats [Update]",
-      "score": 90,
-      "num_comments": 66,
-      "sent_score": 0.214,
-      "url": "https://reddit.com/r/solana/comments/1mwo4hl/made_a_tool_that_tracks_every_wallet_to_find/"
-    },
-    {
-      "date": "2025-09-13",
-      "title": "Is this a Glitch? Thought I was rich for a second",
-      "score": 89,
-      "num_comments": 63,
-      "sent_score": -0.8575,
-      "url": "https://reddit.com/r/solana/comments/1ng9r7e/is_this_a_glitch_thought_i_was_rich_for_a_second/"
-    },
-    {
-      "date": "2025-09-18",
-      "title": "Afternoon was good indeed",
-      "score": 89,
-      "num_comments": 10,
-      "sent_score": 0.9692,
-      "url": "https://reddit.com/r/solana/comments/1nk8o45/afternoon_was_good_indeed/"
-    },
-    {
-      "date": "2025-08-26",
-      "title": "Backpack is really the best Solana Wallet!",
-      "score": 89,
-      "num_comments": 25,
-      "sent_score": 0.9737,
-      "url": "https://reddit.com/r/solana/comments/1n0drz9/backpack_is_really_the_best_solana_wallet/"
-    },
-    {
-      "date": "2025-08-30",
-      "title": "Just paid for my haircut in Solana!",
-      "score": 84,
-      "num_comments": 32,
-      "sent_score": 0.8894,
-      "url": "https://reddit.com/r/solana/comments/1n4515y/just_paid_for_my_haircut_in_solana/"
+      "date": "2025-11-03",
+      "title": "We are now at no.2",
+      "score": 7185,
+      "num_comments": 426,
+      "sent_score": 0.2889,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1on9bvk/we_are_now_at_no2/"
     },
     {
       "date": "2025-09-19",
-      "title": "Solana Just Landed 4 Major Wins Today — Are We Watching It Turn Into a Global Crypto Backbone?",
-      "score": 83,
-      "num_comments": 24,
-      "sent_score": 0.6085,
-      "url": "https://reddit.com/r/solana/comments/1nlh7oo/solana_just_landed_4_major_wins_today_are_we/"
+      "title": "Why didn't I ask my mom for Bitcoin instead of Pokémon cards…",
+      "score": 7103,
+      "num_comments": 217,
+      "sent_score": -0.4097,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1nl3xa5/why_didnt_i_ask_my_mom_for_bitcoin_instead_of/"
     },
     {
-      "date": "2025-09-05",
-      "title": "First Spot Solana ETF with Staking Launches in Kazakhstan! ($SETF)",
-      "score": 81,
-      "num_comments": 30,
-      "sent_score": 0.7235,
-      "url": "https://reddit.com/r/solana/comments/1n9bans/first_spot_solana_etf_with_staking_launches_in/"
+      "date": "2025-01-18",
+      "title": "A Trump insider has a realized profit (meaning they bought and already sold) of $21M, having spent $1M, 1 minute after t",
+      "score": 7100,
+      "num_comments": 739,
+      "sent_score": 0.062,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1i4gq2k/a_trump_insider_has_a_realized_profit_meaning/"
     },
     {
-      "date": "2025-09-03",
-      "title": "the first Nasdaq-listed firm to be tokenized on Solana",
-      "score": 79,
-      "num_comments": 10,
-      "sent_score": 0.2561,
-      "url": "https://reddit.com/r/solana/comments/1n7fv3w/the_first_nasdaqlisted_firm_to_be_tokenized_on/"
+      "date": "2024-12-25",
+      "title": "I was told it would be $10 000 by now",
+      "score": 6883,
+      "num_comments": 731,
+      "sent_score": 0.0128,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1hm4k11/i_was_told_it_would_be_10_000_by_now/"
     },
     {
-      "date": "2025-08-25",
-      "title": "Daily active users. Your thoughts?",
-      "score": 72,
-      "num_comments": 48,
-      "sent_score": -0.1146,
-      "url": "https://reddit.com/r/solana/comments/1mzcuu3/daily_active_users_your_thoughts/"
-    },
-    {
-      "date": "2025-09-11",
-      "title": "Breaking: Solana's market cap has surged to almost $121 billion. Solana jumped its position to 185th in the global",
-      "score": 68,
-      "num_comments": 15,
-      "sent_score": 0.8096,
-      "url": "https://reddit.com/r/solana/comments/1ne11a2/breaking_solanas_market_cap_has_surged_to_almost/"
-    },
-    {
-      "date": "2025-09-03",
-      "title": "I got scammed for $458 or 2 Sol",
-      "score": 66,
-      "num_comments": 169,
-      "sent_score": -0.42,
-      "url": "https://reddit.com/r/solana/comments/1n7inob/i_got_scammed_for_458_or_2_sol/"
-    },
-    {
-      "date": "2025-08-22",
-      "title": "Been throwing away Solana Finally have learned.",
-      "score": 65,
-      "num_comments": 38,
-      "sent_score": 0.5102,
-      "url": "https://reddit.com/r/solana/comments/1mxf1y6/been_throwing_away_solana_finally_have_learned/"
-    },
-    {
-      "date": "2025-08-23",
-      "title": "Binance froze my funds for 30 days, then sent my withdrawal to the wrong address and blamed it on malware 🤡",
-      "score": 63,
-      "num_comments": 51,
-      "sent_score": -0.84,
-      "url": "https://reddit.com/r/solana/comments/1mycj45/binance_froze_my_funds_for_30_days_then_sent_my/"
+      "date": "2025-01-01",
+      "title": "Back to the trenches…",
+      "score": 6732,
+      "num_comments": 165,
+      "sent_score": -0.7066,
+      "url": "https://reddit.com/r/CryptoCurrency/comments/1hr2wpw/back_to_the_trenches/"
     }
   ]
 }
