@@ -1,68 +1,56 @@
-name: 🔄 Daily Pipeline Update
+name: Daily Pipeline Update
 
 on:
   schedule:
-    # 06:00 UTC = 03:00 Buenos Aires (ART = UTC-3)
-    - cron: "0 6 * * *"
-  workflow_dispatch: # permite trigger manual desde GitHub
+    - cron: "0 6 * * *"   # 06:00 UTC = 03:00 Buenos Aires
+  workflow_dispatch:        # trigger manual desde GitHub
 
 jobs:
   update:
-    name: Fetch → Sentiment → Train → Export → Deploy
     runs-on: ubuntu-latest
     permissions:
-      contents: write # necesario para hacer git push
+      contents: write
 
     steps:
-      # ── 1. Checkout ───────────────────────────────────────────────────────
-      - name: ⬇️  Checkout
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── 2. Python ─────────────────────────────────────────────────────────
-      - name: 🐍  Setup Python 3.11
+      - name: Setup Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: pip
 
-      - name: 📦  Install dependencies
+      - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install \
-            pandas numpy scikit-learn xgboost scipy requests \
-            transformers torch torchvision --index-url https://download.pytorch.org/whl/cpu \
-            praw
+          pip install pandas numpy scikit-learn xgboost scipy \
+                      yfinance praw \
+                      transformers torch --index-url https://download.pytorch.org/whl/cpu
 
-      # ── 3. Data collection ────────────────────────────────────────────────
-      - name: 💰  Fetch Solana prices (CoinGecko)
-        env:
-          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+      - name: Fetch Solana prices (Yahoo Finance)
         run: python src/get_prices.py
 
-      - name: 🤖  Fetch Reddit posts
+      - name: Fetch Reddit posts
         env:
           REDDIT_CLIENT_ID:     ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
           REDDIT_USER_AGENT:    ${{ secrets.REDDIT_USER_AGENT }}
         run: python src/get_reddit.py
 
-      # ── 4. Sentiment ──────────────────────────────────────────────────────
-      - name: 🧠  Run sentiment analysis (RoBERTa)
+      - name: Run sentiment analysis (RoBERTa)
         run: python src/sentiment.py
 
-      # ── 5. Export JSON ────────────────────────────────────────────────────
-      - name: 📊  Export dashboard data
+      - name: Export dashboard data + forecast 7d
         run: python export_for_dashboard.py
 
-      # ── 6. Commit & push ──────────────────────────────────────────────────
-      - name: 📤  Commit updated data
+      - name: Commit and push updated data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add dashboard/public/data/dashboard_data.json data/
-          # Solo commitea si hay cambios
           git diff --quiet && git diff --staged --quiet \
             || git commit -m "chore: daily update $(date -u +'%Y-%m-%d')"
           git push
