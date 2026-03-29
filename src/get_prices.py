@@ -1,50 +1,51 @@
-import requests
+import yfinance as yf
 import pandas as pd
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 
-OUTPUT = Path("data/solana_prices.csv")
-START_DATE = date(2024, 1, 1)
-
-
-def fetch_days(days: int) -> pd.DataFrame:
-    """Descarga precios diarios usando el endpoint gratuito de CoinGecko."""
-    url = "https://api.coingecko.com/api/v3/coins/solana/market_chart"
-    params = {"vs_currency": "usd", "days": days, "interval": "daily"}
-    r = requests.get(url, params=params, timeout=30)
-    r.raise_for_status()
-    data = r.json()
-    df = pd.DataFrame(data["prices"], columns=["timestamp", "price"])
-    df["date"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True).dt.date
-    daily = df.groupby("date")["price"].mean().reset_index()
-    return daily
+OUTPUT     = Path("data/solana_prices.csv")
+START_DATE = date(2024, 1, 1)   # base historica desde 2024
+TICKER     = "SOL-USD"
 
 
 def get_solana_prices(start: date = START_DATE) -> pd.DataFrame:
     """
-    Descarga precios desde 'start' hasta hoy usando la API gratuita.
-    Si ya existe el CSV, solo descarga los ultimos 30 dias y los combina.
+    Descarga precios diarios de SOL/USD desde Yahoo Finance (gratis, sin API key).
+    Si el CSV ya existe, solo baja los dias faltantes y los combina.
     """
     today = date.today()
-    days_total = (today - start).days + 1
 
     if OUTPUT.exists():
-        # Actualizar: solo bajar los ultimos 30 dias y combinar
-        print(f"CSV existente encontrado. Actualizando ultimos 30 dias...")
-        new_data = fetch_days(30)
         existing = pd.read_csv(OUTPUT, parse_dates=["date"])
         existing["date"] = existing["date"].dt.date
-        combined = pd.concat([existing, new_data], ignore_index=True)
+        last_date = existing["date"].max()
+        # Si ya esta actualizado, no hacer nada
+        if last_date >= today:
+            print(f"Datos ya actualizados hasta {last_date}.")
+            existing["date"] = existing["date"].astype(str)
+            return existing
+        fetch_from = last_date
     else:
-        # Primera vez: bajar todo desde START_DATE
-        print(f"Descargando {days_total} dias de precios SOL/USD (2024 → hoy)...")
-        new_data = fetch_days(days_total)
-        combined = new_data
+        existing   = pd.DataFrame(columns=["date", "price"])
+        fetch_from = start
 
+    print(f"Descargando SOL/USD desde {fetch_from} hasta {today} (Yahoo Finance)...")
+    tkr = yf.Ticker(TICKER)
+    raw = tkr.history(start=str(fetch_from), end=str(today), interval="1d")
+
+    if raw.empty:
+        raise RuntimeError("Yahoo Finance no devolvio datos. Verificar conexion.")
+
+    raw = raw.reset_index()
+    raw["date"]  = pd.to_datetime(raw["Date"]).dt.date
+    raw["price"] = raw["Close"].astype(float)
+    new_data = raw[["date", "price"]].copy()
+
+    # Combinar y deduplicar
+    combined = pd.concat([existing, new_data], ignore_index=True)
     combined = combined.drop_duplicates(subset="date", keep="last")
+    combined = combined[combined["date"] >= START_DATE]
     combined = combined.sort_values("date").reset_index(drop=True)
-    # Filtrar solo desde START_DATE
-    combined = combined[combined["date"] >= START_DATE].copy()
     combined["date"] = combined["date"].astype(str)
     return combined
 
