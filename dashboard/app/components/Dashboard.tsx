@@ -1,13 +1,11 @@
 "use client";
-
-import {
-  LineChart, Line, BarChart, Bar,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  ResponsiveContainer, ComposedChart, ReferenceLine,
-} from "recharts";
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
+  Legend, ResponsiveContainer, ComposedChart, ReferenceLine, ReferenceDot } from "recharts";
 
 export interface DashboardData {
   last_updated: string;
+  today_price: number | null;
+  today_date: string | null;
   classifier: {
     baseline: { accuracy: number; precision: number; recall: number; f1: number };
     full:     { accuracy: number; precision: number; recall: number; f1: number };
@@ -17,143 +15,190 @@ export interface DashboardData {
     baseline: { mae: number; rmse: number; r2: number };
     full:     { mae: number; rmse: number; r2: number };
   };
-  price_predictions: { date: string; real: number; pred_base: number; pred_full: number }[];
-  sentiment_daily:   { date: string; sentiment: number; price: number }[];
-  reddit_posts: {
-    date: string; title: string; score: number;
-    num_comments: number; sent_score: number | null; url: string;
-  }[];
+  price_history:   { date: string; real: number }[];
+  price_test:      { date: string; real: number; pred_base: number; pred_full: number }[];
+  forecast_7d:     { date: string; pred_base: number; pred_full: number }[];
+  sentiment_daily: { date: string; sentiment: number; price: number }[];
+  reddit_posts:    { date: string; title: string; score: number; num_comments: number; sent_score: number | null; url: string }[];
+  // backward compat
+  price_predictions?: { date: string; real: number; pred_base: number; pred_full: number }[];
 }
 
-const C = {
-  real: "#E8F4FF", baseline: "#F5A623", full: "#4F80FF",
-  positive: "#10CFAA", negative: "#FF4D6A", muted: "#6B89B0",
-  grid: "#1E3A5F", card: "#0C1830",
-};
+const C = { real:"#E8F4FF", baseline:"#F5A623", full:"#4F80FF",
+  positive:"#10CFAA", negative:"#FF4D6A", muted:"#6B89B0",
+  grid:"#1E3A5F", card:"#0C1830", forecast:"#9B6BFF" };
 
-const fmtPct  = (v: number) => `${(v * 100).toFixed(1)}%`;
-const fmtUsd  = (v: number) => `$${v.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+const fmtPct = (v: number) => `${(v*100).toFixed(1)}%`;
+const fmtUsd = (v: number) => `$${v.toLocaleString("en-US",{maximumFractionDigits:2})}`;
 const fmtDate = (s: string) => s.slice(5);
 
-function PriceChart({ data }: { data: DashboardData["price_predictions"] }) {
-  return (
-    <ResponsiveContainer width="100%" height={320}>
-      <LineChart data={data} margin={{ top: 4, right: 16, left: 0, bottom: 0 }}>
-        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4} />
-        <XAxis dataKey="date" tickFormatter={fmtDate} tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} tickLine={false} />
-        <YAxis tickFormatter={(v) => `$${v}`} tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} tickLine={false} width={64} />
-        <Tooltip contentStyle={{ background: C.card, border: `1px solid ${C.grid}`, borderRadius: 8, fontSize: 12 }} />
-        <Legend wrapperStyle={{ fontSize: 12, color: C.muted }}
-          formatter={(v) => v === "real" ? "Precio Real" : v === "pred_base" ? "Baseline" : "Full (+ Sentiment)"} />
-        <Line dataKey="real"      name="real"      stroke={C.real}     strokeWidth={2} dot={false} />
-        <Line dataKey="pred_base" name="pred_base" stroke={C.baseline} strokeWidth={1.5} dot={false} strokeDasharray="5 4" />
-        <Line dataKey="pred_full" name="pred_full" stroke={C.full}     strokeWidth={2} dot={false} />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-}
+// ── Main price + forecast chart ──────────────────────────────────────────
+function PriceChart({ data }: { data: DashboardData }) {
+  const testMap = new Map((data.price_test??data.price_predictions??[]).map(d=>[d.date,d]));
 
-function SentimentChart({ data }: { data: DashboardData["sentiment_daily"] }) {
-  const prices = data.map((d) => d.price);
-  const pMin = Math.min(...prices), pMax = Math.max(...prices);
-  const chartData = data.map((d) => ({
-    date: d.date, sentiment: d.sentiment,
-    priceNorm: parseFloat(((d.price - pMin) / (pMax - pMin)).toFixed(4)),
-    price: d.price,
-  }));
+  // Combine: history (real only) + test (real+preds) + forecast (preds only)
+  // Use last 180 days of history + test + forecast for readability
+  const allHistory = data.price_history ?? [];
+  const recentHistory = allHistory.slice(-180);
+
+  const chartData: Record<string, number|string|undefined>[] = [
+    ...recentHistory.map(h => {
+      const t = testMap.get(h.date);
+      return { date: h.date, real: h.real,
+        pred_base: t?.pred_base, pred_full: t?.pred_full, type: t ? "test" : "hist" };
+    }),
+    ...(data.forecast_7d??[]).map(f => ({
+      date: f.date, pred_base: f.pred_base, pred_full: f.pred_full, type: "forecast"
+    }))
+  ];
+
+  // Find boundary between real data and forecast
+  const lastRealDate = allHistory.length ? allHistory[allHistory.length-1].date : null;
+
   return (
-    <ResponsiveContainer width="100%" height={260}>
-      <ComposedChart data={chartData} margin={{ top: 4, right: 16, left: 0, bottom: 0 }}>
-        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4} />
-        <XAxis dataKey="date" tickFormatter={fmtDate} tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} tickLine={false} interval="preserveStartEnd" />
-        <YAxis yAxisId="sent" domain={[-1, 1]} tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} tickLine={false} width={40} />
-        <YAxis yAxisId="price" orientation="right" domain={[0, 1]} hide />
-        <Tooltip contentStyle={{ background: C.card, border: `1px solid ${C.grid}`, borderRadius: 8, fontSize: 12 }} />
-        <ReferenceLine yAxisId="sent" y={0} stroke={C.grid} strokeDasharray="4 4" />
-        <Bar dataKey="sentiment" yAxisId="sent" name="Sentiment" radius={[2, 2, 0, 0]}
-          fill={C.full} opacity={0.75} />
-        <Line dataKey="priceNorm" yAxisId="price" name="Precio norm."
-          stroke={C.baseline} strokeWidth={1.5} dot={false} strokeDasharray="4 3" />
+    <ResponsiveContainer width="100%" height={360}>
+      <ComposedChart data={chartData} margin={{top:4,right:16,left:0,bottom:0}}>
+        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4}/>
+        <XAxis dataKey="date" tickFormatter={fmtDate} tick={{fill:C.muted,fontSize:10}}
+               axisLine={false} tickLine={false} interval={29}/>
+        <YAxis tickFormatter={v=>`$${v}`} tick={{fill:C.muted,fontSize:10}}
+               axisLine={false} tickLine={false} width={70}/>
+        <Tooltip contentStyle={{background:C.card,border:`1px solid ${C.grid}`,borderRadius:8,fontSize:12}}
+          formatter={(v: number|string) => typeof v==="number" ? fmtUsd(v) : v}/>
+        <Legend wrapperStyle={{fontSize:11,color:C.muted}}
+          formatter={v=>v==="real"?"Precio Real":v==="pred_base"?"Baseline":v==="pred_full"?"Full (+Reddit)":""}/>
+        {lastRealDate && (
+          <ReferenceLine x={lastRealDate} stroke={C.forecast} strokeDasharray="6 3"
+            label={{value:"HOY",fill:C.forecast,fontSize:10,position:"insideTopRight"}}/>
+        )}
+        <Line dataKey="real"      name="real"      stroke={C.real}     strokeWidth={2} dot={false} connectNulls/>
+        <Line dataKey="pred_base" name="pred_base" stroke={C.baseline} strokeWidth={1.5} dot={false}
+              strokeDasharray="5 4" connectNulls/>
+        <Line dataKey="pred_full" name="pred_full" stroke={C.full}     strokeWidth={2} dot={false} connectNulls/>
       </ComposedChart>
     </ResponsiveContainer>
   );
 }
 
-function KpiCard({ label, baseline, full, format, higher = true, delay = "0" }: {
-  label: string; baseline: number; full: number;
-  format: (v: number) => string; higher?: boolean; delay?: string;
-}) {
-  const better = higher ? full > baseline : full < baseline;
-  const pct = baseline !== 0 ? Math.abs(((full - baseline) / Math.abs(baseline)) * 100).toFixed(1) : "—";
+// ── Forecast 7d card ─────────────────────────────────────────────────────
+function ForecastCard({ forecast, todayPrice }: { forecast: DashboardData["forecast_7d"], todayPrice: number|null }) {
+  if (!forecast?.length) return null;
+  const lastFull = forecast[forecast.length-1].pred_full;
+  const firstFull = forecast[0].pred_full;
+  const trend = lastFull > (todayPrice??firstFull);
   return (
-    <div className="glass-card glow-on-hover p-5 flex flex-col gap-3 fade-in" style={{ animationDelay: `${delay}s` }}>
-      <p className="text-xs uppercase tracking-widest text-muted font-display">{label}</p>
-      <div className="flex items-end justify-between">
-        <div>
-          <p className="text-[11px] text-muted mb-1">Con Sentiment</p>
-          <p className="font-mono text-2xl" style={{ color: better ? C.positive : C.negative }}>{format(full)}</p>
-        </div>
-        <div className="text-right">
-          <p className="text-[11px] text-muted mb-1">Baseline</p>
-          <p className="font-mono text-lg" style={{ color: C.muted }}>{format(baseline)}</p>
-        </div>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="px-2 py-0.5 rounded-full text-[11px] font-mono"
-          style={{ background: better ? "rgba(16,207,170,0.12)" : "rgba(255,77,106,0.12)", color: better ? C.positive : C.negative }}>
-          {better ? "▲" : "▼"} {pct}%
+    <div className="glass-card p-5 fade-in">
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-xs uppercase tracking-widest text-muted">Forecast 7 días (modelo full)</p>
+        <span className="px-2 py-0.5 rounded-full text-xs font-mono"
+          style={{background:trend?"rgba(16,207,170,0.12)":"rgba(255,77,106,0.12)",
+                  color:trend?C.positive:C.negative}}>
+          {trend?"▲ Alcista":"▼ Bajista"}
         </span>
-        <span className="text-[11px] text-muted">vs baseline</span>
+      </div>
+      <div className="grid grid-cols-7 gap-1">
+        {forecast.map((f,i)=>{
+          const dir = f.pred_full > (i===0 ? (todayPrice??f.pred_full) : forecast[i-1].pred_full);
+          return (
+            <div key={f.date} className="flex flex-col items-center gap-1 p-2 rounded-lg"
+                 style={{background:"rgba(155,107,255,0.08)"}}>
+              <span className="text-[10px] text-muted font-mono">{fmtDate(f.date)}</span>
+              <span className="text-[11px] font-mono font-bold" style={{color:C.forecast}}>
+                ${f.pred_full.toLocaleString("en-US",{maximumFractionDigits:0})}
+              </span>
+              <span style={{color:dir?C.positive:C.negative}} className="text-[10px]">{dir?"↑":"↓"}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function AccuracyBar({ baseline, full }: { baseline: number; full: number }) {
+// ── Sentiment chart ───────────────────────────────────────────────────────
+function SentimentChart({ data }: { data: DashboardData["sentiment_daily"] }) {
+  const prices = data.map(d=>d.price);
+  const pMin=Math.min(...prices), pMax=Math.max(...prices);
+  const cd = data.map(d=>({...d, priceNorm:parseFloat(((d.price-pMin)/(pMax-pMin)).toFixed(4))}));
   return (
-    <ResponsiveContainer width="100%" height={140}>
-      <BarChart data={[{ name: "Baseline", accuracy: baseline }, { name: "+ Sentiment", accuracy: full }]}
-        margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4} vertical={false} />
-        <XAxis dataKey="name" tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} tickLine={false} />
-        <YAxis domain={[0, 1]} tickFormatter={fmtPct} tick={{ fill: C.muted, fontSize: 11 }} axisLine={false} tickLine={false} width={46} />
-        <Tooltip formatter={(v: number | string) => typeof v === "number" ? fmtPct(v) : v}
-          contentStyle={{ background: C.card, border: `1px solid ${C.grid}` }} />
-        <Bar dataKey="accuracy" radius={[4, 4, 0, 0]} fill={C.full}
-          label={{ position: "top", formatter: (v: number) => fmtPct(v), fill: C.muted, fontSize: 11 }} />
+    <ResponsiveContainer width="100%" height={240}>
+      <ComposedChart data={cd} margin={{top:4,right:16,left:0,bottom:0}}>
+        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4}/>
+        <XAxis dataKey="date" tickFormatter={fmtDate} tick={{fill:C.muted,fontSize:10}}
+               axisLine={false} tickLine={false} interval={29}/>
+        <YAxis yAxisId="sent" domain={[-1,1]} tick={{fill:C.muted,fontSize:10}} axisLine={false} tickLine={false} width={40}/>
+        <YAxis yAxisId="price" orientation="right" domain={[0,1]} hide/>
+        <Tooltip contentStyle={{background:C.card,border:`1px solid ${C.grid}`,borderRadius:8,fontSize:12}}/>
+        <ReferenceLine yAxisId="sent" y={0} stroke={C.grid} strokeDasharray="4 4"/>
+        <Bar dataKey="sentiment" yAxisId="sent" name="Sentiment" fill={C.full} opacity={0.7} radius={[2,2,0,0]}/>
+        <Line dataKey="priceNorm" yAxisId="price" name="Precio norm." stroke={C.baseline} strokeWidth={1.5} dot={false} strokeDasharray="4 3"/>
+      </ComposedChart>
+    </ResponsiveContainer>
+  );
+}
+
+// ── KPI card ─────────────────────────────────────────────────────────────
+function KpiCard({label,baseline,full,format,higher=true,delay="0"}:{label:string;baseline:number;full:number;format:(v:number)=>string;higher?:boolean;delay?:string}) {
+  const better=higher?full>baseline:full<baseline;
+  const pct=baseline!==0?Math.abs(((full-baseline)/Math.abs(baseline))*100).toFixed(1):"—";
+  return (
+    <div className="glass-card glow-on-hover p-4 flex flex-col gap-3 fade-in" style={{animationDelay:`${delay}s`}}>
+      <p className="text-xs uppercase tracking-widest text-muted">{label}</p>
+      <div className="flex items-end justify-between">
+        <div><p className="text-[10px] text-muted mb-0.5">Con Sentiment</p>
+          <p className="font-mono text-xl" style={{color:better?C.positive:C.negative}}>{format(full)}</p></div>
+        <div className="text-right"><p className="text-[10px] text-muted mb-0.5">Baseline</p>
+          <p className="font-mono text-base" style={{color:C.muted}}>{format(baseline)}</p></div>
+      </div>
+      <span className="px-2 py-0.5 rounded-full text-[11px] font-mono self-start"
+        style={{background:better?"rgba(16,207,170,0.12)":"rgba(255,77,106,0.12)",color:better?C.positive:C.negative}}>
+        {better?"▲":"▼"} {pct}%
+      </span>
+    </div>
+  );
+}
+
+// ── Accuracy mini bar ─────────────────────────────────────────────────────
+function AccuracyBar({baseline,full}:{baseline:number;full:number}) {
+  return (
+    <ResponsiveContainer width="100%" height={130}>
+      <BarChart data={[{name:"Baseline",accuracy:baseline},{name:"+Sentiment",accuracy:full}]} margin={{top:8,right:8,left:0,bottom:0}}>
+        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4} vertical={false}/>
+        <XAxis dataKey="name" tick={{fill:C.muted,fontSize:10}} axisLine={false} tickLine={false}/>
+        <YAxis domain={[0,1]} tickFormatter={fmtPct} tick={{fill:C.muted,fontSize:10}} axisLine={false} tickLine={false} width={44}/>
+        <Tooltip formatter={(v:number|string)=>typeof v==="number"?fmtPct(v):v} contentStyle={{background:C.card,border:`1px solid ${C.grid}`}}/>
+        <Bar dataKey="accuracy" radius={[4,4,0,0]} fill={C.full}
+          label={{position:"top",formatter:(v:number)=>fmtPct(v),fill:C.muted,fontSize:10}}/>
       </BarChart>
     </ResponsiveContainer>
   );
 }
 
-function RedditTable({ posts }: { posts: DashboardData["reddit_posts"] }) {
-  const sentColor = (v: number | null) => v === null ? C.muted : v >= 0.05 ? C.positive : v <= -0.05 ? C.negative : C.muted;
-  const sentLabel = (v: number | null) => v === null ? "—" : v >= 0.05 ? "POS" : v <= -0.05 ? "NEG" : "NEU";
+// ── Reddit table ──────────────────────────────────────────────────────────
+function RedditTable({posts}:{posts:DashboardData["reddit_posts"]}) {
+  const sc=(v:number|null)=>v===null?C.muted:v>=0.05?C.positive:v<=-0.05?C.negative:C.muted;
+  const sl=(v:number|null)=>v===null?"—":v>=0.05?"POS":v<=-0.05?"NEG":"NEU";
   return (
-    <div className="overflow-auto max-h-[420px]">
+    <div className="overflow-auto max-h-[380px]">
       <table className="w-full text-xs">
         <thead className="sticky top-0 bg-card">
           <tr className="text-muted uppercase tracking-wider text-left border-b border-border">
-            <th className="py-2 pr-3">Fecha</th>
-            <th className="py-2 pr-3">Título</th>
-            <th className="py-2 pr-3 text-right">Score</th>
-            <th className="py-2 pr-3 text-right">Coment.</th>
-            <th className="py-2 text-right">Sentiment</th>
+            <th className="py-2 pr-2">Fecha</th><th className="py-2 pr-2">Título</th>
+            <th className="py-2 pr-2 text-right">Score</th><th className="py-2 text-right">Sent.</th>
           </tr>
         </thead>
         <tbody>
-          {posts.map((p, i) => (
+          {posts.map((p,i)=>(
             <tr key={i} className="border-b border-[#111F38] hover:bg-[#0f2040] transition-colors">
-              <td className="py-2 pr-3 font-mono text-muted whitespace-nowrap">{p.date}</td>
-              <td className="py-2 pr-3 max-w-[320px]">
+              <td className="py-1.5 pr-2 font-mono text-muted whitespace-nowrap text-[10px]">{p.date}</td>
+              <td className="py-1.5 pr-2 max-w-[260px]">
                 <a href={p.url} target="_blank" rel="noreferrer" className="hover:text-heading transition-colors line-clamp-1" title={p.title}>{p.title}</a>
               </td>
-              <td className="py-2 pr-3 font-mono text-right">{p.score.toLocaleString()}</td>
-              <td className="py-2 pr-3 font-mono text-right text-muted">{p.num_comments}</td>
-              <td className="py-2 text-right">
-                <span className="inline-block px-2 py-0.5 rounded-full font-mono"
-                  style={{ background: `${sentColor(p.sent_score)}22`, color: sentColor(p.sent_score) }}>
-                  {sentLabel(p.sent_score)}{p.sent_score !== null && <span className="ml-1 opacity-70">{p.sent_score.toFixed(3)}</span>}
+              <td className="py-1.5 pr-2 font-mono text-right">{p.score.toLocaleString()}</td>
+              <td className="py-1.5 text-right">
+                <span className="inline-block px-1.5 py-0.5 rounded-full font-mono text-[10px]"
+                  style={{background:`${sc(p.sent_score)}22`,color:sc(p.sent_score)}}>
+                  {sl(p.sent_score)}
                 </span>
               </td>
             </tr>
@@ -164,121 +209,139 @@ function RedditTable({ posts }: { posts: DashboardData["reddit_posts"] }) {
   );
 }
 
-function SectionTitle({ icon, label, delay }: { icon: string; label: string; delay: string }) {
+function SectionTitle({icon,label,delay}:{icon:string;label:string;delay:string}) {
   return (
-    <div className="flex items-center gap-2 mb-4 fade-in" style={{ animationDelay: `${delay}s` }}>
-      <span style={{ color: C.full }} className="text-sm">{icon}</span>
+    <div className="flex items-center gap-2 mb-4 fade-in" style={{animationDelay:`${delay}s`}}>
+      <span style={{color:C.full}} className="text-sm">{icon}</span>
       <h2 className="font-display font-bold text-heading text-base tracking-tight">{label}</h2>
-      <div className="flex-1 h-px bg-border ml-2" />
+      <div className="flex-1 h-px bg-border ml-2"/>
     </div>
   );
 }
 
-export function Dashboard({ data }: { data: DashboardData | null }) {
-  if (!data) {
-    return (
-      <div className="flex min-h-screen items-center justify-center text-muted font-mono text-sm">
-        Sin datos — ejecutá <code className="ml-2 text-primary">python export_for_dashboard.py</code>
-      </div>
-    );
-  }
-  const { classifier: cls, regression: reg } = data;
-  const updatedAt = new Date(data.last_updated).toLocaleString("es-AR", { dateStyle: "medium", timeStyle: "short" });
+// ── Main Dashboard ────────────────────────────────────────────────────────
+export function Dashboard({data}:{data:DashboardData|null}) {
+  if (!data) return (
+    <div className="flex min-h-screen items-center justify-center text-muted font-mono text-sm">
+      Sin datos — ejecutá <code className="ml-2 text-primary">python export_for_dashboard.py</code>
+    </div>
+  );
+
+  const {classifier:cls,regression:reg} = data;
+  const updatedAt = new Date(data.last_updated).toLocaleString("es-AR",{dateStyle:"medium",timeStyle:"short"});
 
   return (
     <main className="min-h-screen bg-bg text-body px-4 py-8 max-w-[1400px] mx-auto">
-      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 fade-in">
+
+      {/* Header */}
+      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 fade-in">
         <div>
           <div className="flex items-center gap-3 mb-2">
             <span className="text-2xl">◎</span>
             <h1 className="font-display font-extrabold text-3xl text-heading tracking-tight">SOL/USD · Sentiment Dashboard</h1>
           </div>
-          <p className="text-sm text-muted font-display">Predicción de precios de Solana usando XGBoost + análisis de sentimiento r/Solana</p>
+          <p className="text-sm text-muted">Predicción con XGBoost + sentimiento Reddit r/Solana · Datos desde 2024</p>
         </div>
-        <div className="text-right">
-          <p className="text-[11px] text-muted uppercase tracking-widest mb-0.5">Última actualización</p>
-          <p className="font-mono text-sm text-body">{updatedAt}</p>
+        <div className="flex gap-4 items-end">
+          {data.today_price && (
+            <div className="glass-card px-4 py-2 text-right">
+              <p className="text-[10px] text-muted uppercase tracking-widest">Precio HOY</p>
+              <p className="font-mono text-2xl font-bold" style={{color:C.positive}}>{fmtUsd(data.today_price)}</p>
+              <p className="text-[10px] text-muted">{data.today_date}</p>
+            </div>
+          )}
+          <div className="text-right">
+            <p className="text-[11px] text-muted uppercase tracking-widest mb-0.5">Actualizado</p>
+            <p className="font-mono text-sm text-body">{updatedAt}</p>
+          </div>
         </div>
       </header>
 
+      {/* Gráfico principal + Forecast */}
       <section className="mb-8">
-        <SectionTitle icon="⬤" label="Clasificador de Dirección (sube / baja)" delay="0.05" />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
-          <KpiCard label="Accuracy"  baseline={cls.baseline.accuracy}  full={cls.full.accuracy}  format={fmtPct} delay="0.08" />
-          <KpiCard label="Precision" baseline={cls.baseline.precision} full={cls.full.precision} format={fmtPct} delay="0.12" />
-          <KpiCard label="Recall"    baseline={cls.baseline.recall}    full={cls.full.recall}    format={fmtPct} delay="0.16" />
-          <KpiCard label="F1 Score"  baseline={cls.baseline.f1}        full={cls.full.f1}        format={fmtPct} delay="0.20" />
+        <SectionTitle icon="◈" label="Precio Real · Predicciones · Forecast 7 días" delay="0.05"/>
+        <div className="glass-card p-5 mb-4 fade-in">
+          <p className="text-xs text-muted mb-1">
+            <span style={{color:C.real}}>━</span> Real &nbsp;
+            <span style={{color:C.baseline}}>╌</span> Baseline &nbsp;
+            <span style={{color:C.full}}>━</span> Full (+Reddit) &nbsp;
+            <span style={{color:C.forecast}}>│</span> Hoy · zona derecha = forecast
+          </p>
+          <PriceChart data={data}/>
+        </div>
+        <ForecastCard forecast={data.forecast_7d??[]} todayPrice={data.today_price}/>
+      </section>
+
+      {/* Clasificador */}
+      <section className="mb-8">
+        <SectionTitle icon="⬤" label="Clasificador de Dirección (sube / baja)" delay="0.20"/>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+          <KpiCard label="Accuracy"  baseline={cls.baseline.accuracy}  full={cls.full.accuracy}  format={fmtPct} delay="0.22"/>
+          <KpiCard label="Precision" baseline={cls.baseline.precision} full={cls.full.precision} format={fmtPct} delay="0.24"/>
+          <KpiCard label="Recall"    baseline={cls.baseline.recall}    full={cls.full.recall}    format={fmtPct} delay="0.26"/>
+          <KpiCard label="F1"        baseline={cls.baseline.f1}        full={cls.full.f1}        format={fmtPct} delay="0.28"/>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="glass-card p-5 fade-in">
-            <p className="text-xs uppercase tracking-widest text-muted mb-3">Accuracy comparada</p>
-            <AccuracyBar baseline={cls.baseline.accuracy} full={cls.full.accuracy} />
+          <div className="glass-card p-4 fade-in">
+            <p className="text-xs uppercase tracking-widest text-muted mb-2">Accuracy comparada</p>
+            <AccuracyBar baseline={cls.baseline.accuracy} full={cls.full.accuracy}/>
           </div>
-          <div className="lg:col-span-2 flex flex-col gap-4">
-            <div className="glass-card p-4 fade-in">
-              <p className="text-xs uppercase tracking-widest text-muted mb-2">Test de McNemar</p>
-              <div className="flex items-center gap-3 flex-wrap">
-                <span className="font-mono text-sm text-body">χ² ≈ {cls.mcnemar.chi2}</span>
-                <span className="font-mono text-sm text-body">p ≈ {cls.mcnemar.p}</span>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-mono"
-                  style={{ background: cls.mcnemar.p < 0.05 ? "rgba(16,207,170,0.12)" : "rgba(107,137,176,0.15)", color: cls.mcnemar.p < 0.05 ? C.positive : C.muted }}>
-                  {cls.mcnemar.p < 0.05 ? "✓ Significativo (p<0.05)" : "No significativo (p≥0.05)"}
-                </span>
-              </div>
-              <p className="text-[11px] text-muted mt-1">b={cls.mcnemar.b} · c={cls.mcnemar.c}</p>
+          <div className="lg:col-span-2 glass-card p-4 fade-in">
+            <p className="text-xs uppercase tracking-widest text-muted mb-2">McNemar · Detalle métricas</p>
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
+              <span className="font-mono text-xs text-body">χ²≈{cls.mcnemar.chi2}</span>
+              <span className="font-mono text-xs text-body">p≈{cls.mcnemar.p}</span>
+              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono"
+                style={{background:cls.mcnemar.p<0.05?"rgba(16,207,170,0.12)":"rgba(107,137,176,0.15)",
+                        color:cls.mcnemar.p<0.05?C.positive:C.muted}}>
+                {cls.mcnemar.p<0.05?"✓ Significativo":"No significativo"}
+              </span>
             </div>
-            <div className="glass-card p-4 fade-in">
-              <p className="text-xs uppercase tracking-widest text-muted mb-3">Detalle métricas</p>
-              <table className="w-full text-xs font-mono">
-                <thead><tr className="text-muted border-b border-border text-left">
-                  <th className="pb-1 pr-4">Métrica</th><th className="pb-1 pr-4 text-right">Baseline</th><th className="pb-1 text-right">+ Sentiment</th>
-                </tr></thead>
-                <tbody>
-                  {(["accuracy","precision","recall","f1"] as const).map((k) => (
-                    <tr key={k} className="border-b border-[#111F38]">
-                      <td className="py-1.5 pr-4 text-muted capitalize">{k}</td>
-                      <td className="py-1.5 pr-4 text-right text-body">{fmtPct(cls.baseline[k])}</td>
-                      <td className="py-1.5 text-right" style={{ color: cls.full[k] >= cls.baseline[k] ? C.positive : C.negative }}>{fmtPct(cls.full[k])}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <table className="w-full text-xs font-mono">
+              <thead><tr className="text-muted border-b border-border text-left">
+                <th className="pb-1 pr-4">Métrica</th><th className="pb-1 pr-4 text-right">Baseline</th><th className="pb-1 text-right">+Sentiment</th>
+              </tr></thead>
+              <tbody>{(["accuracy","precision","recall","f1"] as const).map(k=>(
+                <tr key={k} className="border-b border-[#111F38]">
+                  <td className="py-1 pr-4 text-muted capitalize">{k}</td>
+                  <td className="py-1 pr-4 text-right text-body">{fmtPct(cls.baseline[k])}</td>
+                  <td className="py-1 text-right" style={{color:cls.full[k]>=cls.baseline[k]?C.positive:C.negative}}>{fmtPct(cls.full[k])}</td>
+                </tr>
+              ))}</tbody>
+            </table>
           </div>
         </div>
       </section>
 
+      {/* Regresor métricas */}
       <section className="mb-8">
-        <SectionTitle icon="◈" label="Regresor de Precio Absoluto (XGBoost)" delay="0.22" />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-          <KpiCard label="MAE"  baseline={reg.baseline.mae}  full={reg.full.mae}  format={fmtUsd} higher={false} delay="0.24" />
-          <KpiCard label="RMSE" baseline={reg.baseline.rmse} full={reg.full.rmse} format={fmtUsd} higher={false} delay="0.28" />
-          <KpiCard label="R²"   baseline={reg.baseline.r2}   full={reg.full.r2}   format={(v) => v.toFixed(4)} delay="0.32" />
-        </div>
-        <div className="glass-card p-5 fade-in">
-          <p className="text-xs uppercase tracking-widest text-muted mb-4">Precio Real vs Predicciones — Segmento de Test</p>
-          <PriceChart data={data.price_predictions} />
+        <SectionTitle icon="◆" label="Regresor de Precio — Métricas" delay="0.30"/>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <KpiCard label="MAE"  baseline={reg.baseline.mae}  full={reg.full.mae}  format={fmtUsd} higher={false} delay="0.32"/>
+          <KpiCard label="RMSE" baseline={reg.baseline.rmse} full={reg.full.rmse} format={fmtUsd} higher={false} delay="0.34"/>
+          <KpiCard label="R²"   baseline={reg.baseline.r2}   full={reg.full.r2}   format={v=>v.toFixed(4)} delay="0.36"/>
         </div>
       </section>
 
+      {/* Sentimiento + Reddit */}
       <section className="mb-8">
-        <SectionTitle icon="◆" label="Sentimiento Reddit r/Solana" delay="0.34" />
+        <SectionTitle icon="◎" label="Sentimiento Reddit r/Solana" delay="0.38"/>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <div className="lg:col-span-2 glass-card p-5 fade-in">
-            <p className="text-xs uppercase tracking-widest text-muted mb-1">Sentimiento diario</p>
-            <p className="text-[11px] text-muted mb-3">Barras: sentimiento (RoBERTa) · Línea: precio normalizado</p>
-            <SentimentChart data={data.sentiment_daily} />
+          <div className="lg:col-span-2 glass-card p-4 fade-in">
+            <p className="text-xs uppercase tracking-widest text-muted mb-1">Sentimiento diario (2024+)</p>
+            <p className="text-[10px] text-muted mb-2">Barras: RoBERTa · Línea: precio normalizado</p>
+            <SentimentChart data={data.sentiment_daily}/>
           </div>
-          <div className="lg:col-span-3 glass-card p-5 fade-in">
+          <div className="lg:col-span-3 glass-card p-4 fade-in">
             <p className="text-xs uppercase tracking-widest text-muted mb-3">Top posts por score</p>
-            <RedditTable posts={data.reddit_posts} />
+            <RedditTable posts={data.reddit_posts}/>
           </div>
         </div>
       </section>
 
-      <footer className="text-center text-[11px] text-muted font-mono mt-12 pb-6 space-y-1">
+      <footer className="text-center text-[10px] text-muted font-mono mt-10 pb-4 space-y-0.5">
         <p>Tesina · Licenciatura en Ciencias de Datos · XGBoost + cardiffnlp/twitter-roberta-base-sentiment-latest</p>
-        <p>Datos: CoinGecko API · Reddit r/Solana · Actualización automática vía GitHub Actions</p>
+        <p>Datos desde 2024-01-01 · CoinGecko + Reddit r/Solana · Cron diario vía GitHub Actions</p>
       </footer>
     </main>
   );
