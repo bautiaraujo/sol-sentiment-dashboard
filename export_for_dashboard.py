@@ -7,7 +7,7 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score,
 
 CUTOFF        = pd.Timestamp("2024-01-01")
 FORECAST_DAYS = 7
-SENT_WINDOW   = 14   # media movil de sentimiento (dias)
+SENT_WINDOW   = 7    # rolling window para suavizar sentimiento
 
 def mcnemar(y_true, pa, pb):
     ca = pa == y_true; cb = pb == y_true
@@ -28,34 +28,48 @@ def load():
     pr = pd.read_csv("data/solana_prices.csv",    parse_dates=["date"])
     se = pd.read_csv("data/reddit_sentiment.csv", parse_dates=["date"])
     re = pd.read_csv("data/reddit_posts.csv",     parse_dates=["date"])
-    pr = pr[pr["date"] >= CUTOFF].copy()
+    pr = pr[pr["date"] >= CUTOFF].copy().sort_values("date").reset_index(drop=True)
     se = se[se["date"] >= CUTOFF].copy()
     re = re[re["date"] >= CUTOFF].copy()
 
-    # Sentimiento diario REAL (promedio de posts ese dia)
+    # Sentimiento diario real
     sd_real = se.groupby("date")["sent_score"].mean().reset_index()
     sd_real.columns = ["date", "sent_raw"]
 
-    # Merge con precios
+    # Merge con precios y calcular retorno
     df = pr.merge(sd_real, on="date", how="left")
-
-    # Media movil de SENT_WINDOW dias (suaviza el ruido y extiende cobertura)
-    df = df.sort_values("date").reset_index(drop=True)
-    df["sent_score"] = df["sent_raw"].rolling(window=SENT_WINDOW, min_periods=1).mean()
-
-    # Flag: dias con sentimiento real (no solo roll-over de dias anteriores)
     df["has_real_sent"] = df["sent_raw"].notna()
-
     df["return"] = df["price"].pct_change()
-    df = df.dropna(subset=["price", "return"]).reset_index(drop=True)
-    # Rellenar sent_score restante con 0 (neutral) si aun NaN
+
+    # Rolling mean de sentimiento (solo hacia atras, sin look-ahead)
+    df["sent_score"] = df["sent_raw"].rolling(window=SENT_WINDOW, min_periods=1).mean()
     df["sent_score"] = df["sent_score"].fillna(0.0)
+
+    df = df.dropna(subset=["price", "return"]).reset_index(drop=True)
     return df, se, sd_real, re
 
-def classify(df):
-    # Solo entrenar en filas donde hay sentimiento real o cercano
-    # (al menos 1 dia con sent real en la ventana anterior)
-    d = df.copy()
+
+def get_model_df(df):
+    """
+    Para el entrenamiento usamos solo el periodo donde hay cobertura real
+    de sentimiento: desde el primer dia con dato real hasta hoy.
+    Esto garantiza que el sentimiento no es inventado en la mayoria de filas.
+    """
+    real_dates = df[df["has_real_sent"]]["date"]
+    if real_dates.empty:
+        print("  WARN: no hay sentimiento real. Usando todos los datos.")
+        return df.copy()
+
+    first_real = real_dates.min()
+    df_model = df[df["date"] >= first_real].copy().reset_index(drop=True)
+    coverage = round(df_model["has_real_sent"].mean() * 100, 1)
+    print(f"  Rango modelo: {first_real.date()} -> {df_model['date'].max().date()} ({len(df_model)} dias)")
+    print(f"  Cobertura sentimiento real en periodo de entrenamiento: {coverage}%")
+    return df_model, coverage
+
+
+def classify(df_model):
+    d = df_model.copy()
     d["tgt"] = (d["return"].shift(-1) > 0).astype(int)
     d = d.dropna(subset=["tgt"]).reset_index(drop=True)
     y = d["tgt"].values
@@ -70,15 +84,12 @@ def classify(df):
         "accuracy":accuracy_score(yt,yh),"precision":precision_score(yt,yh,zero_division=0),
         "recall":recall_score(yt,yh,zero_division=0),"f1":f1_score(yt,yh,zero_division=0)}.items()}
     b,c,chi2,pv = mcnemar(y_te,pb,pf)
-    n_real = int(d["has_real_sent"].sum())
-    coverage = round(n_real / len(d) * 100, 1)
-    print(f"  Cobertura de sentimiento real: {n_real}/{len(d)} dias ({coverage}%)")
     return {"baseline":m(y_te,pb),"full":m(y_te,pf),
-            "mcnemar":{"b":b,"c":c,"chi2":chi2,"p":pv},
-            "sentiment_coverage_pct": coverage}
+            "mcnemar":{"b":b,"c":c,"chi2":chi2,"p":pv}}
 
-def regress_and_forecast(df):
-    d = df.copy(); d["tgt"] = d["price"].shift(-1)
+
+def regress_and_forecast(df_all, df_model):
+    d = df_model.copy(); d["tgt"] = d["price"].shift(-1)
     d = d.dropna(subset=["tgt"]).reset_index(drop=True)
     X = d[["price","return","sent_score"]]; y = d["tgt"]; dates = d["date"]
     Xtr,Xte,ytr,yte = train_test_split(X,y,shuffle=False,test_size=0.2)
@@ -91,16 +102,20 @@ def regress_and_forecast(df):
         "rmse":float(np.sqrt(mean_squared_error(yt,yh))),
         "r2":r2_score(yt,yh)}.items()}
     metrics = {"baseline":rm(yte,ypb),"full":rm(yte,ypf)}
+
+    # Historia completa de precios (2024+) para la visualizacion
     history = [{"date":str(dd.date()),"real":round(float(p),2)}
-               for dd,p in zip(df["date"],df["price"])]
+               for dd,p in zip(df_all["date"],df_all["price"])]
+
+    # Test set: predicciones vs real
     test_s = [{"date":str(dd.date()),"real":round(float(r),2),
                "pred_base":round(float(pb2),2),"pred_full":round(float(pf2),2)}
               for dd,r,pb2,pf2 in zip(dte,yte.values,ypb,ypf)]
-    # Forecast recursivo 7 dias
-    pc = float(df["price"].iloc[-1]); pp = float(df["price"].iloc[-2])
+
+    # Forecast recursivo 7 dias desde hoy
+    pc = float(df_all["price"].iloc[-1]); pp = float(df_all["price"].iloc[-2])
     rc = (pc-pp)/pp if pp!=0 else 0.0
-    # Usar la media de los ultimos SENT_WINDOW dias como sentimiento futuro esperado
-    sc = float(df["sent_score"].tail(SENT_WINDOW).mean())
+    sc = float(df_all["sent_score"].tail(SENT_WINDOW).mean())
     fc = []
     for i in range(FORECAST_DAYS):
         nd = date.today() + timedelta(days=i+1)
@@ -110,41 +125,71 @@ def regress_and_forecast(df):
         pp=pc; pc=prd_f; rc=(pc-pp)/pp if pp!=0 else 0.0
     return metrics, history, test_s, fc
 
+
 def main():
-    print("Cargando datos 2024+ con sentimiento rolling...")
-    df, sentiment, sent_daily, reddit = load()
-    real_days = int(df["has_real_sent"].sum())
-    print(f"  {len(df)} dias de precios | {real_days} dias con sentimiento real")
-    print("Clasificador..."); clf_res = classify(df)
-    print("Regresor + Forecast..."); reg_res, hist, test_s, fc = regress_and_forecast(df)
-    sw = sent_daily.merge(df[["date","price"]], on="date", how="inner").sort_values("date")
-    sent_out = [{"date":str(r["date"].date()),"sentiment":round(float(r["sent_raw"]),4),
-                 "price":round(float(r["price"]),2)} for _,r in sw.iterrows()]
+    print("Cargando datos...")
+    df_all, sentiment, sent_daily, reddit = load()
+    n_real = int(df_all["has_real_sent"].sum())
+    print(f"  Total precios 2024+: {len(df_all)} dias | Dias con sent. real: {n_real}")
+
+    result = get_model_df(df_all)
+    if isinstance(result, tuple):
+        df_model, coverage = result
+    else:
+        df_model = result; coverage = 0.0
+
+    print("Clasificador (entrenado en periodo con sentimiento)...")
+    clf_res = classify(df_model)
+
+    print("Regresor + Forecast 7d...")
+    reg_res, hist, test_s, fc = regress_and_forecast(df_all, df_model)
+
+    # Sentimiento diario real para el grafico
+    sw = sent_daily.merge(df_all[["date","price"]], on="date", how="inner").sort_values("date")
+    sent_out = [{"date":str(r["date"].date()),
+                 "sentiment":round(float(r["sent_raw"]),4),
+                 "price":round(float(r["price"]),2)}
+                for _,r in sw.iterrows()]
+
+    # Top posts Reddit
     smap = sentiment.groupby("id")["sent_score"].mean().to_dict()
     posts_out = []
     for _,row in reddit.sort_values("score",ascending=False).head(50).iterrows():
         sv = smap.get(row["id"])
-        posts_out.append({"date":str(row["date"].date()) if hasattr(row["date"],"date") else str(row["date"]),
-                          "title":str(row["title"])[:120],"score":int(row.get("score",0) or 0),
-                          "num_comments":int(row.get("num_comments",0) or 0),
-                          "sent_score":round(float(sv),4) if sv is not None else None,
-                          "url":str(row.get("url",""))})
-    pkg = {"last_updated":datetime.now(timezone.utc).isoformat(),
-           "today_price":hist[-1]["real"] if hist else None,
-           "today_date":hist[-1]["date"] if hist else None,
-           "sentiment_coverage_pct": clf_res.get("sentiment_coverage_pct"),
-           "classifier":clf_res,"regression":reg_res,
-           "price_history":hist,"price_test":test_s,
-           "forecast_7d":fc,"sentiment_daily":sent_out,"reddit_posts":posts_out}
+        posts_out.append({
+            "date":str(row["date"].date()) if hasattr(row["date"],"date") else str(row["date"]),
+            "title":str(row["title"])[:120],
+            "score":int(row.get("score",0) or 0),
+            "num_comments":int(row.get("num_comments",0) or 0),
+            "sent_score":round(float(sv),4) if sv is not None else None,
+            "url":str(row.get("url",""))})
+
+    pkg = {
+        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "today_price":  hist[-1]["real"] if hist else None,
+        "today_date":   hist[-1]["date"] if hist else None,
+        "model_start_date": str(df_model["date"].min().date()),
+        "sentiment_coverage_pct": coverage,
+        "classifier":  clf_res,
+        "regression":  reg_res,
+        "price_history":   hist,
+        "price_test":      test_s,
+        "forecast_7d":     fc,
+        "sentiment_daily": sent_out,
+        "reddit_posts":    posts_out,
+    }
     out_path = Path("dashboard/public/data/dashboard_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as fh:
         json.dump(pkg, fh, ensure_ascii=False, indent=2)
+
     print(f"\nExportado -> {out_path}")
-    print(f"  Hoy: ${pkg['today_price']} ({pkg['today_date']})")
-    print(f"  Cobertura sentimiento: {pkg['sentiment_coverage_pct']}%")
-    print(f"  Clf acc baseline={clf_res['baseline']['accuracy']} full={clf_res['full']['accuracy']}")
-    print(f"  Reg MAE  baseline={reg_res['baseline']['mae']}  full={reg_res['full']['mae']}")
+    print(f"  Precio hoy:  ${pkg['today_price']} ({pkg['today_date']})")
+    print(f"  Modelo desde: {pkg['model_start_date']}")
+    print(f"  Cobertura sentimiento: {coverage}%")
+    print(f"  Clf  baseline acc={clf_res['baseline']['accuracy']}  full={clf_res['full']['accuracy']}")
+    print(f"  Reg  baseline MAE={reg_res['baseline']['mae']}  full={reg_res['full']['mae']}")
+    print(f"  Forecast: {[x['pred_full'] for x in fc]}")
 
 if __name__ == "__main__":
     main()
