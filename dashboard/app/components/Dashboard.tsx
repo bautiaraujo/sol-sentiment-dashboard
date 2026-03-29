@@ -1,6 +1,8 @@
 "use client";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
-  Legend, ResponsiveContainer, ComposedChart, Bar, ReferenceLine } from "recharts";
+import {
+  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  Tooltip, Legend, ResponsiveContainer, ComposedChart, ReferenceLine
+} from "recharts";
 
 export interface DashboardData {
   last_updated: string;
@@ -33,41 +35,29 @@ const C = {
   positive:"#10CFAA", negative:"#FF4D6A", muted:"#6B89B0",
   grid:"#1E3A5F", card:"#0C1830", forecast:"#9B6BFF",
 };
-const fmtPct = (v: number) => `${(v*100).toFixed(1)}%`;
-const fmtUsd = (v: number) => `$${v.toLocaleString("en-US",{maximumFractionDigits:2})}`;
+const fmtPct  = (v: number) => `${(v*100).toFixed(1)}%`;
+const fmtUsd  = (v: number) => `$${v.toLocaleString("en-US",{maximumFractionDigits:2})}`;
 const fmtDate = (s: string) => s ? s.slice(5) : "";
 
-// ── Main combined chart ────────────────────────────────────────────────────
 function PriceChart({ data }: { data: DashboardData }) {
   const testMap  = new Map((data.price_test ?? data.price_predictions ?? []).map(d => [d.date, d]));
   const history  = data.price_history ?? [];
   const forecast = data.forecast_7d ?? [];
 
-  // Build unified timeline: history (with test overlay where available) + forecast
   const histPoints = history.map(h => {
     const t = testMap.get(h.date);
-    return {
-      date:      h.date,
-      real:      h.real,
-      pred_base: t?.pred_base ?? null,
-      pred_full: t?.pred_full ?? null,
-      zone:      t ? "test" : "hist",
-    };
+    return { date: h.date, real: h.real,
+             pred_base: t?.pred_base ?? undefined,
+             pred_full: t?.pred_full ?? undefined };
   });
-
   const fcPoints = forecast.map(f => ({
-    date:      f.date,
-    real:      null as number | null,
-    pred_base: f.pred_base,
-    pred_full: f.pred_full,
-    zone:      "forecast",
+    date: f.date, real: undefined as number|undefined,
+    pred_base: f.pred_base, pred_full: f.pred_full,
   }));
 
-  // Show last 180 days of history for readability + forecast
   const chartData = [...histPoints.slice(-180), ...fcPoints];
-  const todayDate = data.today_date ?? null;
-  const testDates = Array.from(testMap.keys()).sort();
-  const testStart = testDates[0] ?? null;
+  const todayDate = data.today_date ?? undefined;
+  const testStart = Array.from(testMap.keys()).sort()[0] ?? undefined;
 
   return (
     <ResponsiveContainer width="100%" height={360}>
@@ -76,52 +66,38 @@ function PriceChart({ data }: { data: DashboardData }) {
         <XAxis dataKey="date" tickFormatter={fmtDate}
                tick={{fill:C.muted,fontSize:10}} axisLine={false} tickLine={false}
                interval={Math.floor(chartData.length / 8)}/>
-        <YAxis tickFormatter={v=>`$${v}`} tick={{fill:C.muted,fontSize:10}}
-               axisLine={false} tickLine={false} width={70}
-               domain={["auto","auto"]}/>
-        <Tooltip
-          contentStyle={{background:C.card,border:`1px solid ${C.grid}`,borderRadius:8,fontSize:12}}
-          formatter={(v: number|null) => v != null ? fmtUsd(v) : "—"}
-          labelStyle={{color:C.muted}}
-        />
-        <Legend wrapperStyle={{fontSize:11,color:C.muted}} formatter={v =>
-          v==="real"?"Precio Real": v==="pred_base"?"Baseline (test+forecast)": v==="pred_full"?"Full +Reddit (test+forecast)":""}/>
-
-        {/* Linea vertical: inicio del test set */}
+        <YAxis tickFormatter={v => `$${v}`} tick={{fill:C.muted,fontSize:10}}
+               axisLine={false} tickLine={false} width={70} domain={["auto","auto"]}/>
+        <Tooltip contentStyle={{background:C.card,border:`1px solid ${C.grid}`,borderRadius:8,fontSize:12}}
+                 formatter={(v: number|string) => typeof v === "number" ? fmtUsd(v) : "—"}
+                 labelStyle={{color:C.muted}}/>
+        <Legend wrapperStyle={{fontSize:11,color:C.muted}}
+                formatter={v => v==="real"?"Precio Real":
+                                v==="pred_base"?"Baseline":
+                                v==="pred_full"?"Full +Reddit":""}/>
         {testStart && (
           <ReferenceLine x={testStart} stroke={C.muted} strokeDasharray="4 3"
             label={{value:"Test →",fill:C.muted,fontSize:9,position:"insideTopLeft"}}/>
         )}
-        {/* Linea vertical: hoy / inicio del forecast */}
         {todayDate && (
           <ReferenceLine x={todayDate} stroke={C.forecast} strokeDasharray="6 3"
             label={{value:"HOY",fill:C.forecast,fontSize:10,position:"insideTopRight"}}/>
         )}
-
-        {/* Precio real (toda la historia) */}
-        <Line dataKey="real" name="real" stroke={C.real} strokeWidth={2}
-              dot={false} connectNulls={false}/>
-        {/* Prediccion baseline (solo en test y forecast) */}
-        <Line dataKey="pred_base" name="pred_base" stroke={C.baseline}
-              strokeWidth={1.5} dot={false} strokeDasharray="5 4" connectNulls/>
-        {/* Prediccion full (solo en test y forecast) */}
-        <Line dataKey="pred_full" name="pred_full" stroke={C.full}
-              strokeWidth={2} dot={false} strokeDasharray="3 2" connectNulls/>
+        <Line dataKey="real"      name="real"      stroke={C.real}     strokeWidth={2}   dot={false} connectNulls={false}/>
+        <Line dataKey="pred_base" name="pred_base" stroke={C.baseline} strokeWidth={1.5} dot={false} strokeDasharray="5 4" connectNulls/>
+        <Line dataKey="pred_full" name="pred_full" stroke={C.full}     strokeWidth={2}   dot={false} strokeDasharray="3 2" connectNulls/>
       </LineChart>
     </ResponsiveContainer>
   );
 }
 
-// ── Forecast 7d cards ─────────────────────────────────────────────────────
 function ForecastCards({ forecast, todayPrice }: {
   forecast: DashboardData["forecast_7d"]; todayPrice: number | null;
 }) {
   if (!forecast?.length) return null;
   return (
     <div className="glass-card p-4 fade-in">
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-xs uppercase tracking-widest text-muted">Forecast 7 días — modelo full (+Reddit)</p>
-      </div>
+      <p className="text-xs uppercase tracking-widest text-muted mb-3">Forecast 7 días — modelo full (+Reddit)</p>
       <div className="grid grid-cols-7 gap-1">
         {forecast.map((f, i) => {
           const prev = i === 0 ? todayPrice : forecast[i-1].pred_full;
@@ -142,38 +118,58 @@ function ForecastCards({ forecast, todayPrice }: {
   );
 }
 
-// ── Sentiment chart ───────────────────────────────────────────────────────
 function SentimentChart({ data }: { data: DashboardData["sentiment_daily"] }) {
   if (!data?.length) return <p className="text-muted text-xs">Sin datos de sentimiento</p>;
   const prices = data.map(d => d.price);
   const pMin = Math.min(...prices), pMax = Math.max(...prices);
   const cd = data.map(d => ({
     ...d,
-    priceNorm: pMax > pMin ? parseFloat(((d.price - pMin) / (pMax - pMin)).toFixed(4)) : 0.5,
+    priceNorm: pMax > pMin ? parseFloat(((d.price-pMin)/(pMax-pMin)).toFixed(4)) : 0.5,
   }));
   return (
     <ResponsiveContainer width="100%" height={220}>
       <ComposedChart data={cd} margin={{top:4,right:8,left:0,bottom:0}}>
         <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4}/>
-        <XAxis dataKey="date" tickFormatter={fmtDate} tick={{fill:C.muted,fontSize:10}}
-               axisLine={false} tickLine={false} interval="preserveStartEnd"/>
+        <XAxis dataKey="date" tickFormatter={fmtDate}
+               tick={{fill:C.muted,fontSize:10}} axisLine={false} tickLine={false}
+               interval="preserveStartEnd"/>
         <YAxis yAxisId="sent" domain={[-1,1]} tick={{fill:C.muted,fontSize:10}}
                axisLine={false} tickLine={false} width={36}/>
         <YAxis yAxisId="price" orientation="right" domain={[0,1]} hide/>
         <Tooltip contentStyle={{background:C.card,border:`1px solid ${C.grid}`,borderRadius:8,fontSize:12}}/>
         <ReferenceLine yAxisId="sent" y={0} stroke={C.grid} strokeDasharray="4 4"/>
-        <Bar dataKey="sentiment" yAxisId="sent" name="Sentiment" radius={[2,2,0,0]}
-             fill={C.full} opacity={0.75}/>
-        <Line dataKey="priceNorm" yAxisId="price" name="Precio norm."
-              stroke={C.baseline} strokeWidth={1.5} dot={false} strokeDasharray="4 3"/>
+        <Bar dataKey="sentiment" yAxisId="sent" radius={[2,2,0,0]} fill={C.full} opacity={0.75}/>
+        <Line dataKey="priceNorm" yAxisId="price" stroke={C.baseline}
+              strokeWidth={1.5} dot={false} strokeDasharray="4 3"/>
       </ComposedChart>
     </ResponsiveContainer>
   );
 }
 
-// ── KPI card ──────────────────────────────────────────────────────────────
+function AccuracyBar({ baseline, full }: { baseline: number; full: number }) {
+  const barData = [
+    { name: "Baseline",   v: baseline },
+    { name: "+Sentiment", v: full },
+  ];
+  return (
+    <ResponsiveContainer width="100%" height={120}>
+      <BarChart data={barData} margin={{top:8,right:4,left:0,bottom:0}}>
+        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4} vertical={false}/>
+        <XAxis dataKey="name" tick={{fill:C.muted,fontSize:10}} axisLine={false} tickLine={false}/>
+        <YAxis domain={[0,1]} tickFormatter={fmtPct} tick={{fill:C.muted,fontSize:10}}
+               axisLine={false} tickLine={false} width={42}/>
+        <Tooltip formatter={(v: number|string) => typeof v === "number" ? fmtPct(v) : String(v)}
+                 contentStyle={{background:C.card,border:`1px solid ${C.grid}`}}/>
+        <Bar dataKey="v" radius={[4,4,0,0]} fill={C.full}
+             label={{position:"top",formatter:(v: number) => fmtPct(v),fill:C.muted,fontSize:10}}/>
+      </BarChart>
+    </ResponsiveContainer>
+  );
+}
+
 function KpiCard({label,baseline,full,format,higher=true,delay="0"}:{
-  label:string;baseline:number;full:number;format:(v:number)=>string;higher?:boolean;delay?:string}) {
+  label:string;baseline:number;full:number;
+  format:(v:number)=>string;higher?:boolean;delay?:string}) {
   const better = higher ? full > baseline : full < baseline;
   const pct = baseline !== 0 ? Math.abs(((full-baseline)/Math.abs(baseline))*100).toFixed(1) : "—";
   return (
@@ -199,28 +195,9 @@ function KpiCard({label,baseline,full,format,higher=true,delay="0"}:{
   );
 }
 
-function AccuracyBar({baseline,full}:{baseline:number;full:number}) {
-  const { BarChart: BC } = require("recharts");
-  return (
-    <ResponsiveContainer width="100%" height={120}>
-      <BC data={[{name:"Baseline",v:baseline},{name:"+Sent.",v:full}]}
-          margin={{top:8,right:4,left:0,bottom:0}}>
-        <CartesianGrid stroke={C.grid} strokeDasharray="3 3" strokeOpacity={0.4} vertical={false}/>
-        <XAxis dataKey="name" tick={{fill:C.muted,fontSize:10}} axisLine={false} tickLine={false}/>
-        <YAxis domain={[0,1]} tickFormatter={fmtPct} tick={{fill:C.muted,fontSize:10}}
-               axisLine={false} tickLine={false} width={42}/>
-        <Tooltip formatter={(v:number|string)=>typeof v==="number"?fmtPct(v):v}
-                 contentStyle={{background:C.card,border:`1px solid ${C.grid}`}}/>
-        <Bar dataKey="v" radius={[4,4,0,0]} fill={C.full}
-             label={{position:"top",formatter:(v:number)=>fmtPct(v),fill:C.muted,fontSize:10}}/>
-      </BC>
-    </ResponsiveContainer>
-  );
-}
-
-function RedditTable({posts}:{posts:DashboardData["reddit_posts"]}) {
-  const sc=(v:number|null)=>v==null?C.muted:v>=0.05?C.positive:v<=-0.05?C.negative:C.muted;
-  const sl=(v:number|null)=>v==null?"—":v>=0.05?"POS":v<=-0.05?"NEG":"NEU";
+function RedditTable({ posts }: { posts: DashboardData["reddit_posts"] }) {
+  const sc = (v: number|null) => v==null?C.muted:v>=0.05?C.positive:v<=-0.05?C.negative:C.muted;
+  const sl = (v: number|null) => v==null?"—":v>=0.05?"POS":v<=-0.05?"NEG":"NEU";
   return (
     <div className="overflow-auto max-h-[360px]">
       <table className="w-full text-xs">
@@ -233,7 +210,7 @@ function RedditTable({posts}:{posts:DashboardData["reddit_posts"]}) {
           </tr>
         </thead>
         <tbody>
-          {posts.map((p,i)=>(
+          {posts.map((p,i) => (
             <tr key={i} className="border-b border-[#111F38] hover:bg-[#0f2040] transition-colors">
               <td className="py-1.5 pr-2 font-mono text-muted whitespace-nowrap text-[10px]">{p.date}</td>
               <td className="py-1.5 pr-2 max-w-[260px]">
@@ -267,21 +244,20 @@ function SectionTitle({icon,label,delay}:{icon:string;label:string;delay:string}
   );
 }
 
-export function Dashboard({data}:{data:DashboardData|null}) {
+export function Dashboard({ data }: { data: DashboardData | null }) {
   if (!data) return (
     <div className="flex min-h-screen items-center justify-center text-muted font-mono text-sm">
       Sin datos — ejecutá <code className="ml-2 text-primary">python export_for_dashboard.py</code>
     </div>
   );
 
-  const {classifier:cls, regression:reg} = data;
+  const { classifier: cls, regression: reg } = data;
   const updatedAt = new Date(data.last_updated).toLocaleString("es-AR",
     {dateStyle:"medium",timeStyle:"short"});
 
   return (
     <main className="min-h-screen bg-bg text-body px-4 py-8 max-w-[1400px] mx-auto">
 
-      {/* Header */}
       <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 fade-in">
         <div>
           <div className="flex items-center gap-3 mb-2">
@@ -291,7 +267,7 @@ export function Dashboard({data}:{data:DashboardData|null}) {
             </h1>
           </div>
           <p className="text-sm text-muted">
-            XGBoost + RoBERTa sentiment · Datos desde 2024 ·
+            XGBoost + RoBERTa · Precios 2024+ ·
             Modelo: {data.model_start_date} → {data.model_end_date} ({data.model_days} días)
           </p>
         </div>
@@ -312,7 +288,6 @@ export function Dashboard({data}:{data:DashboardData|null}) {
         </div>
       </header>
 
-      {/* Gráfico principal */}
       <section className="mb-8">
         <SectionTitle icon="◈" label="Precio Real · Test Set · Forecast 7 días" delay="0.05"/>
         <div className="glass-card p-5 mb-4 fade-in">
@@ -320,16 +295,15 @@ export function Dashboard({data}:{data:DashboardData|null}) {
             <span style={{color:C.real}}>━</span> Precio real (2024→hoy) &nbsp;
             <span style={{color:C.baseline}}>╌</span> Baseline &nbsp;
             <span style={{color:C.full}}>┅</span> Full (+Reddit) &nbsp;·&nbsp;
-            Las líneas de predicción aparecen en el test set y en el forecast
+            Predicciones aparecen en el test set y en el forecast
           </p>
           <PriceChart data={data}/>
         </div>
         <ForecastCards forecast={data.forecast_7d??[]} todayPrice={data.today_price}/>
       </section>
 
-      {/* Clasificador */}
       <section className="mb-8">
-        <SectionTitle icon="⬤" label="Clasificador de Dirección" delay="0.20"/>
+        <SectionTitle icon="⬤" label="Clasificador de Dirección (sube / baja)" delay="0.20"/>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
           <KpiCard label="Accuracy"  baseline={cls.baseline.accuracy}  full={cls.full.accuracy}  format={fmtPct} delay="0.22"/>
           <KpiCard label="Precision" baseline={cls.baseline.precision} full={cls.full.precision} format={fmtPct} delay="0.24"/>
@@ -338,11 +312,11 @@ export function Dashboard({data}:{data:DashboardData|null}) {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="glass-card p-4 fade-in">
-            <p className="text-xs uppercase tracking-widest text-muted mb-2">Accuracy</p>
+            <p className="text-xs uppercase tracking-widest text-muted mb-2">Accuracy comparada</p>
             <AccuracyBar baseline={cls.baseline.accuracy} full={cls.full.accuracy}/>
           </div>
           <div className="lg:col-span-2 glass-card p-4 fade-in">
-            <p className="text-xs uppercase tracking-widest text-muted mb-2">McNemar · Detalle</p>
+            <p className="text-xs uppercase tracking-widest text-muted mb-2">McNemar · Detalle métricas</p>
             <div className="flex items-center gap-3 mb-3 flex-wrap">
               <span className="font-mono text-xs">χ²≈{cls.mcnemar.chi2}</span>
               <span className="font-mono text-xs">p≈{cls.mcnemar.p}</span>
@@ -353,27 +327,30 @@ export function Dashboard({data}:{data:DashboardData|null}) {
               </span>
             </div>
             <table className="w-full text-xs font-mono">
-              <thead><tr className="text-muted border-b border-border text-left">
-                <th className="pb-1 pr-4">Métrica</th>
-                <th className="pb-1 pr-4 text-right">Baseline</th>
-                <th className="pb-1 text-right">+Sentiment</th>
-              </tr></thead>
-              <tbody>{(["accuracy","precision","recall","f1"] as const).map(k=>(
-                <tr key={k} className="border-b border-[#111F38]">
-                  <td className="py-1 pr-4 text-muted capitalize">{k}</td>
-                  <td className="py-1 pr-4 text-right text-body">{fmtPct(cls.baseline[k])}</td>
-                  <td className="py-1 text-right"
-                      style={{color:cls.full[k]>=cls.baseline[k]?C.positive:C.negative}}>
-                    {fmtPct(cls.full[k])}
-                  </td>
+              <thead>
+                <tr className="text-muted border-b border-border text-left">
+                  <th className="pb-1 pr-4">Métrica</th>
+                  <th className="pb-1 pr-4 text-right">Baseline</th>
+                  <th className="pb-1 text-right">+Sentiment</th>
                 </tr>
-              ))}</tbody>
+              </thead>
+              <tbody>
+                {(["accuracy","precision","recall","f1"] as const).map(k => (
+                  <tr key={k} className="border-b border-[#111F38]">
+                    <td className="py-1 pr-4 text-muted capitalize">{k}</td>
+                    <td className="py-1 pr-4 text-right text-body">{fmtPct(cls.baseline[k])}</td>
+                    <td className="py-1 text-right"
+                        style={{color:cls.full[k]>=cls.baseline[k]?C.positive:C.negative}}>
+                      {fmtPct(cls.full[k])}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </div>
       </section>
 
-      {/* Regresor */}
       <section className="mb-8">
         <SectionTitle icon="◆" label="Regresor de Precio — Métricas en Test Set" delay="0.30"/>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -382,11 +359,10 @@ export function Dashboard({data}:{data:DashboardData|null}) {
           <KpiCard label="RMSE" baseline={reg.baseline.rmse} full={reg.full.rmse}
                    format={fmtUsd} higher={false} delay="0.34"/>
           <KpiCard label="R²"   baseline={reg.baseline.r2}   full={reg.full.r2}
-                   format={v=>v.toFixed(4)} delay="0.36"/>
+                   format={v => v.toFixed(4)} delay="0.36"/>
         </div>
       </section>
 
-      {/* Sentimiento + Reddit */}
       <section className="mb-8">
         <SectionTitle icon="◎" label="Sentimiento Reddit r/Solana" delay="0.38"/>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
