@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-30T11:39:02.290285+00:00",
+  "last_updated": "2026-03-30T12:02:29.499416+00:00",
   "today_price": 81.68,
   "today_date": "2026-03-29",
   "model_start_date": "2024-01-02",
@@ -29,14 +29,14 @@
   },
   "regression": {
     "baseline": {
-      "mae": 3.7417,
-      "rmse": 5.1781,
-      "r2": 0.9585
+      "mae": 6.9158,
+      "rmse": 8.6535,
+      "r2": 0.8842
     },
     "full": {
-      "mae": 3.9929,
-      "rmse": 5.6704,
-      "r2": 0.9503
+      "mae": 5.866,
+      "rmse": 7.5074,
+      "r2": 0.9128
     }
   },
   "price_history": [
@@ -3317,921 +3317,921 @@
     {
       "date": "2025-11-02",
       "real": 166.09,
-      "pred_base": 186.16,
-      "pred_full": 190.35
+      "pred_base": 181.59,
+      "pred_full": 187.53
     },
     {
       "date": "2025-11-03",
       "real": 155.4,
-      "pred_base": 176.28,
-      "pred_full": 180.62
+      "pred_base": 166.54,
+      "pred_full": 176.87
     },
     {
       "date": "2025-11-04",
       "real": 162.57,
-      "pred_base": 153.06,
-      "pred_full": 155.04
+      "pred_base": 152.26,
+      "pred_full": 154.18
     },
     {
       "date": "2025-11-05",
       "real": 155.07,
-      "pred_base": 160.97,
-      "pred_full": 160.53
+      "pred_base": 159.52,
+      "pred_full": 157.23
     },
     {
       "date": "2025-11-06",
       "real": 161.71,
-      "pred_base": 153.93,
-      "pred_full": 151.09
+      "pred_base": 152.83,
+      "pred_full": 150.67
     },
     {
       "date": "2025-11-07",
       "real": 158.1,
-      "pred_base": 161.64,
-      "pred_full": 161.28
+      "pred_base": 159.69,
+      "pred_full": 161.36
     },
     {
       "date": "2025-11-08",
       "real": 164.45,
-      "pred_base": 161.11,
-      "pred_full": 160.4
+      "pred_base": 163.03,
+      "pred_full": 159.72
     },
     {
       "date": "2025-11-09",
       "real": 167.37,
-      "pred_base": 169.82,
-      "pred_full": 162.47
+      "pred_base": 166.7,
+      "pred_full": 165.15
     },
     {
       "date": "2025-11-10",
       "real": 154.57,
-      "pred_base": 169.03,
-      "pred_full": 168.87
+      "pred_base": 163.53,
+      "pred_full": 168.05
     },
     {
       "date": "2025-11-11",
       "real": 153.26,
-      "pred_base": 155.18,
-      "pred_full": 156.74
+      "pred_base": 147.5,
+      "pred_full": 149.25
     },
     {
       "date": "2025-11-12",
       "real": 145.11,
-      "pred_base": 153.03,
-      "pred_full": 157.46
+      "pred_base": 148.77,
+      "pred_full": 151.74
     },
     {
       "date": "2025-11-13",
       "real": 138.68,
-      "pred_base": 147.41,
-      "pred_full": 147.31
+      "pred_base": 148.56,
+      "pred_full": 146.12
     },
     {
       "date": "2025-11-14",
       "real": 139.54,
-      "pred_base": 137.25,
-      "pred_full": 138.3
+      "pred_base": 137.78,
+      "pred_full": 139.2
     },
     {
       "date": "2025-11-15",
       "real": 137.27,
-      "pred_base": 139.33,
-      "pred_full": 140.63
+      "pred_base": 139.95,
+      "pred_full": 137.71
     },
     {
       "date": "2025-11-16",
       "real": 130.85,
-      "pred_base": 137.51,
-      "pred_full": 135.82
+      "pred_base": 134.76,
+      "pred_full": 131.23
     },
     {
       "date": "2025-11-17",
       "real": 140.71,
-      "pred_base": 129.89,
-      "pred_full": 129.23
+      "pred_base": 138.63,
+      "pred_full": 131.36
     },
     {
       "date": "2025-11-18",
       "real": 136.77,
-      "pred_base": 137.53,
-      "pred_full": 143.12
+      "pred_base": 136.78,
+      "pred_full": 138.11
     },
     {
       "date": "2025-11-19",
       "real": 133.52,
-      "pred_base": 136.2,
-      "pred_full": 136.58
+      "pred_base": 138.82,
+      "pred_full": 135.44
     },
     {
       "date": "2025-11-20",
       "real": 128.5,
-      "pred_base": 126.29,
-      "pred_full": 129.81
+      "pred_base": 131.43,
+      "pred_full": 130.55
     },
     {
       "date": "2025-11-21",
       "real": 127.55,
-      "pred_base": 131.99,
-      "pred_full": 128.81
+      "pred_base": 134.92,
+      "pred_full": 127.69
     },
     {
       "date": "2025-11-22",
       "real": 130.71,
-      "pred_base": 128.37,
-      "pred_full": 127.62
+      "pred_base": 129.34,
+      "pred_full": 129.4
     },
     {
       "date": "2025-11-23",
       "real": 138.37,
-      "pred_base": 133.13,
-      "pred_full": 133.11
+      "pred_base": 141.1,
+      "pred_full": 137.76
     },
     {
       "date": "2025-11-24",
       "real": 138.89,
-      "pred_base": 136.74,
-      "pred_full": 140.17
+      "pred_base": 137.04,
+      "pred_full": 135.67
     },
     {
       "date": "2025-11-25",
       "real": 143.01,
-      "pred_base": 146.58,
-      "pred_full": 143.98
+      "pred_base": 146.12,
+      "pred_full": 144.46
     },
     {
       "date": "2025-11-26",
       "real": 140.85,
-      "pred_base": 142.18,
-      "pred_full": 138.28
+      "pred_base": 144.38,
+      "pred_full": 142.82
     },
     {
       "date": "2025-11-27",
       "real": 137.39,
-      "pred_base": 141.58,
-      "pred_full": 141.8
+      "pred_base": 135.45,
+      "pred_full": 137.58
     },
     {
       "date": "2025-11-28",
       "real": 136.08,
-      "pred_base": 137.02,
-      "pred_full": 133.99
+      "pred_base": 130.8,
+      "pred_full": 127.55
     },
     {
       "date": "2025-11-29",
       "real": 133.56,
-      "pred_base": 135.05,
-      "pred_full": 136.56
+      "pred_base": 137.61,
+      "pred_full": 133.22
     },
     {
       "date": "2025-11-30",
       "real": 126.71,
-      "pred_base": 130.98,
-      "pred_full": 130.05
+      "pred_base": 130.27,
+      "pred_full": 135.25
     },
     {
       "date": "2025-12-01",
       "real": 138.67,
-      "pred_base": 127.49,
-      "pred_full": 125.15
+      "pred_base": 132.09,
+      "pred_full": 127.33
     },
     {
       "date": "2025-12-02",
       "real": 144.9,
-      "pred_base": 137.46,
-      "pred_full": 136.48
+      "pred_base": 137.85,
+      "pred_full": 138.82
     },
     {
       "date": "2025-12-03",
       "real": 139.01,
-      "pred_base": 143.3,
-      "pred_full": 143.43
+      "pred_base": 137.53,
+      "pred_full": 140.22
     },
     {
       "date": "2025-12-04",
       "real": 133.32,
-      "pred_base": 137.61,
-      "pred_full": 140.56
+      "pred_base": 139.3,
+      "pred_full": 141.33
     },
     {
       "date": "2025-12-05",
       "real": 132.35,
-      "pred_base": 130.35,
-      "pred_full": 133.53
+      "pred_base": 133.92,
+      "pred_full": 138.67
     },
     {
       "date": "2025-12-06",
       "real": 132.09,
-      "pred_base": 133.2,
-      "pred_full": 133.51
+      "pred_base": 137.02,
+      "pred_full": 139.89
     },
     {
       "date": "2025-12-07",
       "real": 133.28,
-      "pred_base": 131.41,
-      "pred_full": 132.01
+      "pred_base": 138.55,
+      "pred_full": 139.02
     },
     {
       "date": "2025-12-08",
       "real": 137.9,
-      "pred_base": 131.65,
-      "pred_full": 131.75
+      "pred_base": 133.9,
+      "pred_full": 133.17
     },
     {
       "date": "2025-12-09",
       "real": 136.47,
-      "pred_base": 138.33,
-      "pred_full": 138.0
+      "pred_base": 140.17,
+      "pred_full": 137.09
     },
     {
       "date": "2025-12-10",
       "real": 136.37,
-      "pred_base": 135.01,
-      "pred_full": 135.37
+      "pred_base": 132.21,
+      "pred_full": 135.11
     },
     {
       "date": "2025-12-11",
       "real": 132.32,
-      "pred_base": 138.89,
-      "pred_full": 138.68
+      "pred_base": 133.6,
+      "pred_full": 136.51
     },
     {
       "date": "2025-12-12",
       "real": 133.25,
-      "pred_base": 131.8,
-      "pred_full": 133.85
+      "pred_base": 137.65,
+      "pred_full": 137.61
     },
     {
       "date": "2025-12-13",
       "real": 129.48,
-      "pred_base": 133.0,
-      "pred_full": 133.65
+      "pred_base": 137.23,
+      "pred_full": 133.93
     },
     {
       "date": "2025-12-14",
       "real": 127.76,
-      "pred_base": 128.94,
-      "pred_full": 131.78
+      "pred_base": 131.87,
+      "pred_full": 136.29
     },
     {
       "date": "2025-12-15",
       "real": 129.25,
-      "pred_base": 128.43,
-      "pred_full": 128.76
+      "pred_base": 130.04,
+      "pred_full": 132.91
     },
     {
       "date": "2025-12-16",
       "real": 123.12,
-      "pred_base": 129.21,
-      "pred_full": 130.66
+      "pred_base": 136.83,
+      "pred_full": 132.35
     },
     {
       "date": "2025-12-17",
       "real": 119.57,
-      "pred_base": 122.83,
-      "pred_full": 122.08
+      "pred_base": 127.54,
+      "pred_full": 127.21
     },
     {
       "date": "2025-12-18",
       "real": 126.19,
-      "pred_base": 117.94,
-      "pred_full": 117.36
+      "pred_base": 123.35,
+      "pred_full": 118.07
     },
     {
       "date": "2025-12-19",
       "real": 125.81,
-      "pred_base": 126.2,
-      "pred_full": 126.36
+      "pred_base": 128.99,
+      "pred_full": 126.31
     },
     {
       "date": "2025-12-20",
       "real": 125.99,
-      "pred_base": 125.89,
-      "pred_full": 123.81
+      "pred_base": 129.14,
+      "pred_full": 128.34
     },
     {
       "date": "2025-12-21",
       "real": 125.8,
-      "pred_base": 127.13,
-      "pred_full": 127.38
+      "pred_base": 132.85,
+      "pred_full": 130.93
     },
     {
       "date": "2025-12-22",
       "real": 123.86,
-      "pred_base": 124.27,
-      "pred_full": 125.22
+      "pred_base": 127.71,
+      "pred_full": 128.11
     },
     {
       "date": "2025-12-23",
       "real": 122.46,
-      "pred_base": 124.51,
-      "pred_full": 125.15
+      "pred_base": 122.29,
+      "pred_full": 124.57
     },
     {
       "date": "2025-12-24",
       "real": 119.95,
-      "pred_base": 122.22,
-      "pred_full": 123.52
+      "pred_base": 124.92,
+      "pred_full": 129.19
     },
     {
       "date": "2025-12-25",
       "real": 122.2,
-      "pred_base": 113.97,
-      "pred_full": 117.29
+      "pred_base": 112.31,
+      "pred_full": 116.46
     },
     {
       "date": "2025-12-26",
       "real": 124.65,
-      "pred_base": 122.92,
-      "pred_full": 123.92
+      "pred_base": 127.29,
+      "pred_full": 124.27
     },
     {
       "date": "2025-12-27",
       "real": 125.2,
-      "pred_base": 124.88,
-      "pred_full": 124.77
+      "pred_base": 123.58,
+      "pred_full": 123.37
     },
     {
       "date": "2025-12-28",
       "real": 123.13,
-      "pred_base": 123.36,
-      "pred_full": 124.54
+      "pred_base": 124.97,
+      "pred_full": 126.91
     },
     {
       "date": "2025-12-29",
       "real": 124.93,
-      "pred_base": 123.11,
-      "pred_full": 126.68
+      "pred_base": 120.19,
+      "pred_full": 126.45
     },
     {
       "date": "2025-12-30",
       "real": 124.48,
-      "pred_base": 125.23,
-      "pred_full": 124.73
+      "pred_base": 126.4,
+      "pred_full": 122.3
     },
     {
       "date": "2025-12-31",
       "real": 126.76,
-      "pred_base": 124.45,
-      "pred_full": 126.94
+      "pred_base": 125.66,
+      "pred_full": 127.43
     },
     {
       "date": "2026-01-01",
       "real": 132.13,
-      "pred_base": 127.51,
-      "pred_full": 127.67
+      "pred_base": 131.04,
+      "pred_full": 129.24
     },
     {
       "date": "2026-01-02",
       "real": 133.3,
-      "pred_base": 134.8,
-      "pred_full": 131.93
+      "pred_base": 135.82,
+      "pred_full": 136.66
     },
     {
       "date": "2026-01-03",
       "real": 133.9,
-      "pred_base": 131.67,
-      "pred_full": 133.95
+      "pred_base": 133.9,
+      "pred_full": 135.36
     },
     {
       "date": "2026-01-04",
       "real": 137.99,
-      "pred_base": 131.94,
-      "pred_full": 133.78
+      "pred_base": 134.55,
+      "pred_full": 135.64
     },
     {
       "date": "2026-01-05",
       "real": 141.1,
-      "pred_base": 137.91,
-      "pred_full": 138.3
+      "pred_base": 139.36,
+      "pred_full": 139.01
     },
     {
       "date": "2026-01-06",
       "real": 136.31,
-      "pred_base": 144.06,
-      "pred_full": 143.02
+      "pred_base": 141.85,
+      "pred_full": 138.39
     },
     {
       "date": "2026-01-07",
       "real": 138.29,
-      "pred_base": 132.7,
-      "pred_full": 133.48
+      "pred_base": 133.77,
+      "pred_full": 136.3
     },
     {
       "date": "2026-01-08",
       "real": 135.76,
-      "pred_base": 138.63,
-      "pred_full": 137.46
+      "pred_base": 138.9,
+      "pred_full": 133.83
     },
     {
       "date": "2026-01-09",
       "real": 135.73,
-      "pred_base": 133.13,
-      "pred_full": 134.68
+      "pred_base": 128.56,
+      "pred_full": 134.08
     },
     {
       "date": "2026-01-10",
       "real": 139.49,
-      "pred_base": 136.13,
-      "pred_full": 136.14
+      "pred_base": 137.51,
+      "pred_full": 136.7
     },
     {
       "date": "2026-01-11",
       "real": 139.14,
-      "pred_base": 139.74,
-      "pred_full": 139.5
+      "pred_base": 139.87,
+      "pred_full": 137.52
     },
     {
       "date": "2026-01-12",
       "real": 145.36,
-      "pred_base": 138.35,
-      "pred_full": 138.39
+      "pred_base": 137.45,
+      "pred_full": 139.82
     },
     {
       "date": "2026-01-13",
       "real": 146.75,
-      "pred_base": 143.75,
-      "pred_full": 144.91
+      "pred_base": 137.63,
+      "pred_full": 146.19
     },
     {
       "date": "2026-01-14",
       "real": 142.33,
-      "pred_base": 143.5,
-      "pred_full": 145.57
+      "pred_base": 148.91,
+      "pred_full": 143.77
     },
     {
       "date": "2026-01-15",
       "real": 144.86,
-      "pred_base": 141.77,
-      "pred_full": 142.97
+      "pred_base": 144.95,
+      "pred_full": 147.91
     },
     {
       "date": "2026-01-16",
       "real": 143.73,
-      "pred_base": 145.72,
-      "pred_full": 146.85
+      "pred_base": 148.02,
+      "pred_full": 146.8
     },
     {
       "date": "2026-01-17",
       "real": 138.0,
-      "pred_base": 141.09,
-      "pred_full": 142.74
+      "pred_base": 150.82,
+      "pred_full": 147.82
     },
     {
       "date": "2026-01-18",
       "real": 133.34,
-      "pred_base": 137.28,
-      "pred_full": 138.47
+      "pred_base": 138.52,
+      "pred_full": 134.34
     },
     {
       "date": "2026-01-19",
       "real": 125.71,
-      "pred_base": 129.8,
-      "pred_full": 131.15
+      "pred_base": 135.48,
+      "pred_full": 139.2
     },
     {
       "date": "2026-01-20",
       "real": 129.38,
-      "pred_base": 129.3,
-      "pred_full": 127.33
+      "pred_base": 134.93,
+      "pred_full": 135.07
     },
     {
       "date": "2026-01-21",
       "real": 128.29,
-      "pred_base": 128.27,
-      "pred_full": 132.07
+      "pred_base": 132.5,
+      "pred_full": 130.61
     },
     {
       "date": "2026-01-22",
       "real": 127.36,
-      "pred_base": 128.1,
-      "pred_full": 126.86
+      "pred_base": 129.64,
+      "pred_full": 128.84
     },
     {
       "date": "2026-01-23",
       "real": 127.05,
-      "pred_base": 128.18,
-      "pred_full": 127.1
+      "pred_base": 129.34,
+      "pred_full": 131.61
     },
     {
       "date": "2026-01-24",
       "real": 118.77,
-      "pred_base": 126.33,
-      "pred_full": 126.26
+      "pred_base": 128.71,
+      "pred_full": 129.29
     },
     {
       "date": "2026-01-25",
       "real": 124.14,
-      "pred_base": 118.49,
-      "pred_full": 118.48
+      "pred_base": 121.97,
+      "pred_full": 122.62
     },
     {
       "date": "2026-01-26",
       "real": 127.05,
-      "pred_base": 122.77,
-      "pred_full": 121.88
+      "pred_base": 116.95,
+      "pred_full": 118.84
     },
     {
       "date": "2026-01-27",
       "real": 125.12,
-      "pred_base": 129.31,
-      "pred_full": 129.28
+      "pred_base": 132.3,
+      "pred_full": 127.69
     },
     {
       "date": "2026-01-28",
       "real": 117.61,
-      "pred_base": 125.77,
-      "pred_full": 127.1
+      "pred_base": 122.86,
+      "pred_full": 130.16
     },
     {
       "date": "2026-01-29",
       "real": 117.36,
-      "pred_base": 116.33,
-      "pred_full": 116.8
+      "pred_base": 119.21,
+      "pred_full": 122.31
     },
     {
       "date": "2026-01-30",
       "real": 105.44,
-      "pred_base": 116.75,
-      "pred_full": 119.94
+      "pred_base": 122.11,
+      "pred_full": 122.39
     },
     {
       "date": "2026-01-31",
       "real": 100.85,
-      "pred_base": 103.9,
-      "pred_full": 105.0
+      "pred_base": 102.22,
+      "pred_full": 104.55
     },
     {
       "date": "2026-02-01",
       "real": 104.47,
-      "pred_base": 99.94,
-      "pred_full": 100.68
+      "pred_base": 101.87,
+      "pred_full": 98.82
     },
     {
       "date": "2026-02-02",
       "real": 97.56,
-      "pred_base": 107.09,
-      "pred_full": 105.24
+      "pred_base": 109.15,
+      "pred_full": 102.56
     },
     {
       "date": "2026-02-03",
       "real": 92.03,
-      "pred_base": 97.19,
-      "pred_full": 96.14
+      "pred_base": 101.7,
+      "pred_full": 95.69
     },
     {
       "date": "2026-02-04",
       "real": 78.19,
-      "pred_base": 94.66,
-      "pred_full": 93.84
+      "pred_base": 101.74,
+      "pred_full": 96.02
     },
     {
       "date": "2026-02-05",
       "real": 87.46,
-      "pred_base": 77.86,
-      "pred_full": 77.85
+      "pred_base": 94.3,
+      "pred_full": 95.92
     },
     {
       "date": "2026-02-06",
       "real": 87.64,
-      "pred_base": 89.67,
-      "pred_full": 87.31
+      "pred_base": 98.29,
+      "pred_full": 99.84
     },
     {
       "date": "2026-02-07",
       "real": 87.04,
-      "pred_base": 88.43,
-      "pred_full": 88.08
+      "pred_base": 99.96,
+      "pred_full": 94.18
     },
     {
       "date": "2026-02-08",
       "real": 86.7,
-      "pred_base": 86.13,
-      "pred_full": 86.08
+      "pred_base": 95.69,
+      "pred_full": 93.66
     },
     {
       "date": "2026-02-09",
       "real": 82.92,
-      "pred_base": 86.68,
-      "pred_full": 87.03
+      "pred_base": 96.35,
+      "pred_full": 96.9
     },
     {
       "date": "2026-02-10",
       "real": 79.25,
-      "pred_base": 82.17,
-      "pred_full": 84.32
+      "pred_base": 95.49,
+      "pred_full": 95.57
     },
     {
       "date": "2026-02-11",
       "real": 78.35,
-      "pred_base": 78.54,
-      "pred_full": 78.83
+      "pred_base": 95.49,
+      "pred_full": 93.73
     },
     {
       "date": "2026-02-12",
       "real": 84.32,
-      "pred_base": 78.2,
-      "pred_full": 78.08
+      "pred_base": 95.77,
+      "pred_full": 94.83
     },
     {
       "date": "2026-02-13",
       "real": 88.16,
-      "pred_base": 82.41,
-      "pred_full": 82.47
+      "pred_base": 94.32,
+      "pred_full": 95.65
     },
     {
       "date": "2026-02-14",
       "real": 86.01,
-      "pred_base": 87.19,
-      "pred_full": 86.35
+      "pred_base": 87.65,
+      "pred_full": 90.48
     },
     {
       "date": "2026-02-15",
       "real": 86.43,
-      "pred_base": 85.78,
-      "pred_full": 85.06
+      "pred_base": 91.35,
+      "pred_full": 86.44
     },
     {
       "date": "2026-02-16",
       "real": 85.2,
-      "pred_base": 85.16,
-      "pred_full": 85.46
+      "pred_base": 94.78,
+      "pred_full": 97.48
     },
     {
       "date": "2026-02-17",
       "real": 81.57,
-      "pred_base": 87.15,
-      "pred_full": 86.19
+      "pred_base": 109.72,
+      "pred_full": 97.72
     },
     {
       "date": "2026-02-18",
       "real": 82.39,
-      "pred_base": 80.05,
-      "pred_full": 80.13
+      "pred_base": 95.76,
+      "pred_full": 93.66
     },
     {
       "date": "2026-02-19",
       "real": 84.64,
-      "pred_base": 82.41,
-      "pred_full": 82.14
+      "pred_base": 98.74,
+      "pred_full": 92.69
     },
     {
       "date": "2026-02-20",
       "real": 85.21,
-      "pred_base": 85.08,
-      "pred_full": 85.22
+      "pred_base": 97.68,
+      "pred_full": 99.03
     },
     {
       "date": "2026-02-21",
       "real": 82.79,
-      "pred_base": 85.06,
-      "pred_full": 85.07
+      "pred_base": 97.5,
+      "pred_full": 91.83
     },
     {
       "date": "2026-02-22",
       "real": 77.75,
-      "pred_base": 82.45,
-      "pred_full": 84.68
+      "pred_base": 96.12,
+      "pred_full": 94.52
     },
     {
       "date": "2026-02-23",
       "real": 79.04,
-      "pred_base": 76.91,
-      "pred_full": 77.14
+      "pred_base": 95.06,
+      "pred_full": 95.27
     },
     {
       "date": "2026-02-24",
       "real": 87.92,
-      "pred_base": 79.08,
-      "pred_full": 78.24
+      "pred_base": 98.5,
+      "pred_full": 92.91
     },
     {
       "date": "2026-02-25",
       "real": 85.91,
-      "pred_base": 88.03,
-      "pred_full": 90.26
+      "pred_base": 98.15,
+      "pred_full": 98.39
     },
     {
       "date": "2026-02-26",
       "real": 81.95,
-      "pred_base": 86.09,
-      "pred_full": 86.43
+      "pred_base": 96.89,
+      "pred_full": 92.68
     },
     {
       "date": "2026-02-27",
       "real": 84.37,
-      "pred_base": 81.35,
-      "pred_full": 76.91
+      "pred_base": 97.07,
+      "pred_full": 90.38
     },
     {
       "date": "2026-02-28",
       "real": 83.58,
-      "pred_base": 83.87,
-      "pred_full": 82.94
+      "pred_base": 96.75,
+      "pred_full": 92.43
     },
     {
       "date": "2026-03-01",
       "real": 86.63,
-      "pred_base": 83.1,
-      "pred_full": 82.86
+      "pred_base": 94.18,
+      "pred_full": 89.86
     },
     {
       "date": "2026-03-02",
       "real": 87.02,
-      "pred_base": 85.24,
-      "pred_full": 85.83
+      "pred_base": 95.89,
+      "pred_full": 93.37
     },
     {
       "date": "2026-03-03",
       "real": 90.83,
-      "pred_base": 85.74,
-      "pred_full": 87.33
+      "pred_base": 95.1,
+      "pred_full": 95.73
     },
     {
       "date": "2026-03-04",
       "real": 88.69,
-      "pred_base": 89.83,
-      "pred_full": 89.91
+      "pred_base": 87.65,
+      "pred_full": 91.18
     },
     {
       "date": "2026-03-05",
       "real": 84.68,
-      "pred_base": 83.89,
-      "pred_full": 84.95
+      "pred_base": 91.69,
+      "pred_full": 85.06
     },
     {
       "date": "2026-03-06",
       "real": 83.18,
-      "pred_base": 84.06,
-      "pred_full": 85.04
+      "pred_base": 97.07,
+      "pred_full": 93.58
     },
     {
       "date": "2026-03-07",
       "real": 81.62,
-      "pred_base": 81.57,
-      "pred_full": 81.97
+      "pred_base": 90.53,
+      "pred_full": 87.17
     },
     {
       "date": "2026-03-08",
       "real": 84.94,
-      "pred_base": 82.61,
-      "pred_full": 82.15
+      "pred_base": 104.67,
+      "pred_full": 92.57
     },
     {
       "date": "2026-03-09",
       "real": 85.84,
-      "pred_base": 87.71,
-      "pred_full": 88.8
+      "pred_base": 96.06,
+      "pred_full": 97.77
     },
     {
       "date": "2026-03-10",
       "real": 86.56,
-      "pred_base": 85.85,
-      "pred_full": 85.59
+      "pred_base": 98.58,
+      "pred_full": 92.69
     },
     {
       "date": "2026-03-11",
       "real": 86.87,
-      "pred_base": 85.41,
-      "pred_full": 85.15
+      "pred_base": 92.47,
+      "pred_full": 90.84
     },
     {
       "date": "2026-03-12",
       "real": 88.15,
-      "pred_base": 91.68,
-      "pred_full": 88.83
+      "pred_base": 103.57,
+      "pred_full": 95.3
     },
     {
       "date": "2026-03-13",
       "real": 88.07,
-      "pred_base": 88.36,
-      "pred_full": 87.96
+      "pred_base": 97.14,
+      "pred_full": 92.04
     },
     {
       "date": "2026-03-14",
       "real": 92.25,
-      "pred_base": 87.0,
-      "pred_full": 87.33
+      "pred_base": 94.92,
+      "pred_full": 94.38
     },
     {
       "date": "2026-03-15",
       "real": 96.22,
-      "pred_base": 90.92,
-      "pred_full": 89.05
+      "pred_base": 91.51,
+      "pred_full": 89.56
     },
     {
       "date": "2026-03-16",
       "real": 94.71,
-      "pred_base": 96.19,
-      "pred_full": 96.84
+      "pred_base": 99.8,
+      "pred_full": 100.78
     },
     {
       "date": "2026-03-17",
       "real": 90.07,
-      "pred_base": 95.13,
-      "pred_full": 95.27
+      "pred_base": 95.32,
+      "pred_full": 94.93
     },
     {
       "date": "2026-03-18",
       "real": 88.92,
-      "pred_base": 95.13,
-      "pred_full": 92.11
+      "pred_base": 99.02,
+      "pred_full": 92.16
     },
     {
       "date": "2026-03-19",
       "real": 89.85,
-      "pred_base": 89.8,
-      "pred_full": 89.08
+      "pred_base": 93.95,
+      "pred_full": 90.08
     },
     {
       "date": "2026-03-20",
       "real": 87.47,
-      "pred_base": 89.86,
-      "pred_full": 90.35
+      "pred_base": 98.58,
+      "pred_full": 94.2
     },
     {
       "date": "2026-03-21",
       "real": 86.13,
-      "pred_base": 85.39,
-      "pred_full": 85.76
+      "pred_base": 94.43,
+      "pred_full": 87.62
     },
     {
       "date": "2026-03-22",
       "real": 91.42,
-      "pred_base": 86.58,
-      "pred_full": 85.12
+      "pred_base": 92.99,
+      "pred_full": 87.28
     },
     {
       "date": "2026-03-23",
       "real": 90.82,
-      "pred_base": 91.76,
-      "pred_full": 92.43
+      "pred_base": 97.4,
+      "pred_full": 95.21
     },
     {
       "date": "2026-03-24",
       "real": 91.71,
-      "pred_base": 89.87,
-      "pred_full": 90.38
+      "pred_base": 95.69,
+      "pred_full": 94.73
     },
     {
       "date": "2026-03-25",
       "real": 86.44,
-      "pred_base": 91.73,
-      "pred_full": 92.07
+      "pred_base": 98.33,
+      "pred_full": 96.01
     },
     {
       "date": "2026-03-26",
       "real": 83.02,
-      "pred_base": 88.08,
-      "pred_full": 86.99
+      "pred_base": 100.39,
+      "pred_full": 88.83
     },
     {
       "date": "2026-03-27",
       "real": 82.02,
-      "pred_base": 82.59,
-      "pred_full": 81.57
+      "pred_base": 97.06,
+      "pred_full": 88.82
     },
     {
       "date": "2026-03-28",
       "real": 81.68,
-      "pred_base": 81.5,
-      "pred_full": 81.6
+      "pred_base": 92.85,
+      "pred_full": 94.44
     }
   ],
   "forecast_7d": [
     {
       "date": "2026-03-31",
-      "pred_base": 81.65,
-      "pred_full": 81.77
+      "pred_base": 96.35,
+      "pred_full": 94.99
     },
     {
       "date": "2026-04-01",
-      "pred_base": 81.58,
-      "pred_full": 82.41
+      "pred_base": 81.72,
+      "pred_full": 96.55
     },
     {
       "date": "2026-04-02",
-      "pred_base": 81.68,
-      "pred_full": 82.38
+      "pred_base": 103.43,
+      "pred_full": 101.41
     },
     {
       "date": "2026-04-03",
-      "pred_base": 82.63,
-      "pred_full": 83.27
+      "pred_base": 104.04,
+      "pred_full": 100.78
     },
     {
       "date": "2026-04-04",
-      "pred_base": 81.24,
-      "pred_full": 82.54
+      "pred_base": 103.38,
+      "pred_full": 102.78
     },
     {
       "date": "2026-04-05",
-      "pred_base": 80.52,
-      "pred_full": 81.67
+      "pred_base": 101.99,
+      "pred_full": 100.69
     },
     {
       "date": "2026-04-06",
-      "pred_base": 80.79,
-      "pred_full": 81.33
+      "pred_base": 98.57,
+      "pred_full": 99.76
     }
   ],
   "sentiment_daily": [
