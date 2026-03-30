@@ -107,7 +107,7 @@ function ForecastCards({ forecast, todayPrice }: {
                  style={{background:"rgba(155,107,255,0.08)"}}>
               <span className="text-[10px] text-muted font-mono">{fmtDate(f.date)}</span>
               <span className="text-[11px] font-mono font-bold" style={{color:C.forecast}}>
-                ${f.pred_full.toLocaleString("en-US",{maximumFractionDigits:0})}
+                ${f.pred_full.toLocaleString("en-US",{maximumFractionDigits:2})}
               </span>
               <span style={{color:up?C.positive:C.negative}} className="text-xs">{up?"↑":"↓"}</span>
             </div>
