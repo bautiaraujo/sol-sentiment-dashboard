@@ -1,34 +1,34 @@
 """
-export_for_dashboard_v3.py
+export_for_dashboard_v4.py
 ──────────────────────────
 Tesina: Predicción SOL/USD con Análisis de Sentimiento
 
-CAMBIOS vs v1/v2:
-  1. Documenta el resultado NEGATIVO del sentimiento de Reddit
-     (correlación ~0 con retornos futuros, señal reactiva no predictiva)
-  2. Integra Fear & Greed Index (Alternative.me) como fuente alternativa
-  3. Compara 4 modelos: baseline, +Reddit, +F&G, +ambos
-  4. Features técnicos enriquecidos para baseline competitivo
-  5. Modelo regularizado para evitar overfitting con pocos datos
-  6. Gap temporal en train/test split
-  7. Métricas: accuracy, precision, recall, f1, AUC + McNemar
+DISEÑO CLAVE — Comparación justa:
+  - UN SOLO split temporal por fecha de corte (no por ratio)
+  - Todos los modelos se evalúan en EXACTAMENTE los mismos días
+  - Cada modelo se ENTRENA con los datos que tiene disponibles
+  - Las métricas son directamente comparables
+
+Modelos:
+  baseline  = features técnicos solamente
+  reddit    = baseline + sentimiento Reddit lagged
+  fear_greed = baseline + Fear & Greed Index lagged + derivados
+  combined  = baseline + Reddit + F&G
 """
 
 import json, numpy as np, pandas as pd, xgboost as xgb
 from datetime import date, timedelta, datetime, timezone
 from pathlib import Path
-from sklearn.model_selection import train_test_split, TimeSeriesSplit
 from sklearn.metrics import (accuracy_score, precision_score, recall_score,
     f1_score, mean_absolute_error, mean_squared_error, r2_score, roc_auc_score)
 
 # ── Configuración ─────────────────────────────────────────────────
-CUTOFF        = pd.Timestamp("2024-01-01")
-FORECAST_DAYS = 7
-MIN_POSTS_DAY = 5
-TEST_RATIO    = 0.2
-GAP_DAYS      = 1
+CUTOFF          = pd.Timestamp("2024-01-01")
+TEST_CUTOFF     = pd.Timestamp("2025-11-01")   # Fecha fija de corte train/test
+FORECAST_DAYS   = 7
+MIN_POSTS_DAY   = 5
 
-# Modelo conservador: regularizado para ~300 muestras
+# Modelo regularizado para datasets pequeños
 XGB_PARAMS = dict(
     n_estimators     = 150,
     max_depth        = 3,
@@ -40,6 +40,7 @@ XGB_PARAMS = dict(
     reg_lambda       = 1.5,
     random_state     = 42,
 )
+
 
 def mcnemar(y_true, pa, pb):
     ca = pa == y_true; cb = pb == y_true
@@ -53,7 +54,7 @@ def mcnemar(y_true, pa, pb):
 
 
 # ══════════════════════════════════════════════════════════════════
-# CARGA DE DATOS
+# CARGA Y FEATURE ENGINEERING
 # ══════════════════════════════════════════════════════════════════
 def load():
     pr = pd.read_csv("data/solana_prices.csv", parse_dates=["date"])
@@ -72,12 +73,11 @@ def load():
         fg = fg[fg["date"] >= CUTOFF].copy()
         print(f"  Fear & Greed: {len(fg)} días ({fg['date'].min().date()} → {fg['date'].max().date()})")
     else:
-        fg = None
         print("  ⚠ Fear & Greed no encontrado. Corré: python get_fear_greed.py")
 
     # ── Reddit: sentimiento ponderado diario ──────────────────────
-    posts_per_day = se.groupby("date").size()
-    valid_days = posts_per_day[posts_per_day >= MIN_POSTS_DAY].index
+    ppd = se.groupby("date").size()
+    valid_days = ppd[ppd >= MIN_POSTS_DAY].index
     se_filt = se[se["date"].isin(valid_days)].copy()
     se_filt["score_clip"] = se_filt["score"].clip(lower=1)
 
@@ -85,26 +85,22 @@ def load():
         w = g["score_clip"]
         return (g["sent_score"] * w).sum() / w.sum()
 
-    reddit_daily = (se_filt.groupby("date").apply(wsent)
-                           .reset_index(columns=["sent_reddit"]))
+    reddit_daily = (se_filt.groupby("date")
+                           .apply(wsent, include_groups=False)
+                           .reset_index())
     reddit_daily.columns = ["date", "sent_reddit"]
 
-    # ── Build master dataframe ────────────────────────────────────
+    # ── Master dataframe ──────────────────────────────────────────
     df = pr.copy()
-
-    # Merge Reddit (left join - muchos NaN, eso está bien)
     df = df.merge(reddit_daily, on="date", how="left")
-
-    # Merge F&G (left join - cobertura ~100% para días de mercado)
     if has_fg:
         df = df.merge(fg[["date", "fg_value"]], on="date", how="left")
-        # Normalizar F&G de 0-100 a -1 a +1 para comparabilidad
         df["fg_norm"] = (df["fg_value"] - 50) / 50
     else:
         df["fg_value"] = np.nan
         df["fg_norm"] = np.nan
 
-    # ── Features técnicos (siempre disponibles) ───────────────────
+    # ── Features técnicos ─────────────────────────────────────────
     df["return"]       = df["price"].pct_change()
     df["ret_ma5"]      = df["return"].rolling(5, min_periods=2).mean()
     df["ret_ma10"]     = df["return"].rolling(10, min_periods=3).mean()
@@ -113,283 +109,393 @@ def load():
     df["momentum5"]    = df["price"].pct_change(5)
     df["momentum10"]   = df["price"].pct_change(10)
 
-    # ── Features de sentimiento (lagged para evitar look-ahead) ───
-    # Reddit: solo disponible en días con datos
+    # ── Features sentimiento (TODO lagged) ────────────────────────
     df["reddit_lag1"]  = df["sent_reddit"].shift(1)
-
-    # F&G: disponible casi todos los días → más features derivados
     if has_fg:
         df["fg_lag1"]      = df["fg_norm"].shift(1)
         df["fg_lag2"]      = df["fg_norm"].shift(2)
         df["fg_ma3"]       = df["fg_norm"].rolling(3, min_periods=1).mean().shift(1)
         df["fg_delta"]     = df["fg_lag1"] - df["fg_lag2"]
-        # Divergencia: si F&G sube pero precio baja (o viceversa)
         df["fg_price_div"] = df["fg_delta"] - df["return"].shift(1)
+
+    # ── Targets ───────────────────────────────────────────────────
+    df["tgt_direction"] = (df["return"].shift(-1) > 0).astype(float)
+    df["tgt_return"]    = df["return"].shift(-1)
+
+    # Marcar NaN en target para el último día
+    df.loc[df.index[-1], "tgt_direction"] = np.nan
+    df.loc[df.index[-1], "tgt_return"] = np.nan
 
     df = df.dropna(subset=["return"]).reset_index(drop=True)
 
-    # ── Estadísticas ──────────────────────────────────────────────
-    n_total = len(df)
+    # ── Stats ─────────────────────────────────────────────────────
+    n = len(df)
     n_reddit = df["reddit_lag1"].notna().sum()
     n_fg = df["fg_lag1"].notna().sum() if has_fg else 0
-
-    print(f"  Precios 2024+:       {n_total} días")
-    print(f"  Con Reddit (≥{MIN_POSTS_DAY}p): {n_reddit} días ({n_reddit/n_total*100:.1f}%)")
-    print(f"  Con Fear&Greed:      {n_fg} días ({n_fg/n_total*100:.1f}%)")
+    n_train = len(df[df["date"] < TEST_CUTOFF])
+    n_test = len(df[df["date"] >= TEST_CUTOFF])
+    print(f"  Precios 2024+:       {n} días")
+    print(f"  Con Reddit (≥{MIN_POSTS_DAY}p): {n_reddit} días ({n_reddit/n*100:.1f}%)")
+    print(f"  Con Fear&Greed:      {n_fg} días ({n_fg/n*100:.1f}%)")
+    print(f"  Train (<{TEST_CUTOFF.date()}): {n_train} días")
+    print(f"  Test (≥{TEST_CUTOFF.date()}):  {n_test} días")
 
     return df, reddit_daily, re, has_fg
 
 
 # ══════════════════════════════════════════════════════════════════
-# DEFINICIÓN DE MODELOS
+# FEATURE SETS
 # ══════════════════════════════════════════════════════════════════
-FEAT_BASELINE = ["return", "ret_ma5", "ret_ma10", "volatility5",
-                 "volatility10", "momentum5", "momentum10"]
+FEAT_BASE = ["return", "ret_ma5", "ret_ma10", "volatility5",
+             "volatility10", "momentum5", "momentum10"]
 
-FEAT_REDDIT   = FEAT_BASELINE + ["reddit_lag1"]
+FEAT_REDDIT = FEAT_BASE + ["reddit_lag1"]
 
-FEAT_FG       = FEAT_BASELINE + ["fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"]
+FEAT_FG = FEAT_BASE + ["fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"]
 
-FEAT_COMBINED = FEAT_BASELINE + ["reddit_lag1",
+FEAT_COMBINED = FEAT_BASE + ["reddit_lag1",
                 "fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"]
 
 
-def split_with_gap(X, y, test_ratio=TEST_RATIO, gap=GAP_DAYS):
-    n = len(X)
-    n_test = int(n * test_ratio)
-    n_train = n - n_test - gap
-    return (X.iloc[:n_train], X.iloc[n_train+gap:],
-            y.iloc[:n_train], y.iloc[n_train+gap:])
-
-
-def calc_metrics_clf(y_true, y_pred, y_proba):
+# ══════════════════════════════════════════════════════════════════
+# MÉTRICAS
+# ══════════════════════════════════════════════════════════════════
+def clf_metrics(yt, yp, yproba):
     return {k: round(float(v), 4) for k, v in {
-        "accuracy":  accuracy_score(y_true, y_pred),
-        "precision": precision_score(y_true, y_pred, zero_division=0),
-        "recall":    recall_score(y_true, y_pred, zero_division=0),
-        "f1":        f1_score(y_true, y_pred, zero_division=0),
-        "auc":       roc_auc_score(y_true, y_proba) if len(np.unique(y_true)) > 1 else 0.5,
+        "accuracy":  accuracy_score(yt, yp),
+        "precision": precision_score(yt, yp, zero_division=0),
+        "recall":    recall_score(yt, yp, zero_division=0),
+        "f1":        f1_score(yt, yp, zero_division=0),
+        "auc":       roc_auc_score(yt, yproba) if len(np.unique(yt)) > 1 else 0.5,
     }.items()}
 
 
-def calc_metrics_reg(y_true, y_pred):
+def reg_metrics(yt, yp):
     return {k: round(float(v), 4) for k, v in {
-        "mae":  mean_absolute_error(y_true, y_pred),
-        "rmse": float(np.sqrt(mean_squared_error(y_true, y_pred))),
-        "r2":   r2_score(y_true, y_pred),
+        "mae":  mean_absolute_error(yt, yp),
+        "rmse": float(np.sqrt(mean_squared_error(yt, yp))),
+        "r2":   r2_score(yt, yp),
     }.items()}
 
 
 # ══════════════════════════════════════════════════════════════════
-# CLASIFICADOR (sube / baja)
+# CLASIFICADOR — COMPARACIÓN JUSTA
 # ══════════════════════════════════════════════════════════════════
 def classify(df, has_fg):
-    d = df.copy()
-    d["tgt"] = (d["return"].shift(-1) > 0).astype(int)
-    d = d.dropna(subset=["tgt"] + FEAT_BASELINE).reset_index(drop=True)
+    """
+    Estrategia de comparación justa:
+    1. Definir test set = todos los días >= TEST_CUTOFF con target válido
+    2. Para cada modelo, ENTRENAR con sus datos disponibles < TEST_CUTOFF
+    3. Para cada modelo, PREDECIR en los días del test set donde tiene features
+    4. MEDIR métricas solo en la INTERSECCIÓN de días donde TODOS predicen
+    """
+    df_with_target = df.dropna(subset=["tgt_direction"] + FEAT_BASE).copy()
+    train_mask = df_with_target["date"] < TEST_CUTOFF
+    test_mask  = df_with_target["date"] >= TEST_CUTOFF
 
-    y = d["tgt"]
+    test_dates = df_with_target.loc[test_mask, "date"].values
 
-    # Definir qué modelos podemos correr
-    models_config = {"baseline": FEAT_BASELINE}
+    models = {}
+    # ── Entrenar cada modelo ──────────────────────────────────────
 
-    # Reddit: solo si hay suficientes datos en el test set
-    d_reddit = d.dropna(subset=["reddit_lag1"])
-    if len(d_reddit) >= 50:
-        models_config["reddit"] = FEAT_REDDIT
+    # Baseline: siempre tiene datos
+    train_b = df_with_target[train_mask]
+    mb = xgb.XGBClassifier(eval_metric="logloss", **XGB_PARAMS)
+    mb.fit(train_b[FEAT_BASE], train_b["tgt_direction"])
+    models["baseline"] = (mb, FEAT_BASE)
+
+    # Reddit
+    df_reddit = df_with_target.dropna(subset=["reddit_lag1"])
+    train_r = df_reddit[df_reddit["date"] < TEST_CUTOFF]
+    if len(train_r) >= 30:
+        mr = xgb.XGBClassifier(eval_metric="logloss", **XGB_PARAMS)
+        mr.fit(train_r[FEAT_REDDIT], train_r["tgt_direction"])
+        models["reddit"] = (mr, FEAT_REDDIT)
+        print(f"  Reddit train: {len(train_r)} días")
     else:
-        print(f"  ⚠ Reddit: solo {len(d_reddit)} filas completas, omitiendo modelo Reddit")
+        print(f"  ⚠ Reddit: solo {len(train_r)} train days, omitiendo")
 
+    # Fear & Greed
     if has_fg:
-        d_fg = d.dropna(subset=["fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"])
-        if len(d_fg) >= 50:
-            models_config["fear_greed"] = FEAT_FG
-        else:
-            print(f"  ⚠ F&G: solo {len(d_fg)} filas, omitiendo")
+        fg_feats = ["fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"]
+        df_fg = df_with_target.dropna(subset=fg_feats)
+        train_fg = df_fg[df_fg["date"] < TEST_CUTOFF]
+        if len(train_fg) >= 30:
+            mfg = xgb.XGBClassifier(eval_metric="logloss", **XGB_PARAMS)
+            mfg.fit(train_fg[FEAT_FG], train_fg["tgt_direction"])
+            models["fear_greed"] = (mfg, FEAT_FG)
+            print(f"  F&G train: {len(train_fg)} días")
 
-        # Combinado: necesita Reddit + F&G
-        d_comb = d.dropna(subset=["reddit_lag1", "fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"])
-        if len(d_comb) >= 50:
-            models_config["combined"] = FEAT_COMBINED
-        else:
-            print(f"  ⚠ Combinado: solo {len(d_comb)} filas, omitiendo")
+        # Combinado
+        df_comb = df_with_target.dropna(subset=["reddit_lag1"] + fg_feats)
+        train_c = df_comb[df_comb["date"] < TEST_CUTOFF]
+        if len(train_c) >= 30:
+            mc = xgb.XGBClassifier(eval_metric="logloss", **XGB_PARAMS)
+            mc.fit(train_c[FEAT_COMBINED], train_c["tgt_direction"])
+            models["combined"] = (mc, FEAT_COMBINED)
+            print(f"  Combined train: {len(train_c)} días")
 
-    results = {}
+    # ── Predecir en test set ──────────────────────────────────────
+    test_df = df_with_target[test_mask].copy()
     predictions = {}
 
-    for name, features in models_config.items():
-        # Usar subset limpio para cada modelo
-        dd = d.dropna(subset=features).reset_index(drop=True)
-        yy = dd["tgt"]
-        X = dd[features]
+    for name, (model, feats) in models.items():
+        # Predecir solo donde tiene features completos
+        test_valid = test_df.dropna(subset=feats)
+        if len(test_valid) == 0:
+            continue
+        preds = model.predict(test_valid[feats])
+        proba = model.predict_proba(test_valid[feats])[:, 1]
+        predictions[name] = pd.DataFrame({
+            "date": test_valid["date"].values,
+            "y_true": test_valid["tgt_direction"].values,
+            "y_pred": preds,
+            "y_proba": proba,
+        })
 
-        X_tr, X_te, y_tr, y_te = split_with_gap(X, yy)
-
-        clf = xgb.XGBClassifier(eval_metric="logloss", **XGB_PARAMS)
-        clf.fit(X_tr, y_tr)
-
-        pred = clf.predict(X_te)
-        proba = clf.predict_proba(X_te)[:, 1]
-
-        results[name] = calc_metrics_clf(y_te.values, pred, proba)
-        results[name]["n_train"] = len(X_tr)
-        results[name]["n_test"] = len(X_te)
-        predictions[name] = (y_te.values, pred)
-
+    # ── Métricas POR MODELO (en su propio test set) ───────────────
+    results_own = {}
+    for name, pdf in predictions.items():
+        results_own[name] = clf_metrics(pdf["y_true"], pdf["y_pred"], pdf["y_proba"])
+        results_own[name]["n_test"] = len(pdf)
         # Feature importance
-        imp = dict(zip(features, [round(float(x), 4) for x in clf.feature_importances_]))
-        results[name]["feature_importance"] = imp
+        model, feats = models[name]
+        results_own[name]["feature_importance"] = dict(
+            zip(feats, [round(float(x), 4) for x in model.feature_importances_]))
 
-        print(f"  {name:12s}: acc={results[name]['accuracy']:.4f}  "
-              f"f1={results[name]['f1']:.4f}  auc={results[name]['auc']:.4f}  "
-              f"n_test={len(X_te)}")
+    # ── Métricas COMPARACIÓN JUSTA (intersección de días) ─────────
+    # Encontrar días donde TODOS los modelos tienen predicción
+    common_dates = None
+    for name, pdf in predictions.items():
+        dates_set = set(pdf["date"])
+        common_dates = dates_set if common_dates is None else common_dates & dates_set
 
-    # McNemar: baseline vs cada modelo con sentimiento
+    results_fair = {}
+    fair_preds = {}
+    if common_dates and len(common_dates) >= 20:
+        print(f"\n  Comparación justa: {len(common_dates)} días en común")
+        for name, pdf in predictions.items():
+            mask = pdf["date"].isin(common_dates)
+            pf = pdf[mask].sort_values("date")
+            results_fair[name] = clf_metrics(pf["y_true"], pf["y_pred"], pf["y_proba"])
+            results_fair[name]["n_test"] = len(pf)
+            fair_preds[name] = (pf["y_true"].values, pf["y_pred"].values)
+    else:
+        print(f"\n  ⚠ Solo {len(common_dates) if common_dates else 0} días en común — "
+              f"comparación justa solo baseline vs F&G")
+        # Fallback: comparar al menos baseline vs fear_greed
+        if "baseline" in predictions and "fear_greed" in predictions:
+            common_bf = set(predictions["baseline"]["date"]) & set(predictions["fear_greed"]["date"])
+            if len(common_bf) >= 20:
+                print(f"    baseline vs F&G: {len(common_bf)} días en común")
+                for name in ["baseline", "fear_greed"]:
+                    pdf = predictions[name]
+                    mask = pdf["date"].isin(common_bf)
+                    pf = pdf[mask].sort_values("date")
+                    results_fair[name] = clf_metrics(pf["y_true"], pf["y_pred"], pf["y_proba"])
+                    results_fair[name]["n_test"] = len(pf)
+                    fair_preds[name] = (pf["y_true"].values, pf["y_pred"].values)
+
+    # McNemar en comparación justa
     mcnemar_results = {}
-    if "baseline" in predictions:
-        yt_b, pb = predictions["baseline"]
+    if "baseline" in fair_preds:
+        yt_b, pb = fair_preds["baseline"]
         for name in ["reddit", "fear_greed", "combined"]:
-            if name in predictions:
-                yt_s, ps = predictions[name]
-                # Solo comparar si mismo test set size
-                min_len = min(len(pb), len(ps))
-                b, c, chi2, pv = mcnemar(yt_b[:min_len], pb[:min_len], ps[:min_len])
+            if name in fair_preds:
+                yt_s, ps = fair_preds[name]
+                b, c, chi2, pv = mcnemar(yt_b, pb, ps)
                 mcnemar_results[f"baseline_vs_{name}"] = {
                     "b": b, "c": c, "chi2": chi2, "p": pv
                 }
 
-    return {"models": results, "mcnemar": mcnemar_results}
+    # Print
+    print(f"\n  {'Modelo':<14s} {'Own acc':>8s} {'Fair acc':>8s} {'Fair F1':>8s} {'Fair AUC':>8s} {'n_own':>6s} {'n_fair':>6s}")
+    print(f"  {'─'*14} {'─'*8} {'─'*8} {'─'*8} {'─'*8} {'─'*6} {'─'*6}")
+    for name in ["baseline", "reddit", "fear_greed", "combined"]:
+        if name in results_own:
+            own = results_own[name]
+            fair = results_fair.get(name, {})
+            print(f"  {name:<14s} {own['accuracy']:>8.4f} {fair.get('accuracy','—'):>8} "
+                  f"{fair.get('f1','—'):>8} {fair.get('auc','—'):>8} "
+                  f"{own['n_test']:>6d} {fair.get('n_test','—'):>6}")
+
+    return {
+        "models_own_test": results_own,
+        "models_fair_test": results_fair,
+        "mcnemar": mcnemar_results,
+        "n_common_days": len(common_dates) if common_dates else 0,
+    }
 
 
 # ══════════════════════════════════════════════════════════════════
-# REGRESOR (retorno → precio)
+# REGRESOR — COMPARACIÓN JUSTA
 # ══════════════════════════════════════════════════════════════════
 def regress(df, has_fg):
-    d = df.copy()
-    d["tgt_r"] = d["return"].shift(-1)
-    d = d.dropna(subset=["tgt_r"] + FEAT_BASELINE).reset_index(drop=True)
+    df_with_target = df.dropna(subset=["tgt_return"] + FEAT_BASE).copy()
+    train_mask = df_with_target["date"] < TEST_CUTOFF
+    test_mask  = df_with_target["date"] >= TEST_CUTOFF
 
-    models_config = {"baseline": FEAT_BASELINE}
+    models = {}
 
-    d_reddit = d.dropna(subset=["reddit_lag1"])
-    if len(d_reddit) >= 50:
-        models_config["reddit"] = FEAT_REDDIT
+    # Baseline
+    train_b = df_with_target[train_mask]
+    rb = xgb.XGBRegressor(objective="reg:squarederror", **XGB_PARAMS)
+    rb.fit(train_b[FEAT_BASE], train_b["tgt_return"])
+    models["baseline"] = (rb, FEAT_BASE)
 
+    # Reddit
+    df_reddit = df_with_target.dropna(subset=["reddit_lag1"])
+    train_r = df_reddit[df_reddit["date"] < TEST_CUTOFF]
+    if len(train_r) >= 30:
+        rr = xgb.XGBRegressor(objective="reg:squarederror", **XGB_PARAMS)
+        rr.fit(train_r[FEAT_REDDIT], train_r["tgt_return"])
+        models["reddit"] = (rr, FEAT_REDDIT)
+
+    # F&G
     if has_fg:
-        d_fg = d.dropna(subset=["fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"])
-        if len(d_fg) >= 50:
-            models_config["fear_greed"] = FEAT_FG
+        fg_feats = ["fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"]
+        df_fg = df_with_target.dropna(subset=fg_feats)
+        train_fg = df_fg[df_fg["date"] < TEST_CUTOFF]
+        if len(train_fg) >= 30:
+            rfg = xgb.XGBRegressor(objective="reg:squarederror", **XGB_PARAMS)
+            rfg.fit(train_fg[FEAT_FG], train_fg["tgt_return"])
+            models["fear_greed"] = (rfg, FEAT_FG)
 
-        d_comb = d.dropna(subset=["reddit_lag1", "fg_lag1", "fg_ma3", "fg_delta", "fg_price_div"])
-        if len(d_comb) >= 50:
-            models_config["combined"] = FEAT_COMBINED
+        # Combinado
+        df_comb = df_with_target.dropna(subset=["reddit_lag1"] + fg_feats)
+        train_c = df_comb[df_comb["date"] < TEST_CUTOFF]
+        if len(train_c) >= 30:
+            rc = xgb.XGBRegressor(objective="reg:squarederror", **XGB_PARAMS)
+            rc.fit(train_c[FEAT_COMBINED], train_c["tgt_return"])
+            models["combined"] = (rc, FEAT_COMBINED)
 
-    results = {}
-    test_sets = {}
-    trained_models = {}
+    # ── Predecir ──────────────────────────────────────────────────
+    test_df = df_with_target[test_mask].copy()
+    predictions = {}
 
-    for name, features in models_config.items():
-        dd = d.dropna(subset=features).reset_index(drop=True)
-        X = dd[features]
-        y = dd["tgt_r"]
-        prc = dd["price"]
-        dts = dd["date"]
+    for name, (model, feats) in models.items():
+        test_valid = test_df.dropna(subset=feats)
+        if len(test_valid) == 0:
+            continue
+        pred_r = model.predict(test_valid[feats])
+        pred_price = test_valid["price"].values * (1 + pred_r)
+        real_price = test_valid["price"].values * (1 + test_valid["tgt_return"].values)
+        predictions[name] = pd.DataFrame({
+            "date": test_valid["date"].values,
+            "price": test_valid["price"].values,
+            "real_price": real_price,
+            "pred_price": pred_price,
+            "pred_return": pred_r,
+            "real_return": test_valid["tgt_return"].values,
+        })
 
-        X_tr, X_te, y_tr, y_te = split_with_gap(X, y)
-        n_train = len(X_tr)
-        pte = prc.iloc[n_train + GAP_DAYS:].reset_index(drop=True)
-        dte = dts.iloc[n_train + GAP_DAYS:].reset_index(drop=True)
+    # ── Métricas propias ──────────────────────────────────────────
+    results_own = {}
+    for name, pdf in predictions.items():
+        results_own[name] = reg_metrics(pdf["real_price"], pdf["pred_price"])
+        results_own[name]["n_test"] = len(pdf)
+        model, feats = models[name]
+        results_own[name]["feature_importance"] = dict(
+            zip(feats, [round(float(x), 4) for x in model.feature_importances_]))
 
-        reg = xgb.XGBRegressor(objective="reg:squarederror", **XGB_PARAMS)
-        reg.fit(X_tr, y_tr)
+    # ── Comparación justa ─────────────────────────────────────────
+    common_dates = None
+    for name, pdf in predictions.items():
+        dates_set = set(pdf["date"])
+        common_dates = dates_set if common_dates is None else common_dates & dates_set
 
-        pred_r = reg.predict(X_te)
-        pred_price = pte.values * (1 + pred_r)
-        real_price = pte.values * (1 + y_te.values)
+    results_fair = {}
+    if common_dates and len(common_dates) >= 20:
+        for name, pdf in predictions.items():
+            mask = pdf["date"].isin(common_dates)
+            pf = pdf[mask].sort_values("date")
+            results_fair[name] = reg_metrics(pf["real_price"], pf["pred_price"])
+            results_fair[name]["n_test"] = len(pf)
+    else:
+        # Fallback: baseline vs F&G
+        if "baseline" in predictions and "fear_greed" in predictions:
+            common_bf = set(predictions["baseline"]["date"]) & set(predictions["fear_greed"]["date"])
+            if len(common_bf) >= 20:
+                for name in ["baseline", "fear_greed"]:
+                    pdf = predictions[name]
+                    mask = pdf["date"].isin(common_bf)
+                    pf = pdf[mask].sort_values("date")
+                    results_fair[name] = reg_metrics(pf["real_price"], pf["pred_price"])
+                    results_fair[name]["n_test"] = len(pf)
 
-        results[name] = calc_metrics_reg(real_price, pred_price)
-        results[name]["n_train"] = len(X_tr)
-        results[name]["n_test"] = len(X_te)
-
-        imp = dict(zip(features, [round(float(x), 4) for x in reg.feature_importances_]))
-        results[name]["feature_importance"] = imp
-
-        test_sets[name] = (dte, real_price, pred_price)
-        trained_models[name] = reg
-
-        print(f"  {name:12s}: MAE=${results[name]['mae']:.2f}  "
-              f"RMSE=${results[name]['rmse']:.2f}  R²={results[name]['r2']:.4f}  "
-              f"n_test={len(X_te)}")
+    # Print
+    print(f"\n  {'Modelo':<14s} {'Own MAE':>8s} {'Fair MAE':>8s} {'Fair R²':>8s} {'n_own':>6s} {'n_fair':>6s}")
+    print(f"  {'─'*14} {'─'*8} {'─'*8} {'─'*8} {'─'*6} {'─'*6}")
+    for name in ["baseline", "reddit", "fear_greed", "combined"]:
+        if name in results_own:
+            own = results_own[name]
+            fair = results_fair.get(name, {})
+            print(f"  {name:<14s} ${own['mae']:>7.2f} ${fair.get('mae','—'):>7} "
+                  f"{fair.get('r2','—'):>8} {own['n_test']:>6d} {fair.get('n_test','—'):>6}")
 
     # ── Datos para visualización ──────────────────────────────────
     df_all = df[["date", "price"]].dropna().copy()
-
-    # Historia completa
     hist = [{"date": str(dd.date()), "real": round(float(p), 2)}
             for dd, p in zip(df_all["date"], df_all["price"])]
 
-    # Test set (usar baseline + mejor modelo con sentimiento)
+    # Test set (usar baseline + mejor sent model)
     best_sent = None
-    if "fear_greed" in results and "baseline" in results:
-        if results["fear_greed"]["mae"] < results["baseline"]["mae"]:
-            best_sent = "fear_greed"
-    if "combined" in results and "baseline" in results:
-        if results["combined"]["mae"] < results.get(best_sent or "baseline", {}).get("mae", 999):
-            best_sent = "combined"
-    if "reddit" in results and best_sent is None:
-        best_sent = "reddit"
+    for candidate in ["fear_greed", "combined", "reddit"]:
+        if candidate in results_fair:
+            if results_fair[candidate]["mae"] < results_fair.get("baseline", {}).get("mae", 999):
+                if best_sent is None or results_fair[candidate]["mae"] < results_fair[best_sent]["mae"]:
+                    best_sent = candidate
     if best_sent is None:
-        best_sent = "fear_greed" if "fear_greed" in test_sets else "reddit"
+        best_sent = "fear_greed" if "fear_greed" in predictions else "reddit"
 
-    # Test set con baseline
-    dte_b, real_b, pred_b = test_sets["baseline"]
-    ts_baseline = {str(dd.date()): {"real": round(float(r), 2), "pred_base": round(float(p), 2)}
-                   for dd, r, p in zip(dte_b, real_b, pred_b)}
-
-    # Merge test sets
+    # Build test set for chart
     ts = []
-    for dt_str, vals in ts_baseline.items():
-        entry = {"date": dt_str, **vals}
-        # Agregar predicción del mejor modelo con sentimiento si existe para esa fecha
-        if best_sent in test_sets:
-            dte_s, _, pred_s = test_sets[best_sent]
-            for dd, p in zip(dte_s, pred_s):
-                if str(dd.date()) == dt_str:
-                    entry["pred_full"] = round(float(p), 2)
-                    break
-            if "pred_full" not in entry:
+    if "baseline" in predictions:
+        bp = predictions["baseline"]
+        sp = predictions.get(best_sent)
+        for _, row in bp.iterrows():
+            entry = {
+                "date": str(pd.Timestamp(row["date"]).date()),
+                "real": round(float(row["real_price"]), 2),
+                "pred_base": round(float(row["pred_price"]), 2),
+            }
+            # Find matching sentiment prediction for same date
+            if sp is not None:
+                match = sp[sp["date"] == row["date"]]
+                if len(match) > 0:
+                    entry["pred_full"] = round(float(match.iloc[0]["pred_price"]), 2)
+                else:
+                    entry["pred_full"] = entry["pred_base"]
+            else:
                 entry["pred_full"] = entry["pred_base"]
-        else:
-            entry["pred_full"] = entry["pred_base"]
-        ts.append(entry)
+            ts.append(entry)
 
     # ── Forecast 7 días ───────────────────────────────────────────
     last_row = df.iloc[-1]
     pc = float(df_all["price"].iloc[-1])
     fc = []
 
-    # Features del último día
-    feat_vals = {f: float(last_row[f]) if pd.notna(last_row.get(f)) else 0.0
-                 for f in FEAT_COMBINED}
+    feat_vals = {}
+    for f in FEAT_COMBINED:
+        val = last_row.get(f)
+        feat_vals[f] = float(val) if pd.notna(val) else 0.0
 
     for i in range(FORECAST_DAYS):
         nd = date.today() + timedelta(days=i + 1)
-        preds = {}
-        for name, reg in trained_models.items():
-            feats = models_config[name]
+        preds_day = {}
+        for name, (model, feats) in models.items():
             row = [[feat_vals.get(f, 0.0) for f in feats]]
-            pred_r = float(reg.predict(row)[0])
-            preds[name] = round(pc * (1 + pred_r), 2)
+            pred_r = float(model.predict(row)[0])
+            preds_day[name] = round(pc * (1 + pred_r), 2)
 
         fc.append({
             "date": str(nd),
-            "pred_base": preds.get("baseline", pc),
-            "pred_full": preds.get(best_sent, preds.get("baseline", pc)),
+            "pred_base": preds_day.get("baseline", pc),
+            "pred_full": preds_day.get(best_sent, preds_day.get("baseline", pc)),
         })
 
-        # Update features para siguiente iteración
-        best_price = preds.get(best_sent, preds.get("baseline", pc))
-        new_ret = (best_price - pc) / pc if pc != 0 else 0.0
+        best_p = preds_day.get(best_sent, preds_day.get("baseline", pc))
+        new_ret = (best_p - pc) / pc if pc != 0 else 0.0
         feat_vals["return"] = new_ret
         feat_vals["ret_ma5"] = feat_vals.get("ret_ma5", 0) * 0.8 + new_ret * 0.2
         feat_vals["ret_ma10"] = feat_vals.get("ret_ma10", 0) * 0.9 + new_ret * 0.1
@@ -397,55 +503,52 @@ def regress(df, has_fg):
         feat_vals["volatility10"] = feat_vals.get("volatility10", 0) * 0.9 + abs(new_ret) * 0.1
         feat_vals["momentum5"] = new_ret
         feat_vals["momentum10"] = new_ret
-        pc = best_price
+        pc = best_p
 
-    return results, hist, ts, fc, best_sent
+    return results_own, results_fair, hist, ts, fc, best_sent, models
 
 
 # ══════════════════════════════════════════════════════════════════
-# ANÁLISIS ESTADÍSTICO (para documentar en la tesina)
+# ANÁLISIS ESTADÍSTICO
 # ══════════════════════════════════════════════════════════════════
 def statistical_analysis(df, has_fg):
-    """Genera el análisis estadístico que documenta por qué Reddit no funciona."""
     stats = {}
-
     d = df.dropna(subset=["return"]).copy()
     d["return_next"] = d["return"].shift(-1)
 
-    # Reddit analysis
+    # Reddit
     d_r = d.dropna(subset=["sent_reddit", "return_next"])
     if len(d_r) > 30:
         stats["reddit"] = {
-            "n_days": len(d_r),
+            "n_days": int(len(d_r)),
             "corr_same_day": round(float(d_r["sent_reddit"].corr(d_r["return"])), 4),
             "corr_next_day": round(float(d_r["sent_reddit"].corr(d_r["return_next"])), 4),
             "naive_accuracy": round(float(
                 ((d_r["sent_reddit"] > 0).astype(int) == (d_r["return_next"] > 0).astype(int)).mean()
             ), 4),
             "conclusion": "NO_SIGNAL",
-            "detail": "Correlación con retorno siguiente ~0. Sentimiento reactivo al precio, no predictivo.",
+            "detail": "Correlación ~0 con retornos futuros. Sentimiento reactivo al precio.",
         }
 
-    # F&G analysis
+    # F&G
     if has_fg:
-        d_fg = d.dropna(subset=["fg_norm", "return_next"])
+        d_fg = d.dropna(subset=["fg_norm", "return_next"]).copy()
         if len(d_fg) > 30:
-            d_fg["fg_lag1"] = d_fg["fg_norm"].shift(1)
+            d_fg.loc[:, "fg_lag1"] = d_fg["fg_norm"].shift(1)
             d_fg2 = d_fg.dropna(subset=["fg_lag1"])
-
+            corr_lag1 = float(d_fg2["fg_lag1"].corr(d_fg2["return"]))
             stats["fear_greed"] = {
-                "n_days": len(d_fg2),
+                "n_days": int(len(d_fg2)),
                 "corr_same_day": round(float(d_fg2["fg_norm"].corr(d_fg2["return"])), 4),
                 "corr_next_day": round(float(d_fg2["fg_norm"].corr(d_fg2["return_next"])), 4),
-                "corr_lag1":     round(float(d_fg2["fg_lag1"].corr(d_fg2["return"])), 4),
+                "corr_lag1": round(corr_lag1, 4),
                 "naive_accuracy": round(float(
                     ((d_fg2["fg_lag1"] > 0).astype(int) == (d_fg2["return_next"] > 0).astype(int)).mean()
                 ), 4),
             }
-            corr = abs(stats["fear_greed"]["corr_lag1"])
-            if corr > 0.05:
+            if abs(corr_lag1) > 0.05:
                 stats["fear_greed"]["conclusion"] = "WEAK_SIGNAL"
-                stats["fear_greed"]["detail"] = f"Correlación débil ({corr:.3f}) pero potencialmente explotable"
+                stats["fear_greed"]["detail"] = f"Señal débil (r={corr_lag1:.3f}) potencialmente explotable"
             else:
                 stats["fear_greed"]["conclusion"] = "NO_SIGNAL"
                 stats["fear_greed"]["detail"] = "Sin señal predictiva significativa"
@@ -458,8 +561,7 @@ def statistical_analysis(df, has_fg):
 # ══════════════════════════════════════════════════════════════════
 def main():
     print("=" * 60)
-    print("SOL/USD Sentiment Dashboard — v3")
-    print("Reddit vs Fear & Greed Index")
+    print("SOL/USD Sentiment Dashboard — v4 (comparación justa)")
     print("=" * 60)
 
     print("\nCargando datos...")
@@ -476,9 +578,9 @@ def main():
     clf = classify(df, has_fg)
 
     print("\n── Regresor (retorno → precio) ──")
-    reg, hist, ts, fc, best_sent = regress(df, has_fg)
+    reg_own, reg_fair, hist, ts, fc, best_sent, reg_models = regress(df, has_fg)
 
-    # ── Sentimiento diario para gráfico ───────────────────────────
+    # ── Sentimiento para gráficos ─────────────────────────────────
     sw = reddit_daily.merge(df[["date", "price"]].drop_duplicates(),
                             on="date", how="inner").sort_values("date")
     sent_out = [{"date": str(r["date"].date()),
@@ -486,7 +588,6 @@ def main():
                  "price": round(float(r["price"]), 2)}
                 for _, r in sw.iterrows()]
 
-    # F&G diario para gráfico
     fg_out = []
     if has_fg:
         fg_viz = df[df["fg_value"].notna()][["date", "fg_value", "price"]].drop_duplicates("date")
@@ -508,44 +609,54 @@ def main():
             "sent_score": round(float(sv), 4) if sv is not None else None,
             "url": str(row.get("url", ""))})
 
-    # ── Summary ───────────────────────────────────────────────────
-    print(f"\n── Resumen ──")
-    print(f"  Mejor fuente de sentimiento: {best_sent}")
+    # ── Resumen ───────────────────────────────────────────────────
+    print(f"\n── Resumen Final ──")
+    print(f"  Mejor fuente: {best_sent}")
+    print(f"  Test cutoff: {TEST_CUTOFF.date()}")
 
-    # Comparación
-    clf_models = clf["models"]
-    base_acc = clf_models.get("baseline", {}).get("accuracy", 0)
-    for name in ["reddit", "fear_greed", "combined"]:
-        if name in clf_models:
-            diff = clf_models[name]["accuracy"] - base_acc
-            icon = "✅" if diff > 0 else "❌"
-            print(f"  {icon} Clf {name}: {diff:+.4f} vs baseline")
+    # Build compatible output format for dashboard
+    # Usar fair_test si existe, sino own_test
+    clf_for_json = clf.copy()
+    reg_for_json = {
+        "models_own_test": reg_own,
+        "models_fair_test": reg_fair,
+    }
 
-    reg_models = reg
-    base_mae = reg_models.get("baseline", {}).get("mae", 999)
-    for name in ["reddit", "fear_greed", "combined"]:
-        if name in reg_models:
-            diff = base_mae - reg_models[name]["mae"]
-            icon = "✅" if diff > 0 else "❌"
-            print(f"  {icon} Reg {name}: {diff:+.4f} MAE vs baseline")
+    # Legacy format compatible (para el dashboard existente)
+    clf_legacy = {
+        "baseline": clf["models_fair_test"].get("baseline", clf["models_own_test"].get("baseline", {})),
+        "full": clf["models_fair_test"].get(best_sent, clf["models_own_test"].get(best_sent, {})),
+    }
+    if clf["mcnemar"]:
+        key = f"baseline_vs_{best_sent}"
+        clf_legacy["mcnemar"] = clf["mcnemar"].get(key, {})
 
-    # ── Export JSON ────────────────────────────────────────────────
+    reg_legacy = {
+        "baseline": reg_fair.get("baseline", reg_own.get("baseline", {})),
+        "full": reg_fair.get(best_sent, reg_own.get(best_sent, {})),
+    }
+
     out_data = {
         "last_updated": datetime.now(timezone.utc).isoformat(),
         "today_price":  hist[-1]["real"] if hist else None,
         "today_date":   hist[-1]["date"] if hist else None,
         "model_start_date": str(df["date"].min().date()),
         "model_end_date":   str(df["date"].max().date()),
+        "test_cutoff":      str(TEST_CUTOFF.date()),
         "model_days":       len(df),
         "total_price_days": len(df),
         "sentiment_coverage_pct": round(
             df["reddit_lag1"].notna().sum() / len(df) * 100, 1),
         "fg_coverage_pct": round(
-            df["fg_lag1"].notna().sum() / len(df) * 100, 1) if has_fg else 0,
+            df.get("fg_lag1", pd.Series(dtype=float)).notna().sum() / len(df) * 100, 1) if has_fg else 0,
         "best_sentiment_source": best_sent,
         "statistical_analysis": stats,
-        "classifier":      clf,
-        "regression":      reg,
+        # Legacy format (compatible with existing dashboard)
+        "classifier":      clf_legacy,
+        "regression":      reg_legacy,
+        # Detailed results
+        "classifier_detail": clf_for_json,
+        "regression_detail": reg_for_json,
         "price_history":   hist,
         "price_test":      ts,
         "forecast_7d":     fc,
