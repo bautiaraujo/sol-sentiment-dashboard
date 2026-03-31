@@ -61,7 +61,7 @@ def load():
     df_model = df_model.sort_values("date").reset_index(drop=True)
     df_model["sent_score"] = (df_model["sent_score"]
                               .rolling(window=ROLLING_DAYS, min_periods=1)
-                              .mean())
+                              .mean().shift(1))
 
     # Historia completa de precios para visualizacion
     df_all = pr.copy()
