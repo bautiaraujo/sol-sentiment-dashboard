@@ -24,11 +24,7 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install pandas numpy scikit-learn xgboost scipy \
-                      yfinance praw \
-                      transformers torch --index-url https://download.pytorch.org/whl/cpu
+        run: pip install -r requirements.txt
 
       - name: Fetch Solana prices (Yahoo Finance)
         run: python src/get_prices.py
