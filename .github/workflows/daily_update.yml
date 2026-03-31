@@ -34,10 +34,13 @@ jobs:
           REDDIT_CLIENT_ID:     ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
           REDDIT_USER_AGENT:    ${{ secrets.REDDIT_USER_AGENT }}
-        run: python src/get_reddit.py
+        run: python src/get_reddit_extended.py
 
       - name: Run sentiment analysis (RoBERTa)
         run: python src/sentiment.py
+
+      - name: Fetch Fearn and Greed
+        run: python get_fear_greed.py
 
       - name: Export dashboard data + forecast 7d
         run: python export_for_dashboard.py
