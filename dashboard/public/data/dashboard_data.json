@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-04-29T08:22:14.342929+00:00",
-  "today_price": 84.69,
-  "today_date": "2026-04-29",
+  "last_updated": "2026-04-30T08:24:46.963606+00:00",
+  "today_price": 83.18,
+  "today_date": "2026-04-30",
   "model_start_date": "2024-01-02",
-  "model_end_date": "2026-04-29",
+  "model_end_date": "2026-04-30",
   "test_cutoff": "2025-11-01",
-  "model_days": 849,
-  "total_price_days": 849,
+  "model_days": 850,
+  "total_price_days": 850,
   "sentiment_coverage_pct": 36.4,
   "fg_coverage_pct": 99.9,
   "best_sentiment_source": "fear_greed",
@@ -20,11 +20,11 @@
       "detail": "Correlación ~0 con retornos futuros. Sentimiento reactivo al precio."
     },
     "fear_greed": {
-      "n_days": 846,
-      "corr_same_day": 0.0012,
-      "corr_next_day": -0.0031,
-      "corr_lag1": -0.0048,
-      "naive_accuracy": 0.4894,
+      "n_days": 847,
+      "corr_same_day": 0.0016,
+      "corr_next_day": -0.0027,
+      "corr_lag1": -0.0045,
+      "naive_accuracy": 0.49,
       "conclusion": "NO_SIGNAL",
       "detail": "Sin señal predictiva significativa"
     }
@@ -70,12 +70,12 @@
   "classifier_detail": {
     "models_own_test": {
       "baseline": {
-        "accuracy": 0.5028,
+        "accuracy": 0.5056,
         "precision": 0.4471,
         "recall": 0.475,
         "f1": 0.4606,
-        "auc": 0.4749,
-        "n_test": 179,
+        "auc": 0.4743,
+        "n_test": 180,
         "feature_importance": {
           "return": 0.1524,
           "ret_ma5": 0.122,
@@ -105,12 +105,12 @@
         }
       },
       "fear_greed": {
-        "accuracy": 0.5028,
-        "precision": 0.4685,
+        "accuracy": 0.5,
+        "precision": 0.4653,
         "recall": 0.8375,
-        "f1": 0.6009,
-        "auc": 0.5348,
-        "n_test": 179,
+        "f1": 0.5982,
+        "auc": 0.5363,
+        "n_test": 180,
         "feature_importance": {
           "return": 0.0976,
           "ret_ma5": 0.0832,
@@ -207,10 +207,10 @@
   "regression_detail": {
     "models_own_test": {
       "baseline": {
-        "mae": 3.3557,
-        "rmse": 4.6334,
-        "r2": 0.9699,
-        "n_test": 179,
+        "mae": 3.3445,
+        "rmse": 4.6218,
+        "r2": 0.97,
+        "n_test": 180,
         "feature_importance": {
           "return": 0.1444,
           "ret_ma5": 0.1336,
@@ -238,10 +238,10 @@
         }
       },
       "fear_greed": {
-        "mae": 4.4161,
-        "rmse": 5.798,
-        "r2": 0.9528,
-        "n_test": 179,
+        "mae": 4.4059,
+        "rmse": 5.7843,
+        "r2": 0.9531,
+        "n_test": 180,
         "feature_importance": {
           "return": 0.0906,
           "ret_ma5": 0.0897,
@@ -3699,7 +3699,11 @@
     },
     {
       "date": "2026-04-29",
-      "real": 84.69
+      "real": 83.03
+    },
+    {
+      "date": "2026-04-30",
+      "real": 83.18
     }
   ],
   "price_test": [
@@ -4773,46 +4777,52 @@
     },
     {
       "date": "2026-04-28",
-      "real": 84.69,
+      "real": 83.03,
       "pred_base": 84.5,
       "pred_full": 85.15
+    },
+    {
+      "date": "2026-04-29",
+      "real": 83.18,
+      "pred_base": 83.1,
+      "pred_full": 84.09
     }
   ],
   "forecast_7d": [
     {
-      "date": "2026-04-30",
-      "pred_base": 86.96,
-      "pred_full": 86.06
-    },
-    {
       "date": "2026-05-01",
-      "pred_base": 88.38,
-      "pred_full": 87.7
+      "pred_base": 84.13,
+      "pred_full": 84.95
     },
     {
       "date": "2026-05-02",
-      "pred_base": 89.33,
-      "pred_full": 89.13
+      "pred_base": 87.55,
+      "pred_full": 86.68
     },
     {
       "date": "2026-05-03",
-      "pred_base": 90.65,
-      "pred_full": 90.3
+      "pred_base": 87.71,
+      "pred_full": 87.94
     },
     {
       "date": "2026-05-04",
-      "pred_base": 92.1,
-      "pred_full": 91.83
+      "pred_base": 90.32,
+      "pred_full": 90.03
     },
     {
       "date": "2026-05-05",
-      "pred_base": 93.64,
-      "pred_full": 93.54
+      "pred_base": 90.42,
+      "pred_full": 91.09
     },
     {
       "date": "2026-05-06",
-      "pred_base": 93.53,
-      "pred_full": 94.97
+      "pred_base": 91.33,
+      "pred_full": 92.21
+    },
+    {
+      "date": "2026-05-07",
+      "pred_base": 93.79,
+      "pred_full": 93.83
     }
   ],
   "sentiment_daily": [
@@ -10601,7 +10611,12 @@
     {
       "date": "2026-04-29",
       "fg_value": 26,
-      "price": 84.69
+      "price": 83.03
+    },
+    {
+      "date": "2026-04-30",
+      "fg_value": 29,
+      "price": 83.18
     }
   ],
   "reddit_posts": [
